@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace SDKClient
 {
-    public class Class1
+    public class BaseRequest
     {
     }
 }
