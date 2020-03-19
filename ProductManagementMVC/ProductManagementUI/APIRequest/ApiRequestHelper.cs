@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Configuration;
 
-namespace ProductManagementUI
+namespace ProductManagementUI.APIRequest
 {
     /// <summary>
     /// 请求api的辅助方法
