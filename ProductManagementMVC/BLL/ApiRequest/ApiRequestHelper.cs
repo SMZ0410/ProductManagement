@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace BLL.ApiRequest
 {
     /// <summary>
-    /// 七组最牛
+    /// 七组最牛666
     /// 请求api的辅助方法
     /// 此类是统一设置请求为post
     /// </summary>
