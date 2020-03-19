@@ -13,7 +13,6 @@ namespace ProductManagementApi.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            //邵蒙召
             return new string[] { "value1", "value2" };
         }
 
