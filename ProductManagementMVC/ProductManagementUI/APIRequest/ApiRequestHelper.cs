@@ -12,7 +12,7 @@ using System.Configuration;
 namespace ProductManagementUI.APIRequest
 {
     /// <summary>
-    /// 请求api的辅助方法_
+    /// 请求api的辅助方法
     /// 此类是统一设置请求为post
     /// </summary>
     public class ApiRequestHelper
