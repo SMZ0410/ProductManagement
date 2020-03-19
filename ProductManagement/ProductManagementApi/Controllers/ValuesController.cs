@@ -9,7 +9,6 @@ namespace ProductManagementApi.Controllers
 {
     public class ValuesController : ApiController
     {
-       //wym
         //七组   SMZ LM WYM ZJZ 。。。
         // GET api/values
         public IEnumerable<string> Get()
