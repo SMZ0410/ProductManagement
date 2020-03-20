@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace SDKClient
 {
+    /// <summary>
+    /// 请求的基类
+    /// </summary>
     public class BaseRequest
     {
+        /// <summary>
+        /// 返回接口的名称
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetApiName()
+        {
+            return "";
+        }
     }
 }
