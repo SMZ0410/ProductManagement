@@ -15,6 +15,10 @@ namespace ProductManagementUI.Controllers
          */
 
         // GET: User
+        /// <summary>
+        /// 登录页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult UserLoginPage()
         {
             return View();
