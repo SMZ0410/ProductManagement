@@ -46,6 +46,10 @@
     <Compile Include="User\UserBll.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{45e286f7-c9ea-4b0c-b2b8-d673ce321a80}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{41f3c306-01ea-4f29-9752-0dc8a3679dfc}</Project>
       <Name>DAL</Name>
