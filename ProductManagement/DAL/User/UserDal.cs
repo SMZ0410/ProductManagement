@@ -12,7 +12,7 @@ using System.Data;
 namespace DAL.User
 {
     /// <summary>
-    /// 用户数据交互层
+    /// 用户数据交互层 
     /// </summary>
     public class UserDal : BaseDal<UserDal>
     {
