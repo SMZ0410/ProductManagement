@@ -19,19 +19,19 @@ namespace BLL.ApiRequest
     public class ApiRequestHelper
     {
         //地址
-        static string BaseAddress = "http://localhost:55085";
+        static string BaseAddress = "http://localhost:20371";
 
         /// <summary>
         /// 泛型post方法主要作用进行api的post请求
         /// where T:BaseRequest泛型的约束，约束的是T，必须继承BaseRequest
         /// 也就是表示次泛型方法的post请求，必须继承BaseRequest
-        /// SMZ
+        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
         /// public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse 
-        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse// smz约束这个泛型T  必须继承BaseRequest
+        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse,new()// smz约束这个泛型T  必须继承BaseRequest
         {
 
             var api = t.GetApiName();//拿到接口的名称
@@ -59,12 +59,17 @@ namespace BLL.ApiRequest
                 if (obj.Status)
                 {
                     //请求成功
+                    //返回响应结果
+                    return obj;
                 }
-
-                //返回响应结果
-                return obj;
+                else
+                {
+                    
+                    return new TResponse() { Message = msg.ReasonPhrase };
+                }
+                
             }
-            return null;
+            return new TResponse() { Message ="请求失败" }; ;
         }
     }
 }
