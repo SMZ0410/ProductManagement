@@ -10,7 +10,7 @@ using ProductManagementApi.Auth;
 using SDKClient.Api.Response.User;
 using SDKClient.Api.Request.User;
 
-namespace ProductManagementApi.Controllers.User
+namespace ProductManagementApi.Controllers.User 
 {
     /// <summary>
     /// 用户Api控制器
