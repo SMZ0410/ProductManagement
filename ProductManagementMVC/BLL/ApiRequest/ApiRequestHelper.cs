@@ -67,9 +67,8 @@ namespace BLL.ApiRequest
                     
                     return new TResponse() { Message = msg.ReasonPhrase };
                 }
-                
             }
-            return new TResponse() { Message ="请求失败" }; ;
+            return new TResponse() { Message ="请求失败,请检查网络" }; ;
         }
     }
 }

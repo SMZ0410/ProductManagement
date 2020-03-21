@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using ProductManagementUI.Models;
+using SDKClient.Api.Response;
 
 namespace ProductManagementUI.Controllers
 {
@@ -16,17 +17,17 @@ namespace ProductManagementUI.Controllers
 
         // GET: Product
         //产品列表显示
-        public ActionResult Index()
+        public ActionResult ProductInfoPage()
         {
-            List<ProductInfo> list = new List<ProductInfo>();
-
-            return View(list);
+            return View();
         }
 
-        public JsonResult GetProductShow()
+        public JsonResult GetProducts()
         {
             ProductGetRequest getRequest = new ProductGetRequest();
-            return Json(bll.GetProducts(getRequest));
+            return Json(bll.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
+
         }
+
     }
 }

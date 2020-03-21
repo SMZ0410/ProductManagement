@@ -27,7 +27,7 @@ namespace BLL.Product
             }
             else
             {
-                response.Users = list;
+                response.Products = list;
                 response.Message = "获取信息成功";
             }
 
