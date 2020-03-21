@@ -13,7 +13,7 @@ using System.Data;
 namespace DAL.User
 {
     /// <summary>
-    /// 用户数据交互层
+    /// 用户数据交互层 
     /// </summary>
     public class UserDal : BaseDal<UserDal>
     {
@@ -38,6 +38,39 @@ namespace DAL.User
                                         JOIN dbo.RoleInfo r ON m2.RoleId=r.RoleId WHERE u.Status=1";
                 list = conn.Query<UserInfo>(sql).ToList();
                 return list;
+            }
+        }
+
+        /// <summary>
+        /// 根据用户名获取用户的盐
+        /// </summary>
+        /// <returns></returns>
+        public string GetSaltByUserName(string userName)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "SELECT Salt FROM dbo.UserInfo WHERE UserName = @username";
+                 
+                var saltStr = conn.QueryFirstOrDefault<string>(sql,new { username = userName });
+                //返回
+                return saltStr;
+            }
+        }
+
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="user">用户登录信息</param>
+        /// <returns></returns>
+        public int UserLogin(UserLogin user)
+        {
+            using (IDbConnection conn=new SqlConnection(connStr))
+            {
+                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username AND UserPassword=@userpassword";
+            
+                //获取用户id并返回
+                var userId = conn.QueryFirstOrDefault<int>(sql,new { username =user.UserName, userpassword =user.UserPassword});
+                return userId;
             }
         }
     }
