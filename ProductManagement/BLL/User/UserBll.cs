@@ -62,7 +62,7 @@ namespace BLL.User
             request.User.UserPassword = password;
 
             //调用dal层方法 拿到返回id
-            int userId = UserDal.Instance.UserLogin(request.User);
+            int userId = UserDal.Instance.UserLogin(request.User); 
 
             //如果id>0登陆成功
             if (userId>0)
