@@ -25,7 +25,7 @@ namespace BLL.ApiRequest
         /// 泛型post方法主要作用进行api的post请求
         /// where T:BaseRequest泛型的约束，约束的是T，必须继承BaseRequest
         /// 也就是表示次泛型方法的post请求，必须继承BaseRequest
-        /// SMZ
+        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
