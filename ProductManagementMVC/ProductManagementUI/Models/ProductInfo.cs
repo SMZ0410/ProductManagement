@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Model
+namespace ProductManagementUI.Models
 {
-    /// <summary>
-    /// 产品列表信息
-    /// </summary>
     public class ProductInfo
     {
         /// <summary>

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Request\Product\ProductGetRequest.cs" />
-    <Compile Include="Api\Response\ProductGetResponse.cs" />
+    <Compile Include="Api\Response\Product\ProductGetResponse.cs" />
     <Compile Include="Api\Response\UserGetResponse.cs" />
     <Compile Include="BaseRequest.cs" />
     <Compile Include="BaseResponse.cs" />

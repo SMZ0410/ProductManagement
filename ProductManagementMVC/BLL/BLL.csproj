@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ApiRequest\ApiRequestHelper.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Product\ProductBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
