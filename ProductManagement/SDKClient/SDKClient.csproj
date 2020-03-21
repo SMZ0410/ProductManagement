@@ -47,6 +47,7 @@
     <Compile Include="Api\Response\ProductGetResponse.cs" />
     <Compile Include="Api\Response\User\UserGetResponse.cs" />
     <Compile Include="Api\Response\User\UserLoginResponse.cs" />
+    <Compile Include="Api\Response\Product\ProductGetResponse.cs" /> 
     <Compile Include="BaseRequest.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
