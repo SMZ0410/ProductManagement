@@ -1,6 +1,5 @@
 ﻿using BLL.ApiRequest;
 using SDKClient.Api.Request.Product;
-using SDKClient.Api.Response;
 using SDKClient.Api.Response.Product;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Product
 {
-    public class ProductBll:BaseBll<ProductBll>
+    public class ProductBll
     { 
 
         /// <summary>
