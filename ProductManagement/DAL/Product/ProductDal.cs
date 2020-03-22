@@ -22,7 +22,7 @@ namespace DAL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public List<ProductInfo> GetProducts()
+        public List<ProductInfo> GetProducts(ProductQuety query)
         {
             List<ProductInfo> list = new List<ProductInfo>();
 
@@ -36,6 +36,8 @@ namespace DAL.Product
                                 JOIN dbo.AddressInfo AS d ON a.AddressId=d.AddressId
                                 JOIN dbo.ProductStageMapInfo AS s ON p.ProductId=s.ProductId
                                 JOIN dbo.StageInfo AS g ON s.StageId=g.StageId WHERE p.Status=1";
+
+
 
                 list = conn.Query<ProductInfo>(sql).ToList();
 

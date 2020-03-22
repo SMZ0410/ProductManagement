@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Product
 {
-    public class ProductBll
+    public class ProductBll:BaseBll<ProductBll>
     { 
 
         /// <summary>
