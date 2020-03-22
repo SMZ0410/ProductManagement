@@ -11,9 +11,5 @@ namespace SDKClient.Api.Response.User
     /// </summary>
     public class UserLoginResponse : BaseResponse
     {
-        /// <summary>
-        /// 登录是否成功
-        /// </summary>
-        public bool IsLoginSuccess { get; set; }
     }
 }
