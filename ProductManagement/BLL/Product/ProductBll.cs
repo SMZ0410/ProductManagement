@@ -16,24 +16,24 @@ namespace BLL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public ProductGetResponse GetProducts(ProductGetRequest request)
-        {
-            ProductGetResponse response = new ProductGetResponse();
+        //public ProductGetResponse GetProducts(ProductGetRequest request)
+        //{
+        //    ProductGetResponse response = new ProductGetResponse();
 
-            var list = ProductDal.Instance.GetProducts();
+        //    var list = ProductDal.Instance.GetProducts();
 
-            if (list.Count<=0)
-            {
-                response.Status = false;
-                response.Message = "获取信息失败";
-            }
-            else
-            {
-                response.Products = list;
-                response.Message = "获取信息成功";
-            }
+        //    if (list.Count<=0)
+        //    {
+        //        response.Status = false;
+        //        response.Message = "获取信息失败";
+        //    }
+        //    else
+        //    {
+        //        response.Products = list;
+        //        response.Message = "获取信息成功";
+        //    }
 
-            return response;
-        }
+        //    return response;
+        //}
     }
 }

@@ -64,11 +64,11 @@ namespace BLL.ApiRequest
                 }
                 else
                 {
-                    
-                    return new TResponse() { Message = msg.ReasonPhrase };
+                    //请求失败
+                    return new TResponse() { Message= obj.Message };
                 }
             }
-            return new TResponse() { Message ="请求失败,请检查网络" }; ;
+            return new TResponse() { Message ="请求失败,请检查网络" }; 
         }
     }
 }
