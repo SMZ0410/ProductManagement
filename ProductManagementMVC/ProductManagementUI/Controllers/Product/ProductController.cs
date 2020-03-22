@@ -13,19 +13,23 @@ namespace ProductManagementUI.Controllers
 {
     public class ProductController : Controller
     {
-        ProductBll bll = new ProductBll();
-
         // GET: Product
-        //产品列表显示
+        /// <summary>
+        /// 产品列表显示
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ProductInfoPage()
         {
             return View();
         }
-
+        /// <summary>
+        /// 获取产品列表信息
+        /// </summary>
+        /// <returns></returns>
         public JsonResult GetProducts()
         {
             ProductGetRequest getRequest = new ProductGetRequest();
-            return Json(bll.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
+            return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
 
         }
 

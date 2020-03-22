@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDKClient.Api.Request.Product;
+using SDKClient.Api.Response.Product;
 
 namespace BLL.Product
 {
@@ -14,7 +16,7 @@ namespace BLL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public ProductGetResponse GetProducts()
+        public ProductGetResponse GetProducts(ProductGetRequest request)
         {
             ProductGetResponse response = new ProductGetResponse();
 
