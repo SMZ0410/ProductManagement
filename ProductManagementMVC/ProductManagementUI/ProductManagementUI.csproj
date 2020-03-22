@@ -610,6 +610,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\UserLoginPage.cshtml" />
     <Content Include="Views\Product\ProductInfoPage.cshtml" />
+    <Content Include="Views\User\UserShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
