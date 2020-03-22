@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BLL.Product
 {
     public class ProductBll
-    {
+    { 
 
         /// <summary>
         /// 获取产品信息
