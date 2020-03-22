@@ -10,6 +10,7 @@ using SDKClient.Api.Request;
 using SDKClient.Api.Request.Product;
 using SDKClient.Api.Response;
 
+
 namespace ProductManagementApi.Controllers.Product
 {
     /// <summary>
@@ -24,7 +25,7 @@ namespace ProductManagementApi.Controllers.Product
         /// <returns></returns>
         [HttpPost]
         public ProductGetResponse GetProducts()
-        {
+        { 
             return ProductBll.Instance.GetProducts();
         }
     }
