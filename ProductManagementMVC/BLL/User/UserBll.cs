@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.ApiRequest;
 
 namespace BLL.User
 {
@@ -13,13 +14,23 @@ namespace BLL.User
     /// </summary>
     public  class UserBll:BaseBll<UserBll>
     {
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <returns></returns>
+        public UserGetResponse GetUsers(UserGetRequest request)
+        {
+            return ApiRequestHelper.Post<UserGetRequest, UserGetResponse>(request);
+        }
+
         /// <summary>
         /// 用户登录
         /// </summary>
         /// <returns></returns>
         public UserLoginResponse UserLogin(UserLoginRequest request)
         {
-            return ApiRequest.ApiRequestHelper.Post<UserLoginRequest, UserLoginResponse>(request);
+            return  ApiRequestHelper.Post<UserLoginRequest, UserLoginResponse>(request);
         }
     }
 }
