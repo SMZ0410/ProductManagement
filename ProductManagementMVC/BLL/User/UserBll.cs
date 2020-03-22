@@ -1,5 +1,5 @@
 ﻿using BLL.ApiRequest;
-using SDKClient.Api.Response;
+using SDKClient.Api.Response.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
