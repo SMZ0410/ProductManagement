@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 namespace Model.User
 {
     /// <summary>
-    /// 用户管理信息
+    /// 用户信息
     /// </summary>
-    public  class UserInfo
+    public class UserInfo
     {
         /// <summary>
-        /// 用户id
+        /// 用户编号
         /// </summary>
         public int UserId { get; set; }
         /// <summary>
-        /// 用户名
+        /// 用户名称
         /// </summary>
         public string UserName { get; set; }
         /// <summary>
-        /// 地址
+        /// 所属地
         /// </summary>
         public string AddressName { get; set; }
         /// <summary>

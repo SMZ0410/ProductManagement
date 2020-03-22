@@ -28,5 +28,14 @@ namespace ProductManagementUI.Controllers
         { 
 
         }
+        /// <summary>
+        /// 显示页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserShow()
+        {
+            return View();
+        }
+
     }
 }
