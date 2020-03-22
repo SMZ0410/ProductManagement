@@ -60,7 +60,7 @@
       <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\SDKClient\SDKClient.csproj">
-      <Project>{5BA7D0FA-2A05-45B3-A776-B3377AA6A9EA}</Project>
+      <Project>{5ba7d0fa-2a05-45b3-a776-b3377aa6a9ea}</Project>
       <Name>SDKClient</Name>
     </ProjectReference>
   </ItemGroup>
