@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SDKClient.Api.Request;
+using BLL.User;
+
 
 namespace ProductManagementUI.Controllers
 {
@@ -36,6 +39,5 @@ namespace ProductManagementUI.Controllers
         {
             return View();
         }
-
     }
 }
