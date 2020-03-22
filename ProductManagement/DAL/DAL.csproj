@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
     <Compile Include="Product\ProductDal.cs" />
+    <Compile Include="Product\ProductQuety.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserDal.cs" />
   </ItemGroup>
