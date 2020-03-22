@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Model.User
+namespace ProductManagementUI.Models
 {
     /// <summary>
-    /// 用户信息
+    /// 用户管理表
     /// </summary>
     public class UserInfo
     {
         /// <summary>
-        /// 用户编号
+        /// 编号
         /// </summary>
         public int UserId { get; set; }
         /// <summary>

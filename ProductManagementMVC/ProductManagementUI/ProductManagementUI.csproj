@@ -130,6 +130,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductInfo.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -609,6 +610,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\UserLoginPage.cshtml" />
     <Content Include="Views\Product\ProductInfoPage.cshtml" />
+    <Content Include="Views\User\UserShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

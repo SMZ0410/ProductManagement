@@ -10,7 +10,7 @@ namespace SDKClient.Api.Response.User
     /// <summary>
     /// 获取用户信息返回类
     /// </summary>
-    public class UserGetResponse:BaseResponse
+    public class UserGetResponse : BaseResponse
     {
         /// <summary>
         /// 返回的用户信息集合

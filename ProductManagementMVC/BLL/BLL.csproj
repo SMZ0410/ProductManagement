@@ -36,7 +36,7 @@
       <HintPath>..\..\..\..\专高六\技能\ECommerceFront_MVC\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SDKClient">
-      <HintPath>..\..\ProductManagement\SDKClient\bin\Debug\SDKClient.dll</HintPath>
+      <HintPath>C:\Users\lenovo\Desktop\插件\SDKClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -53,6 +53,7 @@
     <Compile Include="BaseBll.cs" />
     <Compile Include="Product\ProductBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\UserBll.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
