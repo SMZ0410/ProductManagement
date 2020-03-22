@@ -33,5 +33,14 @@ namespace ProductManagementUI.Controllers
         {
             return Json(UserBll.Instance.UserLogin(request),JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 显示页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserShow()
+        {
+            return View();
+        }
+
     }
 }
