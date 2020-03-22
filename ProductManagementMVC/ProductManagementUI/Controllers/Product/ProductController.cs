@@ -29,8 +29,7 @@ namespace ProductManagementUI.Controllers
         public JsonResult GetProducts()
         {
             ProductGetRequest getRequest = new ProductGetRequest();
-            return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
-
+            return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet); 
         }
 
     }
