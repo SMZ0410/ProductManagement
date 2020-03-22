@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDKClient.Api.Response
+namespace SDKClient.Api.Response.User
 {
     /// <summary>
     /// 获取用户信息返回类

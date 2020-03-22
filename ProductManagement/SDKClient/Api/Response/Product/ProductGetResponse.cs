@@ -13,6 +13,6 @@ namespace SDKClient.Api.Response
         /// <summary>
         /// 返回的用户信息集合
         /// </summary>
-        public List<ProductInfo> Users { get; set; }
+        public List<ProductInfo> Products { get; set; }
     }
 }

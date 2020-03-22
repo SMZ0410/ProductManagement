@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>产品列表</h2>
+
+@using ProductManagementUI.Models
+@model List<ProductInfo>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>编号</td>
+            <td>产品名称</td>
+            <td>创建时间</td>
+            <td>产品经理</td>
+            <td>应用行业</td>
+            <td>归属地</td>
+            <td>产品阶段</td>
+            <td>详情</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody id="tb"></tbody>
+</table>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $().ready(function () {
+        $.ajax({
+            url: "/Product/GetProducts",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                var ts = "";
+                $(res.Products).each(function () {
+                    ts += "<tr>"
+                        + "<td>" + this.ProductId + "</td>"
+                        + "<td>" + this.ProductName + "</td>"
+                        + "<td>" + this.CreateTime + "</td>"
+                        + "<td>" + this.ProductManager + "</td>"
+                        + "<td>" + this.TradeName + "</td>"
+                        + "<td>" + this.AddressName + "</td>"
+                        + "<td>" + this.StageName + "</td>"
+                        + "<td>" + this.ProductDetail + "</td>"
+                        + "<td><a>删除</a></td>"
+                        + "</tr>";
+                })
+                $("#tb").html(ts);
+            }
+        })
+    })
+</script>
+

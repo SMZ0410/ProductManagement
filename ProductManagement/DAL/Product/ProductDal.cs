@@ -28,7 +28,7 @@ namespace DAL.Product
 
             using (IDbConnection conn=new SqlConnection(connStr))
             {
-                string sql = @"SELECT p.ProductId,p.ProductName,p.CreateTime,p.ProductManager,p.ProductDetail,r.TradeName,d.AddressName,g.StageName
+                string sql = @"SELECT p.ProductId,p.ProductName,p.CreateTime,p.ProductManager,r.TradeName,d.AddressName,g.StageName,p.ProductDetail
                                 FROM dbo.ProductInfo AS p
                                 JOIN dbo.ProductTradeMapInfo AS t ON p.ProductId=t.ProductId
                                 JOIN dbo.TradeInfo AS r ON t.TradeId=r.TradeId

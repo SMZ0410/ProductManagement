@@ -42,8 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Request\Product\ProductGetRequest.cs" />
+    <Compile Include="Api\Request\User\UserGetRequest.cs" />
+    <Compile Include="Api\Request\User\UserLoginRequest.cs" />
     <Compile Include="Api\Response\ProductGetResponse.cs" />
-    <Compile Include="Api\Response\UserGetResponse.cs" />
+    <Compile Include="Api\Response\User\UserGetResponse.cs" />
+    <Compile Include="Api\Response\User\UserLoginResponse.cs" />
+    <Compile Include="Api\Response\Product\ProductGetResponse.cs" /> 
     <Compile Include="BaseRequest.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
