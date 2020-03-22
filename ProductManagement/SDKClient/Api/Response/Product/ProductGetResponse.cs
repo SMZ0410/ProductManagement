@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDKClient.Api.Response.Product
+namespace SDKClient.Api.Response.Product 
 {
     public class ProductGetResponse:BaseResponse
     {
