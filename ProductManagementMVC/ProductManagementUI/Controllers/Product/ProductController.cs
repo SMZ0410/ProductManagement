@@ -1,5 +1,6 @@
 ﻿using BLL.Product;
 using SDKClient.Api.Request.Product;
+using SDKClient.Api.Response.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using ProductManagementUI.Models;
-using SDKClient.Api.Response;
 
 namespace ProductManagementUI.Controllers
 {

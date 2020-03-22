@@ -93,12 +93,13 @@
     //登录点击事件
     $("#login").click(function () {
 
-        //登录对象
+            //登录对象
         var obj = {
-            UserLogin: {
+            User:
+            {
                 UserName: $("#login-username").val(),
                 UserPassword: $("#login-password").val()
-            } 
+            }
         };
 
         $.ajax({
@@ -107,7 +108,12 @@
             data: obj,
             dataType: "json",
             success: function (res) {
-
+                if (res.Satus) {
+                    alert(res.Message);
+                }
+                else {
+                    alert(res.Message); 
+                }
             }
         });
     })

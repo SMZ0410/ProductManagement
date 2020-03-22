@@ -62,14 +62,12 @@ namespace BLL.User
 
             //如果id>0登陆成功
             if (userId>0)
-            {
-                response.IsLoginSuccess = true;
+            { 
                 response.Message = "登陆成功！";
             }
             else
             {
-                response.Status = false;
-                response.IsLoginSuccess = false;
+                response.Status = false; 
                 response.Message = "登录失败，密码错误";
             }
             //返回

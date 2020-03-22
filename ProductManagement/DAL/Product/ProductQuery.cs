@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DAL.Product
 {
 
-    public class ProductQuety
+    public class ProductQuery
     {
         /// <summary>
         /// 产品经理

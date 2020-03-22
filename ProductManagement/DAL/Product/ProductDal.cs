@@ -22,7 +22,7 @@ namespace DAL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public List<ProductInfo> GetProducts(ProductQuety query)
+        public List<ProductInfo> GetProducts(ProductQuery query)
         {
             List<ProductInfo> list = new List<ProductInfo>();
 
