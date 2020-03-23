@@ -10,7 +10,7 @@ using ProductManagementApi.Auth;
 using SDKClient.Api.Request.User;
 using SDKClient.Api.Response.User;
 
-namespace ProductManagementApi.Controllers.User 
+namespace ProductManagementApi.Controllers.User
 {
     /// <summary>
     /// 用户Api控制器
@@ -18,7 +18,7 @@ namespace ProductManagementApi.Controllers.User
     //[ApiAuthorize] 
     public class UserController : ApiController
     {
-       
+
         /// <summary>
         /// 获取用户信息
         /// </summary>
@@ -28,6 +28,7 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.GetUsers();
         }
+
 
         /// <summary>
         /// 用户登录

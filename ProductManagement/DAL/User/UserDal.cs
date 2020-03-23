@@ -52,8 +52,8 @@ namespace DAL.User
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = "SELECT Salt FROM dbo.UserInfo WHERE UserName = @username";
-                 
-                var saltStr = conn.QueryFirstOrDefault<string>(sql,new { username = userName });
+
+                var saltStr = conn.QueryFirstOrDefault<string>(sql, new { username = userName });
                 //返回
                 return saltStr;
             }
@@ -66,15 +66,17 @@ namespace DAL.User
         /// <returns></returns>
         public int UserLogin(UserLogin user)
         {
-            using (IDbConnection conn=new SqlConnection(connStr))
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username AND UserPassword=@userpassword";
-            
+
                 //获取用户id并返回
-                var userId = conn.QueryFirstOrDefault<int>(sql,new { username =user.UserName, userpassword =user.UserPassword});
+                var userId = conn.QueryFirstOrDefault<int>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userId;
             }
         }
+
+
 
     }
 }
