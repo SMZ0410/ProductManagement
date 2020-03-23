@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Request\Product\ProductGetRequest.cs" />
+    <Compile Include="Api\Request\Role\RoleGetRequest.cs" />
     <Compile Include="Api\Request\User\UserGetRequest.cs" />
     <Compile Include="Api\Request\User\UserLoginRequest.cs" />
+    <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
     <Compile Include="Api\Response\User\UserGetResponse.cs" />
     <Compile Include="Api\Response\User\UserLoginResponse.cs" />
     <Compile Include="Api\Response\Product\ProductGetResponse.cs" />
@@ -58,5 +60,6 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

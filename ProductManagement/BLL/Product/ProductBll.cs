@@ -21,7 +21,19 @@ namespace BLL.Product
             ProductGetResponse response = new ProductGetResponse();
 
             var list = ProductDal.Instance.GetProducts();
-
+            //判断是否有数据
+            if (list.Count <= 0)
+            {
+                //给返回对象属性赋值
+                response.Status = false;
+                response.Message = "获取用户信息失败，请检查网络问题";
+            }
+            else
+            {
+                //给返回对象赋值
+                response.Products = list;
+                response.Message = $"获取用户信息成功，共{list.Count}条数据";
+            }
             return response;
         }
     }

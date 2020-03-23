@@ -54,6 +54,7 @@
     <Compile Include="BaseBll.cs" />
     <Compile Include="Product\ProductBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\RoleBll.cs" />
     <Compile Include="User\UserBll.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
