@@ -1,5 +1,6 @@
 ﻿using BLL.ApiRequest;
 using SDKClient.Api.Request.Product;
+using SDKClient.Api.Response;
 using SDKClient.Api.Response.Product;
 using System;
 using System.Collections.Generic;

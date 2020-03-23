@@ -31,12 +31,10 @@ namespace BLL.ApiRequest
         /// <param name="t"></param>
         /// <returns></returns>
         /// public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse 
-        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse, new()// smz约束这个泛型T  必须继承BaseRequest
+        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse,new()// smz约束这个泛型T  必须继承BaseRequest
         {
             try
             {
-
-
                 var api = t.GetApiName();//拿到接口的名称
 
 
@@ -67,17 +65,17 @@ namespace BLL.ApiRequest
                     }
                     else
                     {
-
+                        //请求失败
                         return new TResponse() { Status = false, Message = obj.Message };
                     }
                 }
-                return new TResponse() { Status = false, Message = msg.ReasonPhrase }; ;
+                return new TResponse() { Status = false, Message = msg.ReasonPhrase};
             }
             catch (Exception ex)
             {
-
-                return new TResponse() { Status = false, Message = ex.Message }; ;
+                return new TResponse() { Status = false, Message = ex.Message }; 
             }
+          
         }
     }
 }

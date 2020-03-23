@@ -22,17 +22,6 @@ namespace BLL.Product
 
             var list = ProductDal.Instance.GetProducts();
 
-            if (list.Count<=0)
-            {
-                response.Status = false;
-                response.Message = "获取信息失败";
-            }
-            else
-            {
-                response.Products = list;
-                response.Message = "获取信息成功";
-            }
-
             return response;
         }
     }

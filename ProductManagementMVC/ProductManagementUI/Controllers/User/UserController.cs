@@ -1,8 +1,14 @@
-﻿using System;
+﻿using BLL.User;
+using ProductManagementUI.Models.User;
+using SDKClient.Api.Request.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SDKClient.Api.Request;
+
+
 
 namespace ProductManagementUI.Controllers
 {
@@ -16,17 +22,38 @@ namespace ProductManagementUI.Controllers
 
         // GET: User
         /// <summary>
-        /// 登录页面
+        /// 用户登录页面
         /// </summary>
         /// <returns></returns>
         public ActionResult UserLoginPage()
         {
             return View();
         }
+       /// <summary>
+       /// 用户登录方法
+       /// </summary>
+        public JsonResult UserLogin(UserLoginRequest request)
+        {
+            return Json(UserBll.Instance.UserLogin(request),JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 显示页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserShow()
+        {
+            return View();
+        }
 
-        public void UserLoginAction()
-        { 
 
+        /// <summary>
+        /// 获取用户列表信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetUsers()
+        {
+            UserGetRequest getRequest = new UserGetRequest();
+            return Json(UserBll.Instance.GetUsers(getRequest), JsonRequestBehavior.AllowGet);
         }
     }
 }

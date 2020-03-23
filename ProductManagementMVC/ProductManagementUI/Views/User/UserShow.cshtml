@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "UserShow";
+}
+
+
+<h1>用户显示</h1>
+<div>
+    <input id="txtname" type="text" /><input type="button" name="sele" value="查找" class="btn btn-group" />
+    <table class="table table-bordered">
+        <tr>
+            <th>编号</th>
+            <th>用户名称</th>
+            <th>所属地</th>
+            <th>角色</th>
+            <th>操作</th>
+        </tr>
+        <tbody id="xs">
+
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $().ready(function () {
+        $.ajax({
+            url: "/User/GetUsers",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                var oppo = "";
+                $(res.Users).each(function () {
+                    oppo += "<tr>"
+                        + "<td>" + this.UserId + "</td>"
+                        + "<td>" + this.UserName + "</td>"
+                        + "<td>" + this.AddressName + "</td>"
+                        + "<td>" + this.RoleName + "</td>"
+                        + "<td><a>编辑</a><a>删除</a></td>"
+                })
+                $("#xs").html(oppo);
+            }
+        })
+    })
+
+</script>
+
+
+
+
+
