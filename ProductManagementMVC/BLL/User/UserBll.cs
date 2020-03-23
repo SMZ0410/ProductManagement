@@ -1,11 +1,12 @@
-﻿using SDKClient.Api.Request.User;
-using SDKClient.Api.Response.User;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.ApiRequest;
+using SDKClient.Api.Request.User;
+using SDKClient.Api.Response.User;
 
 namespace BLL.User
 {

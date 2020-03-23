@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SDKClient.Api.Request;
-using BLL.User;
+
 
 
 namespace ProductManagementUI.Controllers
@@ -43,6 +43,17 @@ namespace ProductManagementUI.Controllers
         public ActionResult UserShow()
         {
             return View();
+        }
+
+
+        /// <summary>
+        /// 获取用户列表信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetUsers()
+        {
+            UserGetRequest getRequest = new UserGetRequest();
+            return Json(UserBll.Instance.GetUsers(getRequest), JsonRequestBehavior.AllowGet);
         }
     }
 }

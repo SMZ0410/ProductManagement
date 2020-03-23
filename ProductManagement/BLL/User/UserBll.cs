@@ -26,7 +26,7 @@ namespace BLL.User
             var list = UserDal.Instance.GetUsers();
 
             //判断是否有数据
-            if (list.Count >= 0)
+            if (list.Count <= 0)
             {
                 //给返回对象属性赋值
                 response.Status = false;
