@@ -31,44 +31,53 @@ namespace BLL.ApiRequest
         /// <param name="t"></param>
         /// <returns></returns>
         /// public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse 
-        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse,new()// smz约束这个泛型T  必须继承BaseRequest
+        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse, new()// smz约束这个泛型T  必须继承BaseRequest
         {
-
-            var api = t.GetApiName();//拿到接口的名称
-
-
-            HttpClient client = new HttpClient();
-            //设置 API的 基地址
-            client.BaseAddress = new Uri(BaseAddress);
-            //设置 默认请求头ACCEPT
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string token = ConfigurationManager.AppSettings["token"];
-            client.DefaultRequestHeaders.Add("token", token);
-
-            //设置消息体
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(t));
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            //发送Post请求
-            HttpResponseMessage msg = client.PostAsync(api, content).Result;
-            //判断结果是否成功
-            if (msg.IsSuccessStatusCode)
+            try
             {
 
-                var obj = JsonConvert.DeserializeObject<TResponse>(msg.Content.ReadAsStringAsync().Result);
-                if (obj.Status)
+
+                var api = t.GetApiName();//拿到接口的名称
+
+
+                HttpClient client = new HttpClient();
+                //设置 API的 基地址
+                client.BaseAddress = new Uri(BaseAddress);
+                //设置 默认请求头ACCEPT
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string token = ConfigurationManager.AppSettings["token"];
+                client.DefaultRequestHeaders.Add("token", token);
+
+                //设置消息体
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(t));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //发送Post请求
+                HttpResponseMessage msg = client.PostAsync(api, content).Result;
+                //判断结果是否成功
+                if (msg.IsSuccessStatusCode)
                 {
-                    //请求成功
-                    //返回响应结果
-                    return obj;
+
+                    var obj = JsonConvert.DeserializeObject<TResponse>(msg.Content.ReadAsStringAsync().Result);
+                    if (obj.Status)
+                    {
+                        //请求成功
+                        //返回响应结果
+                        return obj;
+                    }
+                    else
+                    {
+
+                        return new TResponse() { Status = false, Message = obj.Message };
+                    }
                 }
-                else
-                {
-                    
-                    return new TResponse() { Message = msg.ReasonPhrase };
-                }
+                return new TResponse() { Status = false, Message = msg.ReasonPhrase }; ;
             }
-            return new TResponse() { Message ="请求失败,请检查网络" }; ;
+            catch (Exception ex)
+            {
+
+                return new TResponse() { Status = false, Message = ex.Message }; ;
+            }
         }
     }
 }
