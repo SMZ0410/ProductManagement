@@ -23,7 +23,7 @@ namespace DAL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public List<ProductInfo> GetProducts(ProductQuery query)
+        public List<ProductInfo> GetProducts(ProductQuery query) 
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
