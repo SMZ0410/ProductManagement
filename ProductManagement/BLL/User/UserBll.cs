@@ -30,7 +30,7 @@ namespace BLL.User
             {
                 //给返回对象属性赋值
                 response.Status = false;
-                response.Message = "获取用户信息失败咯，请检查网络问题";
+                response.Message = "获取用户信息失败，请检查网络问题";
             }
             else
             {
@@ -56,6 +56,18 @@ namespace BLL.User
 
             //给request参数重新赋值加密后的密码
             request.User.UserPassword = password;
+
+            //非空验证
+            if (string.IsNullOrEmpty(request.User.UserName))
+            {
+                response.Status = false;
+                response.Message = "用户名为空";
+            }
+            if (string.IsNullOrEmpty(request.User.UserPassword))
+            {
+                response.Status = false;
+                response.Message = "密码为空";
+            }
 
             //调用dal层方法 拿到返回id
             int userId = UserDal.Instance.UserLogin(request.User); 
