@@ -62,11 +62,13 @@ namespace BLL.User
             {
                 response.Status = false;
                 response.Message = "用户名为空";
+                return response;
             }
             if (string.IsNullOrEmpty(request.User.UserPassword))
             {
                 response.Status = false;
                 response.Message = "密码为空";
+                return response;
             }
 
             //调用dal层方法 拿到返回id
