@@ -167,6 +167,7 @@
     <Compile Include="Auth\ApiAuthorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
+    <Compile Include="Controllers\Role\RoleController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

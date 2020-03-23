@@ -31,11 +31,10 @@ namespace BLL.ApiRequest
         /// <param name="t"></param>
         /// <returns></returns>
         /// public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse 
-        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse,new()// smz约束这个泛型T  必须继承BaseRequest
+        public static TResponse Post<TRequet, TResponse>(TRequet t) where TRequet : BaseRequest where TResponse : BaseResponse, new()// smz约束这个泛型T  必须继承BaseRequest
         {
-            try
-            {
-                var api = t.GetApiName();//拿到接口的名称
+
+            var api = t.GetApiName();//拿到接口的名称
 
 
                 HttpClient client = new HttpClient();
@@ -56,26 +55,20 @@ namespace BLL.ApiRequest
                 if (msg.IsSuccessStatusCode)
                 {
 
-                    var obj = JsonConvert.DeserializeObject<TResponse>(msg.Content.ReadAsStringAsync().Result);
-                    if (obj.Status)
-                    {
-                        //请求成功
-                        //返回响应结果
-                        return obj;
-                    }
-                    else
-                    {
-                        //请求失败
-                        return new TResponse() { Status = false, Message = obj.Message };
-                    }
+                var obj = JsonConvert.DeserializeObject<TResponse>(msg.Content.ReadAsStringAsync().Result);
+                if (obj.Status)
+                {
+                    //请求成功
+                    //返回响应结果
+                    return obj;
                 }
-                return new TResponse() { Status = false, Message = msg.ReasonPhrase};
+                else
+                {
+                    
+                    return new TResponse() { Message = msg.ReasonPhrase };
+                }
             }
-            catch (Exception ex)
-            {
-                return new TResponse() { Status = false, Message = ex.Message }; 
-            }
-          
+            return new TResponse() { Message ="请求失败,请检查网络" }; ;
         }
     }
 }
