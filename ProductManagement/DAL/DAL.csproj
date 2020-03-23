@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>C:\Users\lenovo\Desktop\插件\Dapper.dll</HintPath>
+    <Reference Include="Dapper">
+      <HintPath>C:\Users\我最黑\Desktop\文件\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
     <Compile Include="Product\ProductDal.cs" />
-    <Compile Include="Product\ProductQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserDal.cs" />
   </ItemGroup>

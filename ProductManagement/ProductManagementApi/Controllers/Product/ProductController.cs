@@ -22,10 +22,10 @@ namespace ProductManagementApi.Controllers.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        //[HttpPost]
-        //public ProductGetResponse GetProducts(ProductGetRequest request)
-        //{
-        //    return ProductBll.Instance.GetProducts(request);
-        //}
+        [HttpPost]
+        public ProductGetResponse GetProducts(ProductGetRequest request)
+        {
+            return ProductBll.Instance.GetProducts(request);
+        }
     }
 }

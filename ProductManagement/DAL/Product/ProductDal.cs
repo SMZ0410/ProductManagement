@@ -8,26 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dapper;
+using Model.Product;
 
 namespace DAL.Product
 {
-    public class ProductDal:BaseDal<ProductDal>
+    public class ProductDal : BaseDal<ProductDal>
     {
         /// <summary>
         /// 获取连接数据库字符串
         /// </summary>
-        private static string connStr = ConfigurationManager.AppSettings["connectionString"];
+        private readonly static string connStr = ConfigurationManager.AppSettings["connectionString"];
 
         /// <summary>
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public List<ProductInfo> GetProducts(ProductQuery query)
+        public List<ProductInfo> GetProducts() 
         {
-            List<ProductInfo> list = new List<ProductInfo>();
-
-            using (IDbConnection conn=new SqlConnection(connStr))
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
+                List<ProductInfo> list = new List<ProductInfo>();
+
                 string sql = @"SELECT p.ProductId,p.ProductName,p.CreateTime,p.ProductManager,r.TradeName,d.AddressName,g.StageName,p.ProductDetail
                                 FROM dbo.ProductInfo AS p
                                 JOIN dbo.ProductTradeMapInfo AS t ON p.ProductId=t.ProductId
@@ -36,8 +37,6 @@ namespace DAL.Product
                                 JOIN dbo.AddressInfo AS d ON a.AddressId=d.AddressId
                                 JOIN dbo.ProductStageMapInfo AS s ON p.ProductId=s.ProductId
                                 JOIN dbo.StageInfo AS g ON s.StageId=g.StageId WHERE p.Status=1";
-
-
 
                 list = conn.Query<ProductInfo>(sql).ToList();
 
