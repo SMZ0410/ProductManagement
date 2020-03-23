@@ -13,6 +13,7 @@ namespace ProductManagementUI.Controllers.Role
         // GET: Role
         /// <summary>
         /// 角色信息显示
+        /// 优秀
         /// </summary>
         /// <returns></returns>
         public ActionResult GetRoleInfos()

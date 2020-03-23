@@ -11,6 +11,11 @@ namespace BLL.Role
 {
     public class RoleBll : BaseBll<RoleBll>
     {
+        /// <summary>
+        /// 优秀
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public RoleGetResponse GetRoleInfos(RoleGetRequest request)
         {
             return ApiRequestHelper.Post<RoleGetRequest, RoleGetResponse>(request);
