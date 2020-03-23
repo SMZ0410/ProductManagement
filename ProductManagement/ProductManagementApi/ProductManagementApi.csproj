@@ -53,6 +53,10 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SDKClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SDKClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -163,6 +167,7 @@
     <Compile Include="Auth\ApiAuthorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
+    <Compile Include="Controllers\Role\RoleController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -267,10 +272,6 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{55d55bd8-a0ec-4444-b840-edc0119ddc69}</Project>
       <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SDKClient\SDKClient.csproj">
-      <Project>{5ba7d0fa-2a05-45b3-a776-b3377aa6a9ea}</Project>
-      <Name>SDKClient</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

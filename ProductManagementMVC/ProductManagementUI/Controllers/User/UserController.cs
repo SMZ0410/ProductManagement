@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SDKClient.Api.Request;
+
+
 
 namespace ProductManagementUI.Controllers
 {
@@ -42,5 +45,15 @@ namespace ProductManagementUI.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 获取用户列表信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetUsers()
+        {
+            UserGetRequest getRequest = new UserGetRequest();
+            return Json(UserBll.Instance.GetUsers(getRequest), JsonRequestBehavior.AllowGet);
+        }
     }
 }
