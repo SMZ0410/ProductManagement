@@ -1,9 +1,9 @@
 ﻿using BLL.ApiRequest;
-using SDKClient.Api.Request.DropDownList;
 using SDKClient.Api.Request.Product;
+using SDKClient.Api.Request.DropDownList;
 using SDKClient.Api.Response;
-using SDKClient.Api.Response.DropDownList;
 using SDKClient.Api.Response.Product;
+using SDKClient.Api.Response.DropDownList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
