@@ -33,5 +33,23 @@ namespace BLL.User
         {
             return  ApiRequestHelper.Post<UserLoginRequest, UserLoginResponse>(request);
         }
+
+        /// <summary>
+        /// 忘记密码 发送更改密码地址到用户邮箱
+        /// </summary>
+        /// <returns></returns>
+        public UserForgotPwdResponse ForgotPassword(UserForgotPwdRequest request)
+        {
+            return ApiRequestHelper.Post<UserForgotPwdRequest, UserForgotPwdResponse>(request);
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <returns></returns>
+        public UserResetPwdResponse ResetPassword(UserResetPwdRequest request)
+        {
+            return ApiRequestHelper.Post<UserResetPwdRequest, UserResetPwdResponse>(request);
+        }
     }
 }
