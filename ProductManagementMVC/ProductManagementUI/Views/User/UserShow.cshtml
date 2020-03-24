@@ -5,31 +5,38 @@
 
 
 <h1>用户显示</h1>
-<div>
-    <input id="txtname" type="text" />
-    <input id="SubSel" type="submit" value="查找"  onclick="seleName" class="btn btn-group"/>
-    <table class="table table-bordered">
-        <tr>
-            <th>编号</th>
-            <th>用户名称</th>
-            <th>所属地</th>
-            <th>角色</th>
-            <th>操作</th>
-        </tr>
-        <tbody id="xs">
 
-    </table>
-</div>
+<input id="txtname" type="text" placeholder="请输入用户名称" />
+<input id="SubSel" type="button" value="查找" onclick="seleName()" class="btn btn-group" />
+<table class="table table-bordered">
+    <tr>
+        <th>编号</th>
+        <th>用户名称</th>
+        <th>所属地</th>
+        <th>角色</th>
+        <th>操作</th>
+    </tr>
+    <tbody id="xs">
+
+</table>
+
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 
 <script>
     $().ready(function () {
+        seleName("");
+    });
+    function seleName(username) {
+        var obj = {
+            UserName: username
+        }
         $.ajax({
             url: "/User/GetUsers",
             type: "POST",
             dataType: "json",
+            data: obj,
             success: function (res) {
                 var oppo = "";
                 $(res.Users).each(function () {
@@ -39,12 +46,16 @@
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.RoleName + "</td>"
                         + "<td><a>编辑</a><a>删除</a></td>"
+                        + "</tr>"
                 })
                 $("#xs").html(oppo);
             }
         })
-    })
-
+        $("#SubSel").click(function () {
+            var username = $("#txtname").val();
+            seleName(username);
+        });
+    }
 </script>
 
 

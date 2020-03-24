@@ -51,9 +51,8 @@ namespace ProductManagementUI.Controllers
         /// 获取用户列表信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetUsers()
+        public JsonResult GetUsers(UserGetRequest getRequest)
         {
-            UserGetRequest getRequest = new UserGetRequest();
             return Json(UserBll.Instance.GetUsers(getRequest), JsonRequestBehavior.AllowGet);
         }
 

@@ -17,13 +17,13 @@ namespace BLL.User
         /// 获取用户基本信息
         /// </summary>
         /// <returns></returns>
-        public UserGetResponse GetUsers()
+        public UserGetResponse GetUsers(UserGetRequest request)
         {
             //实例化一个返回对象
             UserGetResponse response = new UserGetResponse();
 
             //拿到用户信息集合
-            var list = UserDal.Instance.GetUsers();
+            var list = UserDal.Instance.GetUsers(request.UserName);
 
             //判断是否有数据
             if (list.Count <= 0)

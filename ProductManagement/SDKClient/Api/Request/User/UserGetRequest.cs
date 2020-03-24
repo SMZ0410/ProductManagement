@@ -10,9 +10,9 @@ namespace SDKClient.Api.Request.User
     /// <summary>
     /// 用户获取请求
     /// </summary>
-    public class UserGetRequest:BaseRequest
+    public class UserGetRequest : BaseRequest
     {
-
+        public string UserName { get; set; }
         /// <summary>
         /// 重写基类路径
         /// </summary>
