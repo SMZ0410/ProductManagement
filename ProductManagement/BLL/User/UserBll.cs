@@ -87,5 +87,88 @@ namespace BLL.User
             //返回
             return response;
         }
+
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserForgotPwdResponse ForgotPassword(UserForgotPwdRequest request)
+        {
+            UserForgotPwdResponse response = new UserForgotPwdResponse();
+
+            if (string.IsNullOrEmpty(request.UserName))
+            {
+                response.Status = false;
+                response.Message = "用户名为空";
+                return response;
+            }
+            if (string.IsNullOrEmpty(request.Email))
+            {
+                response.Status = false;
+                response.Message = "邮箱地址为空";
+                return response;
+            }
+
+            //判断用户名和邮箱是否存在一条信息里
+            int userId = UserDal.Instance.IsExistUserNameEmail(request.UserName,request.Email);
+
+            //存在 发送修改密码地址到邮箱
+            //否则 返回失败信息
+            if (userId >0)
+            {
+                SendToEmail.UpdPwdAddrToEmail(request.UserName,request.Email);
+                response.Message="发送成功，请打开邮箱查看";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "发送失败，请检查用户名或邮箱地址";
+            }
+
+            return response;
+        }
+         
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserResetPwdResponse ResetUserPassword(UserResetPwdRequest request)
+        {
+            UserResetPwdResponse response = new UserResetPwdResponse();
+            if (string.IsNullOrEmpty(request.UserName))
+            {
+                response.Status = false;
+                response.Message = "用户名为空";
+                return response;
+            }
+            if (string.IsNullOrEmpty(request.NewPassword))
+            {
+                response.Status = false;
+                response.Message = "新密码为空";
+                return response;
+            }
+
+            //将新密码加盐进行md5加密
+            var salt = UserDal.Instance.GetSaltByUserName(request.UserName);
+            var encryptionPassword = MD5Encrypt.MD5Encrypt32(request.NewPassword + salt);
+            var decryptusername = request.UserName.Decrypt();
+            //调用dal层重置密码方法
+            int res = UserDal.Instance.ResetUserPasswod(decryptusername,encryptionPassword);
+
+            //如果res>0修改成功
+            if (res > 0)
+            {
+                response.Message = "修改成功！";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "修改失败，请检查网络";
+            }
+
+            return response;
+        }
     }
 }

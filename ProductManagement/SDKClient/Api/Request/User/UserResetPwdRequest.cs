@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace SDKClient.Api.Request.User
 {
-
-    /// <summary>
-    /// 用户获取请求
-    /// </summary>
-    public class UserGetRequest : BaseRequest
+    public class UserResetPwdRequest:BaseRequest
     {
+        /// <summary>
+        /// 用户名
+        /// </summary>
         public string UserName { get; set; }
         /// <summary>
-        /// 重写基类路径
+        /// 用户密码
         /// </summary>
-        /// <returns></returns>
+        public string NewPassword { get; set; }
         public override string GetApiName()
         {
-            return "api/User/GetUsers";
+            return "api/User/ResetUserPassword";
         }
     }
 }

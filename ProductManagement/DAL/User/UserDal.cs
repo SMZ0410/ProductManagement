@@ -28,7 +28,7 @@ namespace DAL.User
         /// 获取用户基本信息
         /// </summary>
         /// <returns></returns>
-        public List<UserInfo> GetUsers()
+        public List<UserInfo> GetUsers(string uname)
         {
             List<UserInfo> list = new List<UserInfo>();
             using (IDbConnection conn = new SqlConnection(connStr))
@@ -37,8 +37,8 @@ namespace DAL.User
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
-                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1";
-                list = conn.Query<UserInfo>(sql).ToList();
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1 AND u.UserName LIKE @username";
+                list = conn.Query<UserInfo>(sql, new { username = "%" + uname + "%" }).ToList();
                 return list;
             }
         }
@@ -74,6 +74,11 @@ namespace DAL.User
                 var userId = conn.QueryFirstOrDefault<int>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userId;
             }
+        }
+
+        public int UserAdd()
+        {
+            return 0;
         }
 
     }

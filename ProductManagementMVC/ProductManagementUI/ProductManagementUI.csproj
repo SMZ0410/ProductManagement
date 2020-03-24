@@ -614,7 +614,8 @@
     <Content Include="Views\Product\ProductInfoPage.cshtml" />
     <Content Include="Views\User\UserShow.cshtml" />
     <Content Include="Views\Role\GetRoleInfos.cshtml" />
-    <Content Include="Views\Product\ProductAddPage.cshtml" />
+    <Content Include="Views\User\ForgotPasswordPage.cshtml" />
+    <Content Include="Views\User\ResetUserPasswordPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

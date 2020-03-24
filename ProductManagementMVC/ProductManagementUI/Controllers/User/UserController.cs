@@ -51,18 +51,45 @@ namespace ProductManagementUI.Controllers
         /// 获取用户列表信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetUsers()
+        public JsonResult GetUsers(UserGetRequest getRequest)
         {
-            UserGetRequest getRequest = new UserGetRequest();
             return Json(UserBll.Instance.GetUsers(getRequest), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
-        /// 忘记密码 重置密码页面
+        /// 忘记密码 发送邮件到用户邮箱页面
         /// </summary>
-        public ActionResult ResetPasswordPage()
+        public ActionResult ForgotPasswordPage()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 忘记密码 发送邮件到用户邮箱
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult ForgotPassword(UserForgotPwdRequest request)
+        { 
+            return Json(UserBll.Instance.ForgotPassword(request), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 重置密码页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ResetUserPasswordPage(string userName)
+        {
+            ViewBag.UserName = userName;
+            return View();
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult ResetUserPassword(UserResetPwdRequest request)
+        {
+            return Json(UserBll.Instance.ResetPassword(request), JsonRequestBehavior.AllowGet);
         }
     }
 }
