@@ -26,11 +26,19 @@ namespace ProductManagementUI.Controllers
         /// 获取产品列表信息
         /// </summary>
         /// <returns></returns>
-        //public JsonResult GetProducts()
-        //{
-        //    ProductGetRequest getRequest = new ProductGetRequest();
-        //    return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet); 
-        //}
+        public JsonResult GetProducts()
+        {
+            ProductGetRequest getRequest = new ProductGetRequest();
+            return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ProductAddPage()
+        {
+            return View();
+        }
 
     }
 }
