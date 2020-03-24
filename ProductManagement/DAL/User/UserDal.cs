@@ -21,16 +21,15 @@ namespace DAL.User
         /// <summary>
         /// 获取连接数据库字符串
         /// </summary>
-        private readonly string  connStr = ConfigurationManager.AppSettings["connectionString"];
+        private string connStr = ConfigurationManager.AppSettings["connectionString"];
 
 
         /// <summary>
         /// 获取用户基本信息
         /// </summary>
         /// <returns></returns>
-        public List<UserInfo> GetUsers()
+        public List<UserInfo> GetUsers(string uname)
         {
-
             List<UserInfo> list = new List<UserInfo>();
             using (IDbConnection conn = new SqlConnection(connStr))
             {
@@ -38,8 +37,8 @@ namespace DAL.User
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
-                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1";
-                list = conn.Query<UserInfo>(sql).ToList();
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1 AND u.UserName LIKE @username";
+                list = conn.Query<UserInfo>(sql, new { username = "%" + uname + "%" }).ToList();
                 return list;
             }
         }
@@ -77,32 +76,9 @@ namespace DAL.User
             }
         }
 
-        /// <summary>
-        /// 根据用户名&邮箱判断该用户是否存在
-        /// 返回用户id
-        /// </summary>
-        public int IsExistUserNameEmail(string userName,string email)
+        public int UserAdd()
         {
-            using (IDbConnection conn = new SqlConnection(connStr))
-            {
-                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName = @tusername AND Email=@temail";
-                int userId =conn.QueryFirstOrDefault<int>(sql,new { tusername =userName, temail =email});
-                return userId;
-            }
-        }
-         
-        /// <summary>
-        /// 重置用户密码
-        /// </summary>
-        /// <returns>影响行数</returns>
-        public int ResetUserPasswod(string userName,string newPassword)
-        {
-            using (IDbConnection conn = new SqlConnection(connStr))
-            {
-                string sql = "UPDATE dbo.UserInfo SET UserPassword=@userpassword WHERE UserName=@username  ";
-                int res = conn.Execute(sql, new { userpassword = newPassword, username = userName});
-                return res;
-            }
+            return 0;
         }
 
     }

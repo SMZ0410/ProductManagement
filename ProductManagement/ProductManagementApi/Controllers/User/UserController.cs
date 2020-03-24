@@ -24,10 +24,11 @@ namespace ProductManagementApi.Controllers.User
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public UserGetResponse GetUsers()
+        public UserGetResponse GetUsers(UserGetRequest request)
         {
-            return UserBll.Instance.GetUsers();
+            return UserBll.Instance.GetUsers(request);
         }
+
 
         /// <summary>
         /// 用户登录
