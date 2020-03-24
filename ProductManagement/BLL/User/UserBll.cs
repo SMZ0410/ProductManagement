@@ -22,7 +22,7 @@ namespace BLL.User
             //实例化一个返回对象
             UserGetResponse response = new UserGetResponse();
 
-            //拿到用户信息集合
+            //拿到用户信息集合 
             var list = UserDal.Instance.GetUsers();
 
             //判断是否有数据
