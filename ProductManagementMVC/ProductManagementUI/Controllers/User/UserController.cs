@@ -16,8 +16,8 @@ namespace ProductManagementUI.Controllers
     {
 
         /*
-         * 页面用 功能名称+Page   例如 UserLoginPage
-         * 方法使用 功能名称+Action   例如 UserLoginAction
+         * 页面用 功能名称+Page   例如 UserLoginPage 
+         * 方法直接 功能名称 UserLogin
          */
 
         // GET: User
@@ -29,6 +29,7 @@ namespace ProductManagementUI.Controllers
         {
             return View();
         }
+
        /// <summary>
        /// 用户登录方法
        /// </summary>
@@ -36,6 +37,7 @@ namespace ProductManagementUI.Controllers
         {
             return Json(UserBll.Instance.UserLogin(request),JsonRequestBehavior.AllowGet);
         }
+
         /// <summary>
         /// 显示页面
         /// </summary>
@@ -45,7 +47,6 @@ namespace ProductManagementUI.Controllers
             return View();
         }
 
-
         /// <summary>
         /// 获取用户列表信息
         /// </summary>
@@ -54,6 +55,14 @@ namespace ProductManagementUI.Controllers
         {
             UserGetRequest getRequest = new UserGetRequest();
             return Json(UserBll.Instance.GetUsers(getRequest), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 忘记密码 重置密码页面
+        /// </summary>
+        public ActionResult ResetPasswordPage()
+        {
+            return View();
         }
     }
 }

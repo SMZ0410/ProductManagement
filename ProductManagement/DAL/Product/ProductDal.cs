@@ -23,22 +23,107 @@ namespace DAL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public List<ProductInfo> GetProducts() 
+        public List<ProductInfo> GetProducts(ProductQuery query) 
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT p.ProductId,p.ProductName,p.CreateTime,p.ProductManager,r.TradeName,d.AddressName,g.StageName,p.ProductDetail
-                                FROM dbo.ProductInfo AS p
-                                JOIN dbo.ProductTradeMapInfo AS t ON p.ProductId=t.ProductId
-                                JOIN dbo.TradeInfo AS r ON t.TradeId=r.TradeId
-                                JOIN dbo.ProductAddressMapInfo AS a ON p.ProductId=a.ProductId
-                                JOIN dbo.AddressInfo AS d ON a.AddressId=d.AddressId
-                                JOIN dbo.ProductStageMapInfo AS s ON p.ProductId=s.ProductId
-                                JOIN dbo.StageInfo AS g ON s.StageId=g.StageId WHERE p.Status=1";
+                string sql = @"SELECT * FROM v_Products";
 
-                list = conn.Query<ProductInfo>(sql).ToList();
+                if (!string.IsNullOrEmpty(query.ProductManager))
+                {
+                    sql += " AND p.ProductManager LIKE @productManager ";
+                }
+                if (query.StageId>0)
+                {
+                    sql += " AND g.StageId = @stageId ";
+                }
+                if (query.AddressId > 0)
+                {
+                    sql += " AND d.AddressId = @addressId ";
+                }
+                if (query.TradeId>0)
+                {
+                    sql += " AND r.TradeId = @tradeId ";
+                }
+                if (!string.IsNullOrEmpty(query.ProductName))
+                {
+                    sql += " AND p.ProductName LIKE @productName ";
+                }
+
+                list = conn.Query<ProductInfo>(sql,new { productManager= "%"+query.ProductManager+"%", stageId=query.StageId, addressId=query.AddressId, tradeId=query.TradeId, productName="%"+query.ProductName+"%" }).ToList();
+
+                return list;
+            }
+        }
+        /// <summary>
+        /// 获取应用行业的下拉显示
+        /// </summary>
+        /// <returns></returns>
+        public List<TradeInfo> GetTrades()
+        {
+            using (IDbConnection conn=new SqlConnection(connStr))
+            {
+                List<TradeInfo> list = new List<TradeInfo>();
+
+                string sql = $"SELECT * FROM TradeInfo";
+
+                list = conn.Query<TradeInfo>(sql).ToList();
+
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 获取产品阶段的下拉显示
+        /// </summary>
+        /// <returns></returns>
+        public List<StageInfo> GetStages()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<StageInfo> list = new List<StageInfo>();
+
+                string sql = $"SELECT * FROM StageInfo";
+
+                list = conn.Query<StageInfo>(sql).ToList();
+
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 获取归属地的下拉显示
+        /// </summary>
+        /// <returns></returns>
+        public List<AddressInfo> GetAddress()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<AddressInfo> list = new List<AddressInfo>();
+
+                string sql = $"SELECT * FROM AddressInfo";
+
+                list = conn.Query<AddressInfo>(sql).ToList();
+
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 获取应用行业的下拉显示
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductManageInfo> GetManages()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<ProductManageInfo> list = new List<ProductManageInfo>();
+
+                string sql = $"SELECT * FROM ProductInfo";
+
+                list = conn.Query<ProductManageInfo>(sql).ToList();
 
                 return list;
             }

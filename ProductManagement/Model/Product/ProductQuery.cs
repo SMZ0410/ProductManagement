@@ -16,15 +16,15 @@ namespace Model.Product
         /// <summary>
         /// 产品阶段
         /// </summary>
-        public string StageName { get; set; }
+        public int StageId { get; set; }
         /// <summary>
         /// 归属地
         /// </summary>
-        public string AddressName { get; set; }
+        public int AddressId { get; set; }
         /// <summary>
         /// 应用行业
         /// </summary>
-        public string TradeName { get; set; }
+        public int TradeId { get; set; }
         /// <summary>
         /// 产品名称
         /// </summary>

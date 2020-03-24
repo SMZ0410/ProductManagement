@@ -5,6 +5,24 @@
 
 <h2>产品列表</h2>
 
+<div>
+    <select id="selTrea" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">应用行业</option>
+    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="selAddress" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">归属地</option>
+    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="selStage" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">产品阶段</option>
+    </select><br /><br />
+    <select id="selManage" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">产品经理</option>
+    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input id="txtname" type="text" style="width:150px;height:30px" placeholder="请输入产品名称" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <input id="Button1" type="button" value="搜索" class="btn btn-primary" onclick="ProductQuery()" /><br /><br />
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -26,6 +44,18 @@
 
 <script>
     $().ready(function () {
+        ProductQuery("");
+    })
+
+    function ProductQuery(obj) {
+        var obj = {
+            TreadeName: $("#selTrea").val(),
+            AddressName: $("#selAddress").val(), 
+            StageName: $("#selStage").val(),
+            ProductManage: $("#selManage").val(),
+            ProductName:$("#txtname").val()
+        }
+
         $.ajax({
             url: "/Product/GetProducts",
             type: "POST",
@@ -48,6 +78,6 @@
                 $("#tb").html(ts);
             }
         })
-    })
+    }
 </script>
 
