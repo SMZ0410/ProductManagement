@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SDKClient.Api.Request.Product;
 using SDKClient.Api.Response.Product;
 using SDKClient.Api.Response.DropDownList;
-using SDKClient.Api.Request.DropDownList;
+using SDKClient.Api.Request.DropDownList;  
 
 namespace BLL.Product
 {
