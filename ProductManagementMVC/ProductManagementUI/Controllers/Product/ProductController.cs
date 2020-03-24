@@ -31,6 +31,14 @@ namespace ProductManagementUI.Controllers
             ProductGetRequest getRequest = new ProductGetRequest();
             return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ProductAddPage()
+        {
+            return View();
+        }
 
     }
 }
