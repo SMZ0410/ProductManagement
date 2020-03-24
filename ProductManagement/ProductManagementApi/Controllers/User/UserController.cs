@@ -29,7 +29,6 @@ namespace ProductManagementApi.Controllers.User
             return UserBll.Instance.GetUsers(request);
         }
 
-
         /// <summary>
         /// 用户登录
         /// </summary>
