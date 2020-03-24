@@ -31,9 +31,9 @@ namespace DAL.Product
 
                 string sql = @"SELECT * FROM v_Products";
 
-                if (!string.IsNullOrEmpty(query.ProductManager))
+                if (query.TradeId > 0)
                 {
-                    sql += " AND p.ProductManager LIKE @productManager ";
+                    sql += " AND r.TradeId = @tradeId ";
                 }
                 if (query.StageId>0)
                 {
@@ -43,16 +43,16 @@ namespace DAL.Product
                 {
                     sql += " AND d.AddressId = @addressId ";
                 }
-                if (query.TradeId>0)
+                if (query.ProductId > 0)
                 {
-                    sql += " AND r.TradeId = @tradeId ";
+                    sql += " AND p.ProductId = @productId ";
                 }
                 if (!string.IsNullOrEmpty(query.ProductName))
                 {
                     sql += " AND p.ProductName LIKE @productName ";
                 }
 
-                list = conn.Query<ProductInfo>(sql,new { productManager= "%"+query.ProductManager+"%", stageId=query.StageId, addressId=query.AddressId, tradeId=query.TradeId, productName="%"+query.ProductName+"%" }).ToList();
+                list = conn.Query<ProductInfo>(sql,new { tradeId = query.TradeId, stageId =query.StageId, addressId=query.AddressId, productId = query.ProductId, productName="%"+query.ProductName+"%" }).ToList();
 
                 return list;
             }
