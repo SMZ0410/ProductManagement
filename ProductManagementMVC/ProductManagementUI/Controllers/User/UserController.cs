@@ -167,5 +167,23 @@ namespace ProductManagementUI.Controllers
         {
             return Json(UserBll.Instance.UserUpt(request));
         }
+
+        /// <summary>
+        /// 修改个人密码页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateUserPasswordPage()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return Json(UserBll.Instance.UpdateUserPassword(request));
+        }
     }
 }

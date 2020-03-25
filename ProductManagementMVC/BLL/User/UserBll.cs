@@ -112,5 +112,15 @@ namespace BLL.User
         {
             return ApiRequestHelper.Post<UserUptRequest, UserUptResponse>(request);
         }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return ApiRequestHelper.Post<UserUpdPwdRequest, UserUpdPwdResponse>(request);
+        }
     }
 }
