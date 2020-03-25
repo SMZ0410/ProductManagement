@@ -46,8 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="SDKClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SDKClient">
       <HintPath>..\..\Lib\SDKClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
