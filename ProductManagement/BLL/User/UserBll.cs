@@ -171,5 +171,18 @@ namespace BLL.User
 
             return response;
         }
+
+
+        /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserAddResponse UserAdd(UserAddRequest request)
+        {
+            UserAddResponse response = new UserAddResponse();
+
+            return response;
+        }
     }
 }

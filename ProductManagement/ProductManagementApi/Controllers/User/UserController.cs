@@ -59,5 +59,16 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.ResetUserPassword(request);
         }
+
+        /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserAddResponse UserAdd(UserAddRequest request)
+        {
+            return UserBll.Instance.UserAdd(request);
+        }
     }
 }
