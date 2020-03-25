@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDKClient.Api.Request.User
+namespace SDKClient.Api.Response.User
 {
     /// <summary>
-    /// 用户添加请求
+    /// 用户添加返回
     /// </summary>
-    public class UserAddRequest : BaseRequest
+    public class UserAddResponse:BaseResponse
     {
-
     }
 }

@@ -76,8 +76,18 @@ namespace DAL.User
             }
         }
 
-        public int UserAdd()
+        /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="users"></param>
+        /// <returns></returns>
+        public int UserAdd(UserAdd users)
         {
+            using (IDbConnection conn = new SqlConnection(connStr)) 
+            {
+                
+
+            }
             return 0;
         }
 
