@@ -104,11 +104,11 @@ namespace ProductManagementUI.Controllers
         /// 获取产品单条信息
         /// </summary>
         /// <returns></returns>
-        //[HttpPost]
-        //public JsonResult EditProduct(ProductEditRequest request)
-        //{
-        //    return Json(ProductBll.Instance.EditProducts(request));
-        //}
+        [HttpPost]
+        public JsonResult EditProduct(ProductEditRequest request)
+        {
+            return Json(ProductBll.Instance.EditProducts(request));
+        }
 
         /// <summary>
         /// 修改产品信息
