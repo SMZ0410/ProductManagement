@@ -40,5 +40,25 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.UserLogin(request);
         }
+
+        /// <summary>
+        /// 忘记密码 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserForgotPwdResponse ForgotPassword(UserForgotPwdRequest request)
+        {
+            return UserBll.Instance.ForgotPassword(request);
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        [HttpPost]
+        public UserResetPwdResponse ResetUserPassword(UserResetPwdRequest request)
+        {
+            return UserBll.Instance.ResetUserPassword(request);
+        }
     }
 }

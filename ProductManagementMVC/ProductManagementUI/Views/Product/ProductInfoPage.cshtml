@@ -6,21 +6,21 @@
 <h2>产品列表</h2>
 
 <div>
-    <select id="selTrea" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">应用行业</option>
+    应用行业：<select id="selTrea" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <select id="selAddress" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">归属地</option>
+    归属地：<select id="selAddress" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <select id="selStage" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">产品阶段</option>
+    产品阶段：<select id="selStage" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select><br /><br />
-    <select id="selManage" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">产品经理</option>
+    产品经理：<select id="selManage" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input id="txtname" type="text" style="width:150px;height:30px" placeholder="请输入产品名称" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <input id="Button1" type="button" value="搜索" class="btn btn-primary" onclick="ProductQuery()" /><br /><br />
+    <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" /><br /><br />
 </div>
 
 <table class="table table-bordered">
@@ -44,22 +44,68 @@
 
 <script>
     $().ready(function () {
-        ProductQuery("");
+        //获取应用行业
+        $.ajax({
+            url: "/Product/GetTreade",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Trades).each(function () {
+                    var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
+                    $("#selTrea").append(tp);
+                })
+            }
+        })
+        //获取产品阶段
+        $.ajax({
+            url: "/Product/GetStages",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Stages).each(function () {
+                    var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
+                    $("#selStage").append(tp);
+                })
+            }
+        })
+        //获取归属地
+        $.ajax({
+            url: "/Product/GetAddress",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.TrAddress).each(function () {
+                    var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
+                    $("#selAddress").append(tp);
+                })
+            }
+        })
+        //获取产品经理
+        $.ajax({
+            url: "/Product/GetManage",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Manages).each(function () {
+                    var tp = "<option value='" + this.ProductId + "'>" + this.ProductManager + "</option>"
+                    $("#selManage").append(tp);
+                })
+            }
+        })
+
+        QueryProduct();
     })
-
-    function ProductQuery(obj) {
+     
+    function QueryProduct() {
         var obj = {
-            TreadeName: $("#selTrea").val(),
-            AddressName: $("#selAddress").val(), 
-            StageName: $("#selStage").val(),
-            ProductManage: $("#selManage").val(),
-            ProductName:$("#txtname").val()
-        }
-
+            Query:query 
+        };
+        //产品列表显示
         $.ajax({
             url: "/Product/GetProducts",
             type: "POST",
             dataType: "json",
+            data: obj,
             success: function (res) {
                 var ts = "";
                 $(res.Products).each(function () {
@@ -77,6 +123,17 @@
                 })
                 $("#tb").html(ts);
             }
+        })
+
+        $("#ProductQuery").click(function () {
+            var query = {
+                tradeId: $("#selTrea").val(),
+                stageId: $("#selStage").val(),
+                addressId: $("#selAddress").val(),
+                productId: $("#selManage").val(),
+                productName: $("#txtname").val()
+            }
+            QueryProduct(query);
         })
     }
 </script>

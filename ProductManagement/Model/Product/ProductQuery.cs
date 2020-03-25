@@ -10,9 +10,9 @@ namespace Model.Product
     public class ProductQuery
     {
         /// <summary>
-        /// 产品经理
+        /// 应用行业
         /// </summary>
-        public string ProductManager { get; set; }
+        public int TradeId { get; set; }
         /// <summary>
         /// 产品阶段
         /// </summary>
@@ -22,9 +22,9 @@ namespace Model.Product
         /// </summary>
         public int AddressId { get; set; }
         /// <summary>
-        /// 应用行业
+        /// 产品经理
         /// </summary>
-        public int TradeId { get; set; }
+        public int ProductId { get; set; }
         /// <summary>
         /// 产品名称
         /// </summary>

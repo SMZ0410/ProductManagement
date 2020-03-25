@@ -57,11 +57,39 @@ namespace ProductManagementUI.Controllers
         }
 
         /// <summary>
-        /// 忘记密码 重置密码页面
+        /// 忘记密码 发送邮件到用户邮箱页面
         /// </summary>
-        public ActionResult ResetPasswordPage()
+        public ActionResult ForgotPasswordPage()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 忘记密码 发送邮件到用户邮箱
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult ForgotPassword(UserForgotPwdRequest request)
+        { 
+            return Json(UserBll.Instance.ForgotPassword(request), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 重置密码页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ResetUserPasswordPage(string userName)
+        {
+            ViewBag.UserName = userName;
+            return View();
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult ResetUserPassword(UserResetPwdRequest request)
+        {
+            return Json(UserBll.Instance.ResetPassword(request), JsonRequestBehavior.AllowGet);
         }
     }
 }

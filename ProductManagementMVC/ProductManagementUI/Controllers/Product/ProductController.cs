@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using ProductManagementUI.Models;
+using SDKClient.Api.Request.DropDownList;
 
 namespace ProductManagementUI.Controllers
 {
@@ -31,6 +32,43 @@ namespace ProductManagementUI.Controllers
             ProductGetRequest getRequest = new ProductGetRequest();
             return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 获取应用行业信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetTreade()
+        {
+            DropDownTreadeRquest getTreade = new DropDownTreadeRquest();
+            return Json(ProductBll.Instance.GetTreades(getTreade));
+        }
+        /// <summary>
+        /// 获取产品阶段信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetStages()
+        {
+            DropDownStageRequest getStage = new DropDownStageRequest();
+            return Json(ProductBll.Instance.GetStages(getStage));
+        }
+        /// <summary>
+        /// 获取归属地
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetAddress()
+        {
+            DropDownAddressRequest getAddress = new DropDownAddressRequest();
+            return Json(ProductBll.Instance.GetAddress(getAddress));
+        }
+        /// <summary>
+        /// 获取产品经理信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetManage()
+        {
+            DropDownManageRequest getAddress = new DropDownManageRequest();
+            return Json(ProductBll.Instance.GetManage(getAddress));
+        }
+
         /// <summary>
         /// 添加产品信息
         /// </summary>

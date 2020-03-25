@@ -8,8 +8,8 @@
 <input type="text" id="RoleName" placeholder="请输入角色名称" />
 <input type="button" value="查询" id="BtnQuery"/>
 
-<table>
-    <thead class="table">
+<table class="table">
+    <thead>
         <tr>
             <td>编号</td>
             <td>角色名称</td>
@@ -32,7 +32,7 @@
     function RoleQuery(rolename) {
         var obj = {
             RoleName: rolename
-        }
+        };
         $.ajax({
             url: '/Role/GetRole',
             type: 'POST',

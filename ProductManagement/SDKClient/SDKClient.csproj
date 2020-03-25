@@ -42,26 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Request\DropDownList\DropDownAddressRequest.cs" />
-    <Compile Include="Api\Request\DropDownList\DropDownManageRequest.cs" />
-    <Compile Include="Api\Request\DropDownList\DropDownStageRequest.cs" />
-    <Compile Include="Api\Request\DropDownList\DropDownTreadeRquest.cs" />
-    <Compile Include="Api\Request\Product\ProductAddRequest.cs" />
-    <Compile Include="Api\Request\Product\ProductDeleteRequest.cs" />
     <Compile Include="Api\Request\Product\ProductGetRequest.cs" />
-    <Compile Include="Api\Request\Product\ProductUpdateRequest.cs" />
     <Compile Include="Api\Request\Role\RoleGetRequest.cs" />
-    <Compile Include="Api\Request\User\UserAddRequest.cs" />
     <Compile Include="Api\Request\User\UserGetRequest.cs" />
     <Compile Include="Api\Request\User\UserLoginRequest.cs" />
-    <Compile Include="Api\Response\DropDownList\DropDownAddressReponse.cs" />
-    <Compile Include="Api\Response\DropDownList\DropDownManageReponse.cs" />
-    <Compile Include="Api\Response\DropDownList\DropDownStageReponse.cs" />
-    <Compile Include="Api\Response\DropDownList\DropDownTreadeResponse.cs" />
-    <Compile Include="Api\Response\Product\ProductAddResponse.cs" />
-    <Compile Include="Api\Response\Product\ProductDeleteResponse.cs" />
-    <Compile Include="Api\Response\Product\ProductUpdateResponse.cs" />
+    <Compile Include="Api\Request\User\UserForgotPwdRequest.cs" />
+    <Compile Include="Api\Request\User\UserResetPwdRequest.cs" />
     <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
+    <Compile Include="Api\Response\User\UserResetPwdResponse.cs" />
+    <Compile Include="Api\Response\User\UserForgotPwdResponse.cs" />
     <Compile Include="Api\Response\User\UserGetResponse.cs" />
     <Compile Include="Api\Response\User\UserLoginResponse.cs" />
     <Compile Include="Api\Response\Product\ProductGetResponse.cs" />
