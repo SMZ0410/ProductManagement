@@ -17,13 +17,13 @@ namespace BLL.User
         /// 获取用户基本信息
         /// </summary>
         /// <returns></returns>
-        public UserGetResponse GetUsers()
+        public UserGetResponse GetUsers(UserGetRequest request)
         {
             //实例化一个返回对象
             UserGetResponse response = new UserGetResponse();
 
             //拿到用户信息集合
-            var list = UserDal.Instance.GetUsers();
+            var list = UserDal.Instance.GetUsers(request.UserName);
 
             //判断是否有数据
             if (list.Count <= 0)
@@ -52,7 +52,7 @@ namespace BLL.User
             string salt = UserDal.Instance.GetSaltByUserName(request.User.UserName);
 
             //将密码和盐拼接进项MD5加密
-            string password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword+salt);
+            string password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
 
             //给request参数重新赋值加密后的密码
             request.User.UserPassword = password;
@@ -72,16 +72,16 @@ namespace BLL.User
             }
 
             //调用dal层方法 拿到返回id
-            int userId = UserDal.Instance.UserLogin(request.User); 
+            int userId = UserDal.Instance.UserLogin(request.User);
 
             //如果id>0登陆成功
-            if (userId>0)
-            { 
+            if (userId > 0)
+            {
                 response.Message = "登陆成功！";
             }
             else
             {
-                response.Status = false; 
+                response.Status = false;
                 response.Message = "登录失败，密码错误";
             }
             //返回
@@ -111,14 +111,14 @@ namespace BLL.User
             }
 
             //判断用户名和邮箱是否存在一条信息里
-            int userId = UserDal.Instance.IsExistUserNameEmail(request.UserName,request.Email);
+            int userId = UserDal.Instance.IsExistUserNameEmail(request.UserName, request.Email);
 
             //存在 发送修改密码地址到邮箱
             //否则 返回失败信息
-            if (userId >0)
+            if (userId > 0)
             {
-                SendToEmail.UpdPwdAddrToEmail(request.UserName,request.Email);
-                response.Message="发送成功，请打开邮箱查看";
+                SendToEmail.UpdPwdAddrToEmail(request.UserName, request.Email);
+                response.Message = "发送成功，请打开邮箱查看";
             }
             else
             {
@@ -128,7 +128,7 @@ namespace BLL.User
 
             return response;
         }
-         
+
         /// <summary>
         /// 重置密码
         /// </summary>
@@ -150,12 +150,13 @@ namespace BLL.User
                 return response;
             }
 
-            //将新密码加盐进行md5加密
-            var salt = UserDal.Instance.GetSaltByUserName(request.UserName);
-            var encryptionPassword = MD5Encrypt.MD5Encrypt32(request.NewPassword + salt);
+            //解码用户名字符串
             var decryptusername = request.UserName.Decrypt();
+            //将新密码加盐进行md5加密
+            var salt = UserDal.Instance.GetSaltByUserName(decryptusername);
+            var encryptionPassword = MD5Encrypt.MD5Encrypt32(request.NewPassword + salt);
             //调用dal层重置密码方法
-            int res = UserDal.Instance.ResetUserPasswod(decryptusername,encryptionPassword);
+            int res = UserDal.Instance.ResetUserPasswod(decryptusername, encryptionPassword);
 
             //如果res>0修改成功
             if (res > 0)

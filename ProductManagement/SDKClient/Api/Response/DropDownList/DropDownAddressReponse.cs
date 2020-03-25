@@ -10,6 +10,7 @@ namespace SDKClient.Api.Response.DropDownList
     public class DropDownAddressReponse:BaseResponse
     {
         /// <summary>
+        /// 萨达
         /// 返回的地址信息集合
         /// </summary>
         public List<AddressInfo> TrAddress { get; set; }

@@ -21,7 +21,7 @@ namespace DAL.User
         /// <summary>
         /// 获取连接数据库字符串
         /// </summary>
-        private string connStr = ConfigurationManager.AppSettings["connectionString"];
+        private readonly string  connStr = ConfigurationManager.AppSettings["connectionString"];
 
 
         /// <summary>
@@ -89,6 +89,34 @@ namespace DAL.User
 
             }
             return 0;
+        }
+
+        /// <summary>
+        /// 根据用户名&邮箱判断该用户是否存在
+        /// 返回用户id
+        /// </summary>
+        public int IsExistUserNameEmail(string userName,string email)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName = @tusername AND Email=@temail";
+                int userId =conn.QueryFirstOrDefault<int>(sql,new { tusername =userName, temail =email});
+                return userId;
+            }
+        }
+         
+        /// <summary>
+        /// 重置用户密码
+        /// </summary>
+        /// <returns>影响行数</returns>
+        public int ResetUserPasswod(string userName,string newPassword)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE dbo.UserInfo SET UserPassword=@userpassword WHERE UserName=@username  ";
+                int res = conn.Execute(sql, new { userpassword = newPassword, username = userName});
+                return res;
+            }
         }
 
     }
