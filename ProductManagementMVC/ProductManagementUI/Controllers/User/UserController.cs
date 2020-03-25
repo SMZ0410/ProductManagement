@@ -91,5 +91,14 @@ namespace ProductManagementUI.Controllers
         {
             return Json(UserBll.Instance.ResetPassword(request), JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserAdd()
+        {
+            return View();
+        }
     }
 }
