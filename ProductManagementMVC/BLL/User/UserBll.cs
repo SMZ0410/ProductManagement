@@ -13,7 +13,7 @@ namespace BLL.User
     /// <summary>
     /// 
     /// </summary>
-    public  class UserBll:BaseBll<UserBll>
+    public class UserBll : BaseBll<UserBll>
     {
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace BLL.User
         /// <returns></returns>
         public UserLoginResponse UserLogin(UserLoginRequest request)
         {
-            return  ApiRequestHelper.Post<UserLoginRequest, UserLoginResponse>(request);
+            return ApiRequestHelper.Post<UserLoginRequest, UserLoginResponse>(request);
         }
 
         /// <summary>
@@ -52,7 +52,6 @@ namespace BLL.User
             return ApiRequestHelper.Post<UserResetPwdRequest, UserResetPwdResponse>(request);
         }
 
-   
-   
+
     }
 }
