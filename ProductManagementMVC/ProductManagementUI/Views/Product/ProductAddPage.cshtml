@@ -9,7 +9,7 @@
     <tr>
         <td style="color:#808080;font-size:20px">产品名称：:</td>
         <td>
-            <input id="Text1" type="text" placeholder="请输入产品名称" style="width:500px;height:30px" />
+            <input id="txtProductName" type="text" placeholder="请输入产品名称" style="width:500px;height:30px" />
         </td>
         <td style="color:#808080">*必填项，最多50个字符串</td>
     </tr>
@@ -52,19 +52,91 @@
     <tr>
         <td style="color:#808080;font-size:20px">产品经理：:</td>
         <td>
-            <input id="Checkbox1" type="checkbox" />蔡光辉&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" />石斌&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" />赵家林&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" />李文博&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" />赵鑫杰
+            <input id="Checkbox1" type="checkbox" name="Manage" value="蔡光辉" />蔡光辉&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="石斌" />石斌&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="赵家林"  />赵家林&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="李文博"  />李文博&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="赵鑫杰"  />赵鑫杰
         </td>
         <td style="color:#808080">*必填项，最多可选3位经理</td>
     </tr>
     <tr>
         <td></td>
         <td>
-            <input id="Button1" type="button" value="添加产品" class="btn btn-primary" />
+            <input id="Button1" type="button" value="添加产品" class="btn btn-primary" onclick="AddProduct()" />
         </td>
     </tr>
 </table>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $().ready(function () {
+        //获取应用行业
+        $.ajax({
+            url: "/Product/GetTreade",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Trades).each(function () {
+                    var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
+                    $("#selTreade").append(tp);
+                })
+            }
+        })
+        //获取归属地
+        $.ajax({
+            url: "/Product/GetAddress",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.TrAddress).each(function () {
+                    var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
+                    $("#selAddress").append(tp);
+                })
+            }
+        })
+        //获取产品阶段
+        $.ajax({
+            url: "/Product/GetStages",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Stages).each(function () {
+                    var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
+                    $("#selStages").append(tp);
+                })
+            }
+        })
+    })
+
+    function AddProduct() {
+
+        var obj = {
+            Products: {
+                ProductName: $("#txtProductName").val(),
+                TreadeId: $("#selTreade").val(),
+                TypeId: $("input[name='ProductType']:checked").val(),
+                AddressId: $("#selAddress").val(),
+                StageId: $("#selStages").val(),
+                ProductManage: $("input[name='Manage']:checked").val()
+            }
+        };
+
+        $.ajax({
+            url: "/Product/ProductAddPage",
+            type: "POST",
+            dataType: "json",
+            data: obj,
+            success: function (res) {
+                if (res.Status) {
+                    alert(res.Message);
+                }
+                else {
+                    alert(res.Message);
+                }
+            }
+        })
+    }
+</script>
 

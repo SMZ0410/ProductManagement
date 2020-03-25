@@ -8,5 +8,9 @@ namespace SDKClient.Api.Request.Product
 {
     public class ProductDeleteRequest:BaseRequest
     {
+        public override string GetApiName()
+        {
+            return "api/Product/DeleteProduct";
+        }
     }
 }

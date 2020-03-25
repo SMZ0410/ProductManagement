@@ -63,7 +63,29 @@ namespace ProductManagementApi.Controllers.Product
         [HttpPost]
         public DropDownManageReponse GetManages(DropDownManageRequest request)
         {
-            return ProductBll.Instance.GetManages(request);
+            return ProductBll.Instance.GetManages(request); 
+        }
+
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ProductAddResponse AddProducts(ProductAddRequest request)
+        {
+            return ProductBll.Instance.ProductAdd(request);
+        }
+
+        /// <summary>
+        /// 删除产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ProductDeleteResponse DeleteProduct(ProductDeleteRequest request)
+        {
+            return ProductBll.Instance.DeleteProduct(request);
         }
     }
 }

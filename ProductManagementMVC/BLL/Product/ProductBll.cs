@@ -58,5 +58,25 @@ namespace BLL.Product
         {
             return ApiRequestHelper.Post<DropDownManageRequest, DropDownManageReponse>(request);
         }
+
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductAddResponse AddProduct(ProductAddRequest request)
+        {
+            return ApiRequestHelper.Post<ProductAddRequest, ProductAddResponse>(request);
+        }
+
+        /// <summary>
+        /// 删除产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductDeleteResponse DeleteProducts(ProductDeleteRequest request)
+        {
+            return ApiRequestHelper.Post<ProductDeleteRequest, ProductDeleteResponse>(request);
+        }
     }
 }

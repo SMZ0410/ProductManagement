@@ -141,5 +141,54 @@ namespace BLL.Product
             }
             return response;
         }
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <returns></returns>
+        public ProductAddResponse ProductAdd(ProductAddRequest request)
+        {
+            ProductAddResponse response = new ProductAddResponse();
+
+            var res = ProductDal.Instance.AddProduct(request.Products);
+
+            if (res > 0)
+            {
+                response.Status = true;
+                response.Message = "添加成功";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "添加失败";
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 产出产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductDeleteResponse DeleteProduct(ProductDeleteRequest request)
+        {
+            ProductDeleteResponse response = new ProductDeleteResponse();
+
+            int ids = 0;
+
+            var res = ProductDal.Instance.DeleteProduct(ids);
+            if (res>0)
+            {
+                response.Status = true;
+                response.Message = "删除成功";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "删除失败";
+            }
+
+            return response;
+        }
     }
 }

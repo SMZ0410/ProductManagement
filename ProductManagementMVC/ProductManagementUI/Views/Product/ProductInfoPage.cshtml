@@ -20,12 +20,15 @@
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input id="txtname" type="text" style="width:150px;height:30px" placeholder="请输入产品名称" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" /><br /><br />
+    <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <input id="DelProduct" type="button" value="删除" class="btn btn-danger" onclick="Delete()" /><br /><br />
 </div>
 
 <table class="table table-bordered">
     <thead>
         <tr>
+            <td><input id="Checkbox1" type="checkbox" /></td>
             <td>编号</td>
             <td>产品名称</td>
             <td>创建时间</td>
@@ -95,10 +98,10 @@
 
         QueryProduct();
     })
-     
+
     function QueryProduct() {
         var obj = {
-            Query:query 
+            Query: query
         };
         //产品列表显示
         $.ajax({
@@ -110,6 +113,7 @@
                 var ts = "";
                 $(res.Products).each(function () {
                     ts += "<tr>"
+                        + "<td><input id='Checkbox1' name='ck' type='checkbox' value='" + this.ProductId + "' /></td>"
                         + "<td>" + this.ProductId + "</td>"
                         + "<td>" + this.ProductName + "</td>"
                         + "<td>" + this.CreateTime + "</td>"
@@ -118,7 +122,7 @@
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.StageName + "</td>"
                         + "<td>" + this.ProductDetail + "</td>"
-                        + "<td><a>删除</a></td>"
+                        + "<td><a onclick='Update(" + this.ProductId + ")'>修改</a></td>"
                         + "</tr>";
                 })
                 $("#tb").html(ts);
@@ -135,6 +139,35 @@
             }
             QueryProduct(query);
         })
+    }
+    //删除产品信息（逻辑删除）
+    function Delete() {
+        var ids = "";
+
+        val = $("[name='ck']:checked").each(function () {
+            ids = ids + $(this).val() + ',';
+        })
+
+        if (ids == "") {
+            alert("请选择您要办理的信息");
+            return;
+        }
+
+        if (confirm("确认删除吗")) {
+            $.ajax({
+                url: "/Product/DeleteProduct",
+                type: "POST",
+                dataType: "json",
+                success: function (res) {
+                    if (res.Status) {
+                        alert(res.Message);
+                    }
+                    else {
+                        alert(res.Message);
+                    }
+                }
+            });
+        }
     }
 </script>
 

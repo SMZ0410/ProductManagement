@@ -35,7 +35,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\专高六\技能\ECommerceFront_MVC\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SDKClient">
+    <Reference Include="SDKClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\SDKClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />

@@ -70,12 +70,30 @@ namespace ProductManagementUI.Controllers
         }
 
         /// <summary>
-        /// 添加产品信息
+        /// 添加产品视图
         /// </summary>
         /// <returns></returns>
         public ActionResult ProductAddPage()
         {
             return View();
+        }
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult AddProduct()
+        {
+            ProductAddRequest addRequest = new ProductAddRequest();
+            return Json(ProductBll.Instance.AddProduct(addRequest));
+        }
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult DeleteProduct()
+        {
+            ProductDeleteRequest request = new ProductDeleteRequest();
+            return Json(ProductBll.Instance.DeleteProducts(request));
         }
 
     }

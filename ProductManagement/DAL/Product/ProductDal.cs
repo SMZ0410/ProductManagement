@@ -128,5 +128,55 @@ namespace DAL.Product
                 return list;
             }
         }
+
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public int AddProduct(ProductAdd info)
+        {
+            using (IDbConnection conn=new SqlConnection())
+            {
+                string sql = @"EXEC dbo.p_Product @productName,
+                                                  @productManage,
+                                                  @productDetail,
+                                                  @tradeId, 
+                                                  @typeId,
+                                                  @addressId,
+                                                  @stageId";
+                var res = conn.Execute(sql,new { productName = info.ProductName , productManage =info.ProductManager, productDetail =info.productDetail, tradeId =info.TradeId, typeId =info.TypeId, addressId =info.AddressId, stageId =info.StageId});
+
+                return res;
+            } 
+        }
+
+        /// <summary>
+        /// 逻辑删除产品信息
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int DeleteProduct(int ids)
+        {
+            using (IDbConnection conn=new SqlConnection(connStr))
+            {
+                string sql = $"update ProductInfo set Status=0 where ProductId in ('"+ids+"')";
+
+                var res = conn.Execute(sql);
+
+                return res;
+            }
+        }
+        /// <summary>
+        /// 获取产品的单条信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ProductInfo ExitProduct(int id)
+        {
+            ProductInfo info = new ProductInfo();
+
+            return info;
+        }
     }
 }
