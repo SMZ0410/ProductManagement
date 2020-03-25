@@ -143,6 +143,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ReferencesFile\Error\css\font-awesome.min.css" />
+    <Content Include="ReferencesFile\Error\css\style.css" />
+    <Content Include="ReferencesFile\Error\index.html" />
+    <Content Include="ReferencesFile\Error\说明.htm" />
     <Content Include="ReferencesFile\Template\charts.html" />
     <Content Include="ReferencesFile\Template\css\custom.css" />
     <Content Include="ReferencesFile\Template\css\fontastic.css" />
@@ -158,6 +162,7 @@
     <Content Include="ReferencesFile\Template\icons-reference\fonts\dashboard.svg" />
     <Content Include="ReferencesFile\Template\icons-reference\icons-reference.html" />
     <Content Include="ReferencesFile\Template\icons-reference\styles.css" />
+    <Content Include="ReferencesFile\Template\Icon\error.png" />
     <Content Include="ReferencesFile\Template\Icon\login.png" />
     <Content Include="ReferencesFile\Template\Icon\ResetPassword.png" />
     <Content Include="ReferencesFile\Template\img\avatar-0.jpg" />
@@ -585,6 +590,11 @@
     <Content Include="ReferencesFile\Template\vendor\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="ReferencesFile\Template\vendor\jquery.cookie\component.json" />
     <Content Include="ReferencesFile\Template\vendor\jquery.cookie\cookie.jquery.json" />
+    <Content Include="ReferencesFile\Error\fonts\fontawesome-webfont.eot" />
+    <Content Include="ReferencesFile\Error\fonts\fontawesome-webfont.ttf" />
+    <Content Include="ReferencesFile\Error\fonts\fontawesome-webfont.woff" />
+    <Content Include="ReferencesFile\Error\fonts\fontawesome-webfont.woff2" />
+    <Content Include="ReferencesFile\Error\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -605,7 +615,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -617,6 +626,7 @@
     <Content Include="Views\User\ForgotPasswordPage.cshtml" />
     <Content Include="Views\User\ResetUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductAddPage.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
