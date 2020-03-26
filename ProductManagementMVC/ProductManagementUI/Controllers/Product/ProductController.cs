@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using ProductManagementUI.Models;
 using SDKClient.Api.Request.DropDownList;
 
+
 namespace ProductManagementUI.Controllers
 {
     public class ProductController : Controller
@@ -27,45 +28,40 @@ namespace ProductManagementUI.Controllers
         /// 获取产品列表信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetProducts()
+        public JsonResult GetProducts(ProductGetRequest getRequest)
         {
-            ProductGetRequest getRequest = new ProductGetRequest();
             return Json(ProductBll.Instance.GetProducts(getRequest), JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// 获取应用行业信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetTreade()
+        public JsonResult GetTreade(DropDownTreadeRquest getTreade)
         {
-            DropDownTreadeRquest getTreade = new DropDownTreadeRquest();
             return Json(ProductBll.Instance.GetTreades(getTreade));
         }
         /// <summary>
         /// 获取产品阶段信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetStages()
+        public JsonResult GetStages(DropDownStageRequest getStage)
         {
-            DropDownStageRequest getStage = new DropDownStageRequest();
             return Json(ProductBll.Instance.GetStages(getStage));
         }
         /// <summary>
         /// 获取归属地
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetAddress()
+        public JsonResult GetAddress(DropDownAddressRequest getAddress)
         {
-            DropDownAddressRequest getAddress = new DropDownAddressRequest();
             return Json(ProductBll.Instance.GetAddress(getAddress));
         }
         /// <summary>
         /// 获取产品经理信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetManage()
+        public JsonResult GetManage(DropDownManageRequest getAddress)
         {
-            DropDownManageRequest getAddress = new DropDownManageRequest();
             return Json(ProductBll.Instance.GetManage(getAddress));
         }
 
@@ -81,18 +77,16 @@ namespace ProductManagementUI.Controllers
         /// 添加产品信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult AddProduct()
+        public JsonResult AddProduct(ProductAddRequest addRequest)
         {
-            ProductAddRequest addRequest = new ProductAddRequest();
             return Json(ProductBll.Instance.AddProduct(addRequest));
         }
         /// <summary>
         /// 删除信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult DeleteProduct()
+        public JsonResult DeleteProduct(ProductDeleteRequest request)
         {
-            ProductDeleteRequest request = new ProductDeleteRequest();
             return Json(ProductBll.Instance.DeleteProducts(request));
         }
 

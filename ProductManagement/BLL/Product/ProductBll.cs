@@ -166,7 +166,7 @@ namespace BLL.Product
         }
 
         /// <summary>
-        /// 产出产品信息
+        /// 删除产品信息
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -174,9 +174,9 @@ namespace BLL.Product
         {
             ProductDeleteResponse response = new ProductDeleteResponse();
 
-            int ids = 0;
+           
+            var res = ProductDal.Instance.DeleteProduct(request.Ids);
 
-            var res = ProductDal.Instance.DeleteProduct(ids);
             if (res>0)
             {
                 response.Status = true;

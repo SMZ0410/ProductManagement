@@ -13,6 +13,10 @@ namespace SDKClient.Api.Request.Product
         /// 产品信息查询model
         /// </summary>
         public ProductQuery Query { get; set; }
+        /// <summary>
+        /// 重写基类路径
+        /// </summary>
+        /// <returns></returns>
         public override string GetApiName()
         {
             return "api/Product/GetProducts";

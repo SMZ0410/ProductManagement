@@ -54,16 +54,23 @@
         <td>
             <input id="Checkbox1" type="checkbox" name="Manage" value="蔡光辉" />蔡光辉&nbsp;&nbsp;&nbsp;
             <input id="Checkbox1" type="checkbox" name="Manage" value="石斌" />石斌&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" name="Manage" value="赵家林"  />赵家林&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" name="Manage" value="李文博"  />李文博&nbsp;&nbsp;&nbsp;
-            <input id="Checkbox1" type="checkbox" name="Manage" value="赵鑫杰"  />赵鑫杰
+            <input id="Checkbox1" type="checkbox" name="Manage" value="赵家林" />赵家林&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="李文博" />李文博&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="赵鑫杰" />赵鑫杰
         </td>
         <td style="color:#808080">*必填项，最多可选3位经理</td>
     </tr>
     <tr>
+        <td style="color:#808080;font-size:20px">产品描述：:</td>
+        <td>
+            <textarea id="txtProductDetail" rows="2" cols="20" placeholder="请输入产品描述" style="width:500px;height:30px"></textarea>
+        </td>
+        <td style="color:#808080">*必填项</td>
+    </tr>
+    <tr>
         <td></td>
         <td>
-            <input id="Button1" type="button" value="添加产品" class="btn btn-primary" onclick="AddProduct()" />
+            <input id="AddProduct" type="button" value="添加产品" onclick="ProductAdd()" class="btn btn-primary" />
         </td>
     </tr>
 </table>
@@ -110,27 +117,36 @@
         })
     })
 
-    function AddProduct() {
+    //添加的点击事件
+    function ProductAdd() {
+        var ids = "";
+        $("input[name='Manage']:checked").each(function () {
+            ids += $(this).val() + ',';
+        })
+        ids = ids.substring(0, ids.length - 1);
 
-        var obj = {
-            Products: {
-                ProductName: $("#txtProductName").val(),
-                TreadeId: $("#selTreade").val(),
-                TypeId: $("input[name='ProductType']:checked").val(),
-                AddressId: $("#selAddress").val(),
-                StageId: $("#selStages").val(),
-                ProductManage: $("input[name='Manage']:checked").val()
-            }
-        };
+        //添加对象
+        var products = {
+            ProductName: $("#txtProductName").val(),
+            ProductManager: ids,
+            ProductDetail: $("#txtProductDetail").val(),
+            TradeId: $("#selTreade").val(),
+            TypeId: $("input[name='ProductType']:checked").val(),
+            AddressId: $("#selAddress").val(),
+            StageId: $("#selStages").val()
+        }
 
         $.ajax({
-            url: "/Product/ProductAddPage",
+            url: "/Product/AddProduct",
             type: "POST",
             dataType: "json",
-            data: obj,
+            data: {
+                Products: products
+            },
             success: function (res) {
                 if (res.Status) {
                     alert(res.Message);
+                    location.href = "/Product/ProductInfoPage";
                 }
                 else {
                     alert(res.Message);
@@ -138,5 +154,10 @@
             }
         })
     }
+
+//$("#AddProduct").click(function () {
+
+
+//})
 </script>
 

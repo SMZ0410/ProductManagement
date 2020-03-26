@@ -23,6 +23,8 @@ namespace Model
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
+
+        //public string CreateTimeStr { get { return CreateTime.ToString(); } }
         /// <summary>
         /// 产品经理
         /// </summary>
