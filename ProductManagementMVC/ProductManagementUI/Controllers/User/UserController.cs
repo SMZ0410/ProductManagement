@@ -34,7 +34,7 @@ namespace ProductManagementUI.Controllers
        /// 用户登录方法
        /// </summary>
         public JsonResult UserLogin(UserLoginRequest request)
-        {
+        { 
             return Json(UserBll.Instance.UserLogin(request),JsonRequestBehavior.AllowGet);
         }
 
