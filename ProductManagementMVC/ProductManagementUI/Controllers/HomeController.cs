@@ -10,8 +10,17 @@ namespace ProductManagementUI.Controllers
     //七组无敌！！！！
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string userName="",string roleName="")
         {
+            if (!string.IsNullOrEmpty(userName))
+            {
+                Session["UserName"] = userName;
+            }
+            if (!string.IsNullOrEmpty(roleName))
+            {
+                Session["RoleName"] = roleName;
+            }
+
             return View();
         }
 

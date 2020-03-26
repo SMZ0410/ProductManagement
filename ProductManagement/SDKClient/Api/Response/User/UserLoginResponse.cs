@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,9 @@ namespace SDKClient.Api.Response.User
     /// </summary>
     public class UserLoginResponse : BaseResponse
     {
+        /// <summary>
+        /// 返回用户信息
+        /// </summary>
+        public UserLogModel User { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace DAL.User
         private readonly string  connStr = ConfigurationManager.AppSettings["connectionString"];
 
 
+
         /// <summary>
         /// 获取用户基本信息
         /// </summary>
@@ -64,15 +65,18 @@ namespace DAL.User
         /// </summary>
         /// <param name="user">用户登录信息</param>
         /// <returns></returns>
-        public int UserLogin(UserLogin user)
-        {
+        public UserLogModel UserLogin(UserLogModel user)
+        { 
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username AND UserPassword=@userpassword";
+                string sql = @"SELECT u.UserId, u.UserName,r.RoleName FROM dbo.UserInfo u
+                                        JOIN dbo.UserRoleMapInfo m ON u. UserId = m.UserId
+                                        JOIN dbo.RoleInfo r ON m.RoleId = r.RoleId
+                                        WHERE UserName = @username  AND UserPassword = @userpassword";
 
-                //获取用户id并返回
-                var userId = conn.QueryFirstOrDefault<int>(sql, new { username = user.UserName, userpassword = user.UserPassword });
-                return userId;
+                //获取用户id并返回 
+                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
+                return userinfo;
             }
         }
 

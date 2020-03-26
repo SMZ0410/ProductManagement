@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Model.User
 {
     /// <summary>
-    /// 用户登录模型
+    /// 用户登录请求&返回模型
     /// </summary>
-    public  class UserLogin
+    public class UserLogModel
     {
         /// <summary>
         /// 用户名
@@ -19,5 +19,9 @@ namespace Model.User
         /// 用户密码
         /// </summary>
         public string UserPassword { get; set; }
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RoleName { get; set; }
     }
 }

@@ -33,6 +33,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
+    <input type="hidden" id="hideusername" />
+    <input type="hidden" id="hiderolename" />
     <div class="page login-page">
         <div class="container d-flex align-items-center">
             <div class="form-holder has-shadow">
@@ -75,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="copyrights text-center"> 
+        <div class="copyrights text-center">
         </div>
     </div>
     <!-- JavaScript files-->
@@ -110,8 +112,10 @@
             data: obj,
             dataType: "json",
             success: function (res) {
-                if (res.Satus) {
-                    alert(res.Message);
+                if (res.Status) { 
+                    $("#hideusername").val(res.User.UserName);
+                    $("#hiderolename").val(res.User.RoleName);
+                    location.href = "/Home/Index?userName="+ $("#hideusername").val()+"&roleName="+$("#hiderolename").val();
                 }
                 else {
                     alert(res.Message);
