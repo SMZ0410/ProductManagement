@@ -633,6 +633,7 @@
     <Content Include="Views\User\UpdateUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductUpdatePage.cshtml" />
     <Content Include="Views\User\UserUpdate.cshtml" />
+    <Content Include="Views\Role\AddRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
