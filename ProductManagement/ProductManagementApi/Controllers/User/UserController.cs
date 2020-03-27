@@ -9,6 +9,8 @@ using System.Web.Http;
 using ProductManagementApi.Auth;
 using SDKClient.Api.Request.User;
 using SDKClient.Api.Response.User;
+using SDKClient.Api.Response.DropDownList;
+using SDKClient.Api.Request.DropDownList;
 
 namespace ProductManagementApi.Controllers.User
 {
@@ -70,5 +72,50 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.UserAdd(request);
         }
+        /// <summary>
+        /// 地址下拉
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public DropDownAddressReponse GetAddress(DropDownAddressRequest request)
+        {
+            return UserBll.Instance.GetAddress(request);
+        }
+
+        /// <summary>
+        /// 角色下拉
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public DropDownRoleReponse GetRoles(DropDownRoleRequest request)
+        {
+            return UserBll.Instance.GetRoles(request);
+        }
+
+        /// <summary>
+        /// 逻辑删除用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserDeleteResponse UserDelete(UserDeleteRequest request)
+        {
+            return UserBll.Instance.UserDelete(request);
+        }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return UserBll.Instance.UpdateUserPassword(request);
+        }
+
+
     }
 }

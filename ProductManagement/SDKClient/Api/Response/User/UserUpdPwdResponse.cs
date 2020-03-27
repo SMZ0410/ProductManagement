@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 namespace SDKClient.Api.Response.User
 {
     /// <summary>
-    /// 用户添加返回
+    /// 修改个人密码返回类
     /// </summary>
-    public class UserAddResponse:BaseResponse
+    public class UserUpdPwdResponse:BaseResponse
     {
-
-
-
     }
 }

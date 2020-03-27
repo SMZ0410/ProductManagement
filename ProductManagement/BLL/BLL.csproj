@@ -49,6 +49,7 @@
     <Compile Include="Product\ProductBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role\RoleBll.cs" />
+    <Compile Include="Role\UpdateRoleBll.cs" />
     <Compile Include="User\UserBll.cs" />
   </ItemGroup>
   <ItemGroup>

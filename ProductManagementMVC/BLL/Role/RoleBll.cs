@@ -12,7 +12,7 @@ namespace BLL.Role
     public class RoleBll : BaseBll<RoleBll>
     {
         /// <summary>
-        /// 优秀
+        /// 角色信息
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -20,5 +20,16 @@ namespace BLL.Role
         {
             return ApiRequestHelper.Post<RoleGetRequest, RoleGetResponse>(request);
         }
+
+        /// <summary>
+        /// 修改以及逻辑删除
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public RoleUpdateResponse PutRole(RoleUpdateRequest request)
+        {
+            return ApiRequestHelper.Post<RoleUpdateRequest, RoleUpdateResponse>(request);
+        }
+
     }
 }

@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace SDKClient.Api.Response.User
 {
-    /// <summary>
-    /// 用户添加返回
-    /// </summary>
-    public class UserAddResponse:BaseResponse
+    public class UserDeleteResponse:BaseResponse
     {
-
-
-
     }
 }
