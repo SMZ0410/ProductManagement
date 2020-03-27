@@ -75,12 +75,13 @@ namespace BLL.User
             }
 
             //调用dal层方法 拿到返回id
-            int userId = UserDal.Instance.UserLogin(request.User);
+            var  user = UserDal.Instance.UserLogin(request.User);
 
             //如果id>0登陆成功
-            if (userId > 0)
+            if (user!=null)
             {
                 response.Message = "登陆成功！";
+                response.User = user;
             }
             else
             {

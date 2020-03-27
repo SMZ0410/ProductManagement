@@ -1,44 +1,152 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>沪棋产品后台</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link href="~/ReferencesFile/Template/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- Font Awesome CSS-->
+    <link href="~/ReferencesFile/Template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Fontastic Custom icon font-->
+    <link href="~/ReferencesFile/Template/css/fontastic.css" rel="stylesheet" />
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link href="~/ReferencesFile/Template/css/style.default.css" rel="stylesheet" />
+    <!-- Custom stylesheet - for your changes-->
+    <link href="~/ReferencesFile/Template/css/custom.css" rel="stylesheet" />
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/ReferencesFile/Template/Icon/index.png">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+    <div class="page">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar">
+                <!-- Search Box-->
+                <div class="search-box">
+                    <button class="dismiss"><i class="icon-close"></i></button>
+                    <form id="searchForm" action="#" role="search">
+                        <input type="search" placeholder="What are you looking for..." class="form-control">
+                    </form>
+                </div>
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                                <div class="brand-text d-none d-lg-inline-block"><span> 沪棋产品 </span><strong> HuQiProduct</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                            </a>
+                            <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                        </div>
+                        <!-- Navbar Menu -->
+                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                            <!-- Search-->
+                            <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
+
+
+                            <!-- Languages dropdown    -->
+                            <li class="nav-item dropdown">
+                                <a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src=" ~/ReferencesFile/Template/Icon/China.jpg" alt="English"><span class="d-none d-sm-inline-block">China</span></a>
+                                <ul aria-labelledby="Languages" class="dropdown-menu">
+                                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="~/ReferencesFile/Template/Icon/China.jpg" alt="China" class="mr-2">China</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Logout    -->
+                            <li class="nav-item"><a href="/User/UserLogin" class="nav-link logout"> <span class="d-none d-sm-inline">注销_LogOut</span><i class="fa fa-sign-out"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar -->
+            <nav class="side-navbar">
+                <!-- Sidebar Header-->
+                <div class="sidebar-header d-flex align-items-center">
+
+                    <div class="title">
+                        <h1 style="margin-left:30px" class="h4">登录人：@Session["UserName"]</h1>
+                        <p style="margin-left:50px"> @Session["RoleName"]</p>
+                    </div> 
+
+                </div>
+                <!-- Sidebar Navidation Menus--> 
+                <ul class="list-unstyled">
+                    <li class="active"><a href="/Home/index"> <i class="icon-home"></i>主页_Main </a></li>
+                    <li><a href="/Product/ProductInfoPage"> <i class="icon-list"></i>产品列表_Product</a></li>
+                    <li><a href="/Product/ProductAddPage"> <i class="icon-form"></i>添加产品_AddPro</a></li>
+                    <li>
+                        <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-user"></i> 用户管理_Users </a>
+                        <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                            <li><a href="/Role/GetRoleInfos">角色管理</a></li>
+                            <li><a href="#">添加角色</a></li>
+                            <li><a href="/User/UserShow">用户管理</a></li>
+                            <li><a href="#">添加用户</a></li> 
+                        </ul>
+                    </li>
+                    <li><a href="#"> <i class="icon-website"></i>权限管理_Privilege</a></li> 
+                    <li><a href="#"> <i class="icon-interface-windows"></i>修改密码_UpdPwd</a></li>
+
                 </ul>
+
+
+                  
+            </nav>
+            <div class="content-inner">
+                <!-- Page Header-->
+                <header class="page-header">
+                    <div class="container-fluid">
+                        <h3 class="no-margin-bottom">质量-环境-安全</h3>
+                    </div>
+                </header>
+                @RenderBody()
+                <!-- Dashboard Header Section    -->
+                <section class="dashboard-header">
+                    <div class="container-fluid">
+                        <div class="row"> 
+                        </div>
+                    </div>
+                </section>
+                <!-- Page Footer-->
+                <footer class="main-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6 text-right">
+                                <p></p>
+                                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
-    </div>
-
-    
+    <!-- JavaScript files-->
+    <script src="~/ReferencesFile/Template/vendor/jquery/jquery.js"></script>
+    <script src="~/ReferencesFile/Template/vendor/popper.js/umd/popper-utils.js"></script>
+    <script src="~/ReferencesFile/Template/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="~/ReferencesFile/Template/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="~/ReferencesFile/Template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Main File-->
+    <script src="~/ReferencesFile/Template/js/front.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
