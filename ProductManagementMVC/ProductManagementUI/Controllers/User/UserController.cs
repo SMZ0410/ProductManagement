@@ -130,7 +130,7 @@ namespace ProductManagementUI.Controllers
         }
 
         /// <summary>
-        /// 逻辑删除
+        /// 逻辑删除用户信息
         /// </summary>
         /// <returns></returns>
         public JsonResult UserDelete()
