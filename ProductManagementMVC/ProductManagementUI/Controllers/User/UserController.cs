@@ -26,6 +26,9 @@ namespace ProductManagementUI.Controllers
         /// <returns></returns>
         public ActionResult UserLoginPage()
         {
+            Session["UserName"] = "";
+            Session["RoleName"] = "";
+            Session["UserId"] = 0;
             return View();
         }
 
@@ -137,6 +140,24 @@ namespace ProductManagementUI.Controllers
         {
             UserDeleteRequest getAddress = new UserDeleteRequest();
             return Json(UserBll.Instance.UserDelete(getAddress));
+        }
+
+        /// <summary>
+        /// 修改个人密码页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateUserPasswordPage()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return Json(UserBll.Instance.UpdateUserPassword(request));
         }
     }
 }
