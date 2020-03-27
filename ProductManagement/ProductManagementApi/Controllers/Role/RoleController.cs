@@ -25,5 +25,17 @@ namespace ProductManagementApi.Controllers.Role
 
             return RoleBll.Instance.GetRoleInfos(request);
         }
+
+        /// <summary>
+        /// 修改以及逻辑删除
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public RoleUpdateResponse UpdateRole(RoleUpdateRequest request)
+        {
+            return UpdateRoleBll.Instance.PutRole(request);
+        }
+
     }
 }

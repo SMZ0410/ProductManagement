@@ -13,7 +13,6 @@ namespace ProductManagementUI.Controllers.Role
         // GET: Role
         /// <summary>
         /// 角色信息显示
-        /// 优秀
         /// </summary>
         /// <returns></returns>
         public ActionResult GetRoleInfos()
@@ -30,5 +29,17 @@ namespace ProductManagementUI.Controllers.Role
             
             return Json(RoleBll.Instance.GetRoleInfos(getRequest),JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 逻辑删除
+        /// </summary>
+        /// <param name="getRequest"></param>
+        /// <returns></returns>
+        public JsonResult DeleteRole(RoleUpdateRequest request)
+        {
+
+            return Json(RoleBll.Instance.PutRole(request), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
