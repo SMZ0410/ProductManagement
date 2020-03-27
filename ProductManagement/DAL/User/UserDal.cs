@@ -66,7 +66,7 @@ namespace DAL.User
         /// <param name="user">用户登录信息</param>
         /// <returns></returns>
         public UserLogModel UserLogin(UserLogModel user)
-        { 
+        {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = @"SELECT u.UserId, u.UserName,r.RoleName FROM dbo.UserInfo u
@@ -75,7 +75,7 @@ namespace DAL.User
                                         WHERE UserName = @username  AND UserPassword = @userpassword";
 
                 //获取用户id并返回 
-                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
+                var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userinfo;
             }
         }
@@ -167,16 +167,29 @@ namespace DAL.User
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int UserDel(int id)
+        public int UserDelete(string id)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in ('" + id + "')";
-                var res = conn.Execute(sql);
-
+                var res = conn.Execute(sql, new { ID = id });
                 return res;
             }
 
+        }
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int UserUpt(int id)
+        {
+            using (resource)
+            {
+
+            }
+            return 0;
         }
 
     }

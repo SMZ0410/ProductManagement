@@ -8,6 +8,8 @@ namespace SDKClient.Api.Request.User
 {
     public class UserDeleteRequest:BaseRequest
     {
+        public string ID { get; set; }
+
         public override string GetApiName()
         {
             return "api/User/UserDelete";

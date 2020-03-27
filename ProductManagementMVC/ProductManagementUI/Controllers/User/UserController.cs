@@ -99,6 +99,7 @@ namespace ProductManagementUI.Controllers
         {
             return View();
         }
+        [HttpPost]
         /// <summary>
         /// 获取用户添加信息方法
         /// </summary>
@@ -133,9 +134,8 @@ namespace ProductManagementUI.Controllers
         /// 逻辑删除用户信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult UserDelete()
+        public JsonResult UserDelete(UserDeleteRequest getAddress)
         {
-            UserDeleteRequest getAddress = new UserDeleteRequest();
             return Json(UserBll.Instance.UserDelete(getAddress));
         }
     }

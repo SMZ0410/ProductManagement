@@ -84,31 +84,31 @@
             }
         })
     })
-         function useradd() {
-            var obj = {
-                UserName: $("#txtName").val(),
-                UserPassword: $("#txtPwd").val(),
-                Email: $("#txtEmail").val(),
-                AddressId: $("#seleAddress").val(),
-                RoleId: $("#seleRole").val()
-            };
-             $.ajax({
-                 url: "/User/GeUserAdd",
-                 data: { Users: obj },
-                type: "POST",
-                dataType: "json",
-                success: function (res) {
-                    if (res.Status) {
-                        alert(res.Message);
-                        location.href = 'User/UserShow';
-                    }
-                    else {
-                        alert(res.Message);
-                    }
+    function useradd() {
+        var obj = {
+            UserName: $("#txtName").val(),
+            UserPassword: $("#txtPwd").val(),
+            Email: $("#txtEmail").val(),
+            AddressId: $("#seleAddress").val(),
+            RoleId: $("#seleRole").val()
+        };
+        $.ajax({
+            url: "/User/GeUserAdd",
+            type: "POST",
+            data: { Users: obj },
+            dataType: "json",
+            success: function (res) {
+                if (res.Status) {
+                    alert(res.Message);
+                    location.href = 'User/UserShow';
                 }
-            })
+                else {
+                    alert(res.Message);
+                }
+            }
+        })
 
-        }
+    }
 
 </script>
 

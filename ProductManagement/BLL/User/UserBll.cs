@@ -210,18 +210,18 @@ namespace BLL.User
                 response.Message = "请选择地址";
                 return response;
             }
-            //if (request.Users.RoleId <= 0)
-            //{
-            //    response.Status = false;
-            //    response.Message = "请选择角色";
-            //    return response;
-            //}
-            if (request.Users.CreatorId <= 0)
+            if (request.Users.RoleId <= 0)
             {
                 response.Status = false;
-                response.Message = "系统繁忙，creatorid<=0";
+                response.Message = "请选择角色";
                 return response;
             }
+            //if (request.Users.CreatorId <= 0)
+            //{
+            //    response.Status = false;
+            //    response.Message = "系统繁忙，creatorid<=0";
+            //    return response;
+            //}
 
             //开始获取盐
             var salt = Generate.GenerateSalt();
@@ -297,8 +297,7 @@ namespace BLL.User
         public UserDeleteResponse UserDelete(UserDeleteRequest request)
         {
             UserDeleteResponse response = new UserDeleteResponse();
-            int id = 0;
-            var res = UserDal.Instance.UserDel(id);
+            var res = UserDal.Instance.UserDelete(request.ID);
             if (res<=0)
             {
                 response.Status = false;
