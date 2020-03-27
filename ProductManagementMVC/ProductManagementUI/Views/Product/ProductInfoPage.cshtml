@@ -22,7 +22,7 @@
 
     <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <input id="DelProduct" type="button" value="删除" class="btn btn-danger" onclick="Delete()" /><br /><br />
+    <input id="DelProduct" type="button" style="float:right" name="ck" value="批量删除" class="btn btn-danger" onclick="Delete()" /><br /><br />
 </div>
 
 <table class="table table-bordered">
@@ -96,25 +96,40 @@
             }
         })
 
+        //全选/反选
+        $("#Checkbox1").click(function () {
+            $("[type=checkbox]").each(function () {
+                this.checked = $("#Checkbox1").prop("checked");
+            })
+        })
+
         QueryProduct();
     })
 
     function QueryProduct() {
-        var obj = {
-            Query: query
-        };
+        var query = {
+                TradeId: $("#selTrea").val(),
+                StageId: $("#selStage").val(),
+                AddressId: $("#selAddress").val(),
+                ProductId: $("#selManage").val(),
+                ProductName: $("#txtname").val()
+            }
+
         //产品列表显示
         $.ajax({
             url: "/Product/GetProducts",
             type: "POST",
             dataType: "json",
-            data: obj,
+            data: {
+                Query:query
+            },
             success: function (res) {
+                var i = 1;
                 var ts = "";
                 $(res.Products).each(function () {
                     ts += "<tr>"
                         + "<td><input id='Checkbox1' name='ck' type='checkbox' value='" + this.ProductId + "' /></td>"
-                        + "<td>" + this.ProductId + "</td>"
+                        + "<td>" + i + "</td>"
                         + "<td>" + this.ProductName + "</td>"
                         + "<td>" + this.CreateTime + "</td>"
                         + "<td>" + this.ProductManager + "</td>"
@@ -124,43 +139,45 @@
                         + "<td>" + this.ProductDetail + "</td>"
                         + "<td><a onclick='Update(" + this.ProductId + ")'>修改</a></td>"
                         + "</tr>";
+                    i++;
                 })
                 $("#tb").html(ts);
             }
         })
 
         $("#ProductQuery").click(function () {
-            var query = {
-                tradeId: $("#selTrea").val(),
-                stageId: $("#selStage").val(),
-                addressId: $("#selAddress").val(),
-                productId: $("#selManage").val(),
-                productName: $("#txtname").val()
-            }
-            QueryProduct(query);
+            
+            QueryProduct();
         })
     }
     //删除产品信息（逻辑删除）
     function Delete() {
         var ids = "";
 
+        //拼接
         val = $("[name='ck']:checked").each(function () {
             ids = ids + $(this).val() + ',';
         })
+        //截取字符串
+        ids = ids.substring(0, ids.length - 1);
 
         if (ids == "") {
-            alert("请选择您要办理的信息");
+            alert("请选择您要删除的信息");
             return;
         }
-
+        //删除
         if (confirm("确认删除吗")) {
             $.ajax({
                 url: "/Product/DeleteProduct",
                 type: "POST",
                 dataType: "json",
+                data: {
+                    ids
+                },
                 success: function (res) {
                     if (res.Status) {
                         alert(res.Message);
+                        QueryProduct();
                     }
                     else {
                         alert(res.Message);

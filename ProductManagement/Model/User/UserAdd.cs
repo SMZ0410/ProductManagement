@@ -13,12 +13,30 @@ namespace Model.User
         /// </summary>
         public string UserName { get; set; }
         /// <summary>
-        /// 所在地
+        /// 用户密码
         /// </summary>
-        public string AddressName { get; set; }
+        public string UserPassword { get; set; }
         /// <summary>
-        /// 关联角色
+        /// 盐
         /// </summary>
-        public string RoleName { get; set; }
+        public string Salt { get; set; }
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
+        /// 当前登录人id
+        /// </summary>
+        public int CreatorId { get; set; }
+
+        /// <summary>
+        /// 角色id
+        /// </summary>
+        public int RoleId { get; set; }
+
+        /// <summary>
+        /// 地址id
+        /// </summary>
+        public int AddressId { get; set; }
     }
 }

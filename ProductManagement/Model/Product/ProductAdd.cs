@@ -16,7 +16,7 @@ namespace Model.Product
         /// <summary>
         /// 描述
         /// </summary>
-        public string productDetail { get; set; }
+        public string ProductDetail { get; set; }
         /// <summary>
         /// 应用行业
         /// </summary>

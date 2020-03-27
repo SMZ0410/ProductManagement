@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleInfo\RoleInfoModel.cs" />
     <Compile Include="Product\TradeInfo.cs" />
+    <Compile Include="User\RoleInfos.cs" />
     <Compile Include="User\UserAdd.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="User\UserLogModel.cs" />
