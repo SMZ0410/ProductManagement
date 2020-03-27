@@ -50,7 +50,7 @@ namespace BLL.Product
             return ApiRequestHelper.Post<DropDownAddressRequest, DropDownAddressReponse>(request);
         }
         /// <summary>
-        /// 获取应用行业
+        /// 获取产品经理
         /// </summary>
         /// <param name="rquest"></param>
         /// <returns></returns>
@@ -77,6 +77,24 @@ namespace BLL.Product
         public ProductDeleteResponse DeleteProducts(ProductDeleteRequest request)
         {
             return ApiRequestHelper.Post<ProductDeleteRequest, ProductDeleteResponse>(request);
+        }
+        /// <summary>
+        /// 获取产品单条信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductEditResponse ExitProducts(ProductEditRequest request)
+        {
+            return ApiRequestHelper.Post<ProductEditRequest, ProductEditResponse>(request);
+        }
+        /// <summary>
+        /// 修改产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductUpdateResponse UpdateProducts(ProductUpdateRequest request)
+        {
+            return ApiRequestHelper.Post<ProductUpdateRequest, ProductUpdateResponse>(request);
         }
     }
 }

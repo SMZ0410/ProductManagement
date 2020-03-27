@@ -48,6 +48,7 @@
     <Compile Include="Api\Request\DropDownList\DropDownTreadeRquest.cs" />
     <Compile Include="Api\Request\Product\ProductAddRequest.cs" />
     <Compile Include="Api\Request\Product\ProductDeleteRequest.cs" />
+    <Compile Include="Api\Request\Product\ProductEditRequest.cs" />
     <Compile Include="Api\Request\Product\ProductGetRequest.cs" />
     <Compile Include="Api\Request\Product\ProductUpdateRequest.cs" />
     <Compile Include="Api\Request\Role\RoleGetRequest.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Api\Response\DropDownList\DropDownTreadeResponse.cs" />
     <Compile Include="Api\Response\Product\ProductAddResponse.cs" />
     <Compile Include="Api\Response\Product\ProductDeleteResponse.cs" />
+    <Compile Include="Api\Response\Product\ProductEditResponse.cs" />
     <Compile Include="Api\Response\Product\ProductUpdateResponse.cs" />
     <Compile Include="Api\Request\User\UserForgotPwdRequest.cs" />
     <Compile Include="Api\Request\User\UserResetPwdRequest.cs" />

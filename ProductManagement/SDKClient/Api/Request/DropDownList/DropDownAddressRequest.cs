@@ -9,7 +9,7 @@ namespace SDKClient.Api.Request.DropDownList
     public class DropDownAddressRequest:BaseRequest
     {
         /// <summary>
-        /// 萨达
+        /// 重写基类路径
         /// </summary>
         /// <returns></returns>
         public override string GetApiName()

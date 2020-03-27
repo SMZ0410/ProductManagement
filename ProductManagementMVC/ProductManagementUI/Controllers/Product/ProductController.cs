@@ -90,5 +90,32 @@ namespace ProductManagementUI.Controllers
             return Json(ProductBll.Instance.DeleteProducts(request));
         }
 
+        /// <summary>
+        /// 编辑产品视图
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ProductUpdPage()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 获取产品单条信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult ExitProduct(ProductEditRequest request)
+        {
+            return Json(ProductBll.Instance.ExitProducts(request));
+        }
+
+        /// <summary>
+        /// 修改产品信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult UpdateProduct(ProductUpdateRequest request)
+        {
+            return Json(ProductBll.Instance.UpdateProducts(request));
+        }
+
     }
 }

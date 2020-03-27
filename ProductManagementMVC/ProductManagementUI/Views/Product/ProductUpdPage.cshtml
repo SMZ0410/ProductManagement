@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "ProductAddPage";
+    ViewBag.Title = "ProductUpdPage";
 }
 
-<h2>添加产品信息</h2>
+<h2>修改产品信息</h2>
 
 <table class="table">
     <tr>
@@ -68,12 +68,13 @@
     <tr>
         <td></td>
         <td>
-            <input id="AddProduct" type="button" value="添加产品" onclick="ProductAdd()" class="btn btn-primary" />
+            <input id="UpdProduct" type="button" value="下一步" onclick="ProductUpdate()" class="btn btn-primary" />
         </td>
     </tr>
 </table>
 
 <script src="~/ReferencesFile/Template/vendor/jquery/jquery.min.js"></script>
+
 
 <script>
     $().ready(function () {
@@ -125,11 +126,30 @@
                 })
             }
         })
+
+        //获取信息
+        $.ajax({
+            url: "/Product/ExitProduct",
+            type: "POST",
+            dataType: "json",
+            data: {
+                Id
+            },
+            success: function (res) {
+                $("#txtProductName").val(res.ProductName),
+                    $("#selManager").val(), (res.UserId),
+                    $("#txtProductDetail").val(res.ProductDetail),
+                    $("#selTreade").val(res.TradeId),
+                    $("input[name='ProductType']:checked").val(res.TypeId),
+                    $("#selAddress").val(res.AddressId),
+                    $("#selStages").val(res.StageId)
+            }
+        })
     })
 
-    //添加的点击事件
-    function ProductAdd() {
-        
+    //修改
+    function ProductUpdate() {
+       
         //添加对象
         var products = {
             ProductName: $("#txtProductName").val(),
@@ -140,9 +160,9 @@
             AddressId: $("#selAddress").val(),
             StageId: $("#selStages").val()
         }
-        //添加
+
         $.ajax({
-            url: "/Product/AddProduct",
+            url: "/Product/UpdateProduct",
             type: "POST",
             dataType: "json",
             data: {

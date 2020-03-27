@@ -1,5 +1,4 @@
-﻿using Model.Product;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace SDKClient.Api.Request.Product
 {
-    public class ProductUpdateRequest:BaseRequest
+    public class ProductEditRequest:BaseRequest
     {
-        public ProductEditAdd Products { get; set; }
+        public int ProductId { get; set; }
+
         /// <summary>
         /// 重写基类路径
         /// </summary>
         /// <returns></returns>
         public override string GetApiName()
         {
-            return "api/Product/UpdateProducts";
+            return "api/Product/EditProduct";
         }
     }
 }

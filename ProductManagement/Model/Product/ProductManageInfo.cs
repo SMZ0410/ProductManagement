@@ -11,10 +11,10 @@ namespace Model.Product
         /// <summary>
         /// 主键id
         /// </summary>
-        public int ProductId { get; set; }
+        public int UserId { get; set; }
         /// <summary>
-        /// 地名称
+        /// 产品经理名称
         /// </summary>
-        public string ProductManager { get; set; }
+        public string UName { get; set; }
     }
 }
