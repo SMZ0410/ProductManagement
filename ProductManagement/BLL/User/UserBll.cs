@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Model.User;
+using SDKClient.Api.Response.DropDownList;
+using SDKClient.Api.Request.DropDownList;
 
 namespace BLL.User
 {
@@ -181,7 +184,130 @@ namespace BLL.User
         public UserAddResponse UserAdd(UserAddRequest request)
         {
             UserAddResponse response = new UserAddResponse();
+            //非空判断
+            if (string.IsNullOrEmpty(request.Users.UserName))
+            {
+                response.Status = false;
+                response.Message = "用户名为空";
+                return response;
+            }
+            if (string.IsNullOrEmpty(request.Users.UserPassword))
+            {
+                response.Status = false;
+                response.Message = "密码为空";
+                return response;
+            }
+            if (string.IsNullOrEmpty(request.Users.Email))
+            {
+                response.Status = false;
+                response.Message = "邮箱为空";
+                return response;
+            }
+            if (request.Users.AddressId<=0)
+            {
+                response.Status = false;
+                response.Message = "请选择地址";
+                return response;
+            }
+            //if (request.Users.RoleId <= 0)
+            //{
+            //    response.Status = false;
+            //    response.Message = "请选择角色";
+            //    return response;
+            //}
+            if (request.Users.CreatorId <= 0)
+            {
+                response.Status = false;
+                response.Message = "系统繁忙，creatorid<=0";
+                return response;
+            }
 
+            //开始获取盐
+            var salt = Generate.GenerateSalt();
+            //获取md5加密密码
+            var pwd = MD5Encrypt.MD5Encrypt32(request.Users.UserPassword+salt);
+            request.Users.UserPassword = pwd;
+            request.Users.Salt = salt;
+            var res = UserDal.Instance.UserAdd(request.Users);
+            if (res<0)
+            {
+                response.Status = false;
+                response.Message = "添加失败";
+            }
+            else
+            {
+                response.Message = "添加成功";
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// 获得地址的下拉值
+        /// </summary>
+        /// <returns></returns>
+        public DropDownAddressReponse GetAddress(DropDownAddressRequest request)
+        {
+            DropDownAddressReponse reponse = new DropDownAddressReponse();
+            var list = UserDal.Instance.GetAddress();
+            if (list.Count<=0)
+            {
+                reponse.Message = "获取失败，请稍后再试";
+                reponse.Status = false;
+            }
+            else
+            {
+                
+                reponse.TrAddress = list;
+                reponse.Message = $"获取数据成功，共获取{list}条数据";
+            }
+
+            return reponse;
+        }
+
+        /// <summary>
+        /// 获取角色的下拉值
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public DropDownRoleReponse GetRoles(DropDownRoleRequest request)
+        {
+            DropDownRoleReponse reponse = new DropDownRoleReponse();
+            var list = UserDal.Instance.GetRoles();
+            if (list.Count <= 0)
+            {
+                reponse.Message = "获取失败，请稍后再试";
+                reponse.Status = false;
+            }
+            else
+            {
+
+                reponse.Roles = list;
+                reponse.Message = $"获取数据成功，共获取{list}条数据";
+            }
+
+            return reponse;
+        }
+
+        /// <summary>
+        /// 逻辑删除用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserDeleteResponse UserDelete(UserDeleteRequest request)
+        {
+            UserDeleteResponse response = new UserDeleteResponse();
+            int id = 0;
+            var res = UserDal.Instance.UserDel(id);
+            if (res<=0)
+            {
+                response.Status = false;
+                response.Message = "删除失败，请重试";
+            }
+            else
+            {
+                response.Status = true;
+                response.Message = "删除成功";
+            }
             return response;
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Model.User;
 using Dapper;
 using System.Data;
-
+using Model;
 
 namespace DAL.User
 {
@@ -21,7 +21,7 @@ namespace DAL.User
         /// <summary>
         /// 获取连接数据库字符串
         /// </summary>
-        private readonly string  connStr = ConfigurationManager.AppSettings["connectionString"];
+        private readonly string connStr = ConfigurationManager.AppSettings["connectionString"];
 
 
         /// <summary>
@@ -77,46 +77,102 @@ namespace DAL.User
         }
 
         /// <summary>
+        /// 获得地址的下拉值
+        /// </summary>
+        /// <returns></returns>
+        public List<AddressInfo> GetAddress()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<AddressInfo> list = new List<AddressInfo>();
+                var sql = "SELECT AddressName FROM dbo.AddressInfo";
+                list = conn.Query<AddressInfo>(sql).ToList();
+                return list;
+            }
+
+
+        }
+
+        /// <summary>
+        /// 获取角色的下拉值
+        /// </summary>
+        /// <returns></returns>
+        public List<RoleInfos> GetRoles()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<RoleInfos> list = new List<RoleInfos>();
+                var sql = $"SELECT * FROM dbo.RoleInfo";
+                list = conn.Query<RoleInfos>(sql).ToList();
+                return list;
+            }
+        }
+
+        /// <summary>
         /// 用户添加
         /// </summary>
         /// <param name="users"></param>
         /// <returns></returns>
         public int UserAdd(UserAdd users)
         {
-            using (IDbConnection conn = new SqlConnection(connStr)) 
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
-                
+                var sql = @"EXEC dbo.P_UserAddInfo  @userName, 
+                               @userPassword,
+                                @salt, 
+                               @email,
+                                 @creatorId, 
+                                 @roleId, @addressId ";
 
+                var iu = conn.Execute(sql, new { userName = users.UserName, userPassword = users.UserPassword, salt = users.Salt, email = users.Email, creatorId = users.CreatorId, roleId = users.RoleId, addressId = users.AddressId });
+                return iu;
             }
-            return 0;
+
         }
 
         /// <summary>
         /// 根据用户名&邮箱判断该用户是否存在
         /// 返回用户id
         /// </summary>
-        public int IsExistUserNameEmail(string userName,string email)
+        public int IsExistUserNameEmail(string userName, string email)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName = @tusername AND Email=@temail";
-                int userId =conn.QueryFirstOrDefault<int>(sql,new { tusername =userName, temail =email});
+                string sql = $"SELECT * FROM dbo.UserInfo WHERE UserName = @tusername AND Email=@temail";
+                int userId = conn.QueryFirstOrDefault<int>(sql, new { tusername = userName, temail = email });
                 return userId;
             }
         }
-         
+
         /// <summary>
         /// 重置用户密码
         /// </summary>
         /// <returns>影响行数</returns>
-        public int ResetUserPasswod(string userName,string newPassword)
+        public int ResetUserPasswod(string userName, string newPassword)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = "UPDATE dbo.UserInfo SET UserPassword=@userpassword WHERE UserName=@username  ";
-                int res = conn.Execute(sql, new { userpassword = newPassword, username = userName});
+                int res = conn.Execute(sql, new { userpassword = newPassword, username = userName });
                 return res;
             }
+        }
+
+        /// <summary>
+        /// 逻辑删除用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int UserDel(int id)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in ('" + id + "')";
+                var res = conn.Execute(sql);
+
+                return res;
+            }
+
         }
 
     }

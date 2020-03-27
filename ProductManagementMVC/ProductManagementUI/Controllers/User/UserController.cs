@@ -7,8 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SDKClient.Api.Request;
-
-
+using SDKClient.Api.Request.DropDownList;
 
 namespace ProductManagementUI.Controllers
 {
@@ -30,12 +29,12 @@ namespace ProductManagementUI.Controllers
             return View();
         }
 
-       /// <summary>
-       /// 用户登录方法
-       /// </summary>
+        /// <summary>
+        /// 用户登录方法
+        /// </summary>
         public JsonResult UserLogin(UserLoginRequest request)
         {
-            return Json(UserBll.Instance.UserLogin(request),JsonRequestBehavior.AllowGet);
+            return Json(UserBll.Instance.UserLogin(request), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -69,7 +68,7 @@ namespace ProductManagementUI.Controllers
         /// </summary>
         /// <returns></returns>
         public JsonResult ForgotPassword(UserForgotPwdRequest request)
-        { 
+        {
             return Json(UserBll.Instance.ForgotPassword(request), JsonRequestBehavior.AllowGet);
         }
 
@@ -99,6 +98,45 @@ namespace ProductManagementUI.Controllers
         public ActionResult UserAdd()
         {
             return View();
+        }
+        /// <summary>
+        /// 获取用户添加信息方法
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult GeUserAdd(UserAddRequest request)
+        {
+            return Json(UserBll.Instance.UserAdd(request));
+        }
+
+        /// <summary>
+        /// 获取归属地
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetAddress()
+        {
+            DropDownAddressRequest getAddress = new DropDownAddressRequest();
+            return Json(UserBll.Instance.GetAddress(getAddress));
+        }
+
+        /// <summary>
+        /// 获取角色
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetRoles()
+        {
+            DropDownRoleRequest getAddress = new DropDownRoleRequest();
+            return Json(UserBll.Instance.GetRoles(getAddress));
+        }
+
+        /// <summary>
+        /// 逻辑删除
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult UserDelete()
+        {
+            UserDeleteRequest getAddress = new UserDeleteRequest();
+            return Json(UserBll.Instance.UserDelete(getAddress));
         }
     }
 }
