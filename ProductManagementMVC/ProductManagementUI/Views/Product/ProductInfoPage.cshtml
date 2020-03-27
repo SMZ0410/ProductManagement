@@ -6,26 +6,29 @@
 <h2>产品列表</h2>
 
 <div>
-    <select id="selTrea" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">应用行业</option>
+    应用行业：<select id="selTrea" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <select id="selAddress" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">归属地</option>
+    归属地：<select id="selAddress" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <select id="selStage" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">产品阶段</option>
+    产品阶段：<select id="selStage" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select><br /><br />
-    <select id="selManage" class="text_sketch" style="width:100px;height:30px">
-        <option value="0">产品经理</option>
+    产品经理：<select id="selManage" class="text_sketch" style="width:100px;height:30px">
+        <option value="0">--请选择--</option>
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input id="txtname" type="text" style="width:150px;height:30px" placeholder="请输入产品名称" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <input id="Button1" type="button" value="搜索" class="btn btn-primary" onclick="ProductQuery()" /><br /><br />
+    <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <input id="DelProduct" type="button" style="float:right" name="ck" value="批量删除" class="btn btn-danger" onclick="Delete()" /><br /><br />
 </div>
 
 <table class="table table-bordered">
     <thead>
         <tr>
+            <td><input id="Checkbox1" type="checkbox" /></td>
             <td>编号</td>
             <td>产品名称</td>
             <td>创建时间</td>
@@ -44,27 +47,89 @@
 
 <script>
     $().ready(function () {
-        ProductQuery("");
+        //获取应用行业
+        $.ajax({
+            url: "/Product/GetTreade",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Trades).each(function () {
+                    var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
+                    $("#selTrea").append(tp);
+                })
+            }
+        })
+        //获取产品阶段
+        $.ajax({
+            url: "/Product/GetStages",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Stages).each(function () {
+                    var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
+                    $("#selStage").append(tp);
+                })
+            }
+        })
+        //获取归属地
+        $.ajax({
+            url: "/Product/GetAddress",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.TrAddress).each(function () {
+                    var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
+                    $("#selAddress").append(tp);
+                })
+            }
+        })
+        //获取产品经理
+        $.ajax({
+            url: "/Product/GetManage",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Manages).each(function () {
+                    var tp = "<option value='" + this.ProductId + "'>" + this.ProductManager + "</option>"
+                    $("#selManage").append(tp);
+                })
+            }
+        })
+
+        //全选/反选
+        $("#Checkbox1").click(function () {
+            $("[type=checkbox]").each(function () {
+                this.checked = $("#Checkbox1").prop("checked");
+            })
+        })
+
+        QueryProduct();
     })
 
-    function ProductQuery(obj) {
-        var obj = {
-            TreadeName: $("#selTrea").val(),
-            AddressName: $("#selAddress").val(), 
-            StageName: $("#selStage").val(),
-            ProductManage: $("#selManage").val(),
-            ProductName:$("#txtname").val()
-        }
+    function QueryProduct() {
+        var query = {
+                TradeId: $("#selTrea").val(),
+                StageId: $("#selStage").val(),
+                AddressId: $("#selAddress").val(),
+                ProductId: $("#selManage").val(),
+                ProductName: $("#txtname").val()
+            }
 
+        //产品列表显示
         $.ajax({
             url: "/Product/GetProducts",
             type: "POST",
             dataType: "json",
+            data: {
+                Query:query
+            },
             success: function (res) {
+                var i = 1;
                 var ts = "";
                 $(res.Products).each(function () {
                     ts += "<tr>"
-                        + "<td>" + this.ProductId + "</td>"
+                        + "<td><input id='Checkbox1' name='ck' type='checkbox' value='" + this.ProductId + "' /></td>"
+                        + "<td>" + i + "</td>"
                         + "<td>" + this.ProductName + "</td>"
                         + "<td>" + this.CreateTime + "</td>"
                         + "<td>" + this.ProductManager + "</td>"
@@ -72,12 +137,54 @@
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.StageName + "</td>"
                         + "<td>" + this.ProductDetail + "</td>"
-                        + "<td><a>删除</a></td>"
+                        + "<td><a onclick='Update(" + this.ProductId + ")'>修改</a></td>"
                         + "</tr>";
+                    i++;
                 })
                 $("#tb").html(ts);
             }
         })
+
+        $("#ProductQuery").click(function () {
+            
+            QueryProduct();
+        })
+    }
+    //删除产品信息（逻辑删除）
+    function Delete() {
+        var ids = "";
+
+        //拼接
+        val = $("[name='ck']:checked").each(function () {
+            ids = ids + $(this).val() + ',';
+        })
+        //截取字符串
+        ids = ids.substring(0, ids.length - 1);
+
+        if (ids == "") {
+            alert("请选择您要删除的信息");
+            return;
+        }
+        //删除
+        if (confirm("确认删除吗")) {
+            $.ajax({
+                url: "/Product/DeleteProduct",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    ids
+                },
+                success: function (res) {
+                    if (res.Status) {
+                        alert(res.Message);
+                        QueryProduct();
+                    }
+                    else {
+                        alert(res.Message);
+                    }
+                }
+            });
+        }
     }
 </script>
 

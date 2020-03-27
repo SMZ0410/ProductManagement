@@ -23,7 +23,7 @@ namespace DAL.Product
         /// 获取产品信息
         /// </summary>
         /// <returns></returns>
-        public List<ProductInfo> GetProducts(ProductQuery query) 
+        public List<ProductInfo> GetProducts(ProductQuery query)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
@@ -31,28 +31,33 @@ namespace DAL.Product
 
                 string sql = @"SELECT * FROM v_Products";
 
-                if (!string.IsNullOrEmpty(query.ProductManager))
+                if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.ProductId > 0 || !string.IsNullOrEmpty(query.ProductName))
                 {
-                    sql += " AND p.ProductManager LIKE @productManager ";
-                }
-                if (query.StageId>0)
-                {
-                    sql += " AND g.StageId = @stageId ";
-                }
-                if (query.AddressId > 0)
-                {
-                    sql += " AND d.AddressId = @addressId ";
-                }
-                if (query.TradeId>0)
-                {
-                    sql += " AND r.TradeId = @tradeId ";
-                }
-                if (!string.IsNullOrEmpty(query.ProductName))
-                {
-                    sql += " AND p.ProductName LIKE @productName ";
+                    sql += " WHERE 1=1";
+
+                    if (query.TradeId > 0)
+                    {
+                        sql += " AND TradeId = @tradeId ";
+                    }
+                    if (query.StageId > 0)
+                    {
+                        sql += " AND StageId = @stageId ";
+                    }
+                    if (query.AddressId > 0)
+                    {
+                        sql += " AND AddressId = @addressId ";
+                    }
+                    if (query.ProductId > 0)
+                    {
+                        sql += " AND ProductId = @productId ";
+                    }
+                    if (!string.IsNullOrEmpty(query.ProductName))
+                    {
+                        sql += " AND ProductName LIKE @productName ";
+                    }
                 }
 
-                list = conn.Query<ProductInfo>(sql,new { productManager= "%"+query.ProductManager+"%", stageId=query.StageId, addressId=query.AddressId, tradeId=query.TradeId, productName="%"+query.ProductName+"%" }).ToList();
+                list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, productId = query.ProductId, productName = "%" + query.ProductName + "%" }).ToList();
 
                 return list;
             }
@@ -63,7 +68,7 @@ namespace DAL.Product
         /// <returns></returns>
         public List<TradeInfo> GetTrades()
         {
-            using (IDbConnection conn=new SqlConnection(connStr))
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
                 List<TradeInfo> list = new List<TradeInfo>();
 
@@ -127,6 +132,56 @@ namespace DAL.Product
 
                 return list;
             }
+        }
+
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public int AddProduct(ProductAdd info)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"EXEC dbo.p_Product @productName,
+                                                  @productManage,
+                                                  @productDetail,
+                                                  @tradeId, 
+                                                  @typeId,
+                                                  @addressId,
+                                                  @stageId";
+                var res = conn.Execute(sql, new { productName = info.ProductName, productManage = info.ProductManager, productDetail = info.ProductDetail, tradeId = info.TradeId, typeId = info.TypeId, addressId = info.AddressId, stageId = info.StageId });
+
+                return res;
+            }
+        }
+
+        /// <summary>
+        /// 逻辑删除产品信息
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int DeleteProduct(string ids)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = $"update ProductInfo set Status=0 where ProductId in ("+ids+")";
+
+                var res = conn.Execute(sql, new { Ids = ids });
+
+                return res;
+            }
+        }
+        /// <summary>
+        /// 获取产品的单条信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ProductInfo ExitProduct(int id)
+        {
+            ProductInfo info = new ProductInfo();
+
+            return info;
         }
     }
 }

@@ -45,6 +45,8 @@
     <Compile Include="Generate.cs" />
     <Compile Include="MD5Encrypt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendToEmail.cs" />
+    <Compile Include="StringEncryption.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

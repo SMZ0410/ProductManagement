@@ -8,5 +8,6 @@ namespace SDKClient.Api.Response.Product
 {
     public class ProductDeleteResponse:BaseResponse
     {
+        
     }
 }

@@ -26,13 +26,15 @@
     <!-- Custom stylesheet - for your changes-->
     <link href="~/ReferencesFile/Template/css/custom.css" rel="stylesheet" />
     <!-- Favicon-->
-    <link rel="shortcut icon" href="~/ReferencesFile/Template/Icon/login_账户.png">
+    <link rel="shortcut icon" href="~/ReferencesFile/Template/Icon/login.png"> 
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
+    <input type="hidden" id="hideusername" />
+    <input type="hidden" id="hiderolename" />
     <div class="page login-page">
         <div class="container d-flex align-items-center">
             <div class="form-holder has-shadow">
@@ -53,6 +55,8 @@
                         <div class="form d-flex align-items-center">
                             <div class="content">
                                 <form method="post" class="form-validate">
+                                    <br />
+                                    <br />
                                     <div class="form-group">
                                         <input id="login-username" type="text" name="loginUsername" required data-msg="请输入用户名" class="input-material">
                                         <label for="login-username" class="label-material">用户名_UserName</label>
@@ -66,7 +70,7 @@
                                         <label for="register-agree">记住密码_RememberPassword</label>
                                     </div>
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                                </form><br /><br /><a href="#" class="forgot-pass">忘记密码...?_ForgotPassword</a><br>
+                                </form> <a href="/User/ForgotPasswordPage" class="forgot-pass">忘记密码...?_ForgotPassword</a><br>
                             </div>
                         </div>
                     </div>
@@ -74,10 +78,6 @@
             </div>
         </div>
         <div class="copyrights text-center">
-            <p>
-                Design by <a href="#" class="external">Bootstrapious</a>
-                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-            </p>
         </div>
     </div>
     <!-- JavaScript files-->
@@ -112,8 +112,10 @@
             data: obj,
             dataType: "json",
             success: function (res) {
-                if (res.Satus) {
-                    alert(res.Message);
+                if (res.Status) { 
+                    $("#hideusername").val(res.User.UserName);
+                    $("#hiderolename").val(res.User.RoleName);
+                    location.href = "/Home/Index?userName="+ $("#hideusername").val()+"&roleName="+$("#hiderolename").val();
                 }
                 else {
                     alert(res.Message);

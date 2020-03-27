@@ -7,64 +7,157 @@
 
 <table class="table">
     <tr>
-        <td style="color:#808080;font-size:20px">产品名称:</td>
+        <td style="color:#808080;font-size:20px">产品名称：:</td>
         <td>
-            <input id="txtname" type="text" class="text_sketch" style="width:500px;height:40px" placeholder="请输入" />
+            <input id="txtProductName" type="text" placeholder="请输入产品名称" style="width:500px;height:30px" />
         </td>
         <td style="color:#808080">*必填项，最多50个字符串</td>
     </tr>
     <tr>
-        <td style="color:#808080;font-size:20px">应用行业:</td>
+        <td style="color:#808080;font-size:20px">应用行业：:</td>
         <td>
-            <select id="selTrea" class="text_sketch" style="width:500px;height:40px">
-                <option value="0">请选择</option>
+            <select id="selTreade" style="width:500px;height:30px">
+                <option value="0">---请选择---</option>
             </select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
     <tr>
-        <td style="color:#808080;font-size:20px">产品类型:</td>
+        <td style="color:#808080;font-size:20px">产品类型：:</td>
         <td>
-            <input id="Radio1" type="radio" name="ProductType" value="1" checked="checked" />系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="Radio1" type="radio" name="ProductType" value="2" />产品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="Radio1" type="radio" name="ProductType" value="1" checked="checked" />系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="Radio1" type="radio" name="ProductType" value="2" />产品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="Radio1" type="radio" name="ProductType" value="2" />方案
         </td>
         <td style="color:#808080">*请选择</td>
     </tr>
     <tr>
-        <td style="color:#808080;font-size:20px">归属地:</td>
+        <td style="color:#808080;font-size:20px">归属地：:</td>
         <td>
-            <select id="selAddress" class="text_sketch" style="width:500px;height:40px">
-                <option value="0">请选择</option>
+            <select id="selAddress" style="width:500px;height:30px">
+                <option value="0">---请选择---</option>
             </select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
     <tr>
-        <td style="color:#808080;font-size:20px">产品阶段:</td>
+        <td style="color:#808080;font-size:20px">产品阶段：:</td>
         <td>
-            <select id="selStage" class="text_sketch" style="width:500px;height:40px">
-                <option value="0">请选择</option>
+            <select id="selStages" style="width:500px;height:30px">
+                <option value="0">---请选择---</option>
             </select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
     <tr>
-        <td style="color:#808080;font-size:20px">产品经理:</td>
+        <td style="color:#808080;font-size:20px">产品经理：:</td>
         <td>
-            <input id="Checkbox1" type="checkbox" />蔡光辉
-            <input id="Checkbox1" type="checkbox" />石斌
-            <input id="Checkbox1" type="checkbox" />郭志傲
-            <input id="Checkbox1" type="checkbox" />赵家林
-            <input id="Checkbox1" type="checkbox" />刘仔
+            <input id="Checkbox1" type="checkbox" name="Manage" value="蔡光辉" />蔡光辉&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="石斌" />石斌&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="赵家林" />赵家林&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="李文博" />李文博&nbsp;&nbsp;&nbsp;
+            <input id="Checkbox1" type="checkbox" name="Manage" value="赵鑫杰" />赵鑫杰
         </td>
-        <td style="color:#808080">*必填项，最多可选三位产品经理</td>
+        <td style="color:#808080">*必填项，最多可选3位经理</td>
+    </tr>
+    <tr>
+        <td style="color:#808080;font-size:20px">产品描述：:</td>
+        <td>
+            <textarea id="txtProductDetail" rows="2" cols="20" placeholder="请输入产品描述" style="width:500px;height:30px"></textarea>
+        </td>
+        <td style="color:#808080">*必填项</td>
     </tr>
     <tr>
         <td></td>
         <td>
-            <input id="Button1" type="button" value="添加产品" class="btn btn-primary" />
+            <input id="AddProduct" type="button" value="添加产品" onclick="ProductAdd()" class="btn btn-primary" />
         </td>
     </tr>
 </table>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $().ready(function () {
+        //获取应用行业
+        $.ajax({
+            url: "/Product/GetTreade",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Trades).each(function () {
+                    var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
+                    $("#selTreade").append(tp);
+                })
+            }
+        })
+        //获取归属地
+        $.ajax({
+            url: "/Product/GetAddress",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.TrAddress).each(function () {
+                    var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
+                    $("#selAddress").append(tp);
+                })
+            }
+        })
+        //获取产品阶段
+        $.ajax({
+            url: "/Product/GetStages",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Stages).each(function () {
+                    var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
+                    $("#selStages").append(tp);
+                })
+            }
+        })
+    })
+
+    //添加的点击事件
+    function ProductAdd() {
+        var ids = "";
+        $("input[name='Manage']:checked").each(function () {
+            ids += $(this).val() + ',';
+        })
+        ids = ids.substring(0, ids.length - 1);
+
+        //添加对象
+        var products = {
+            ProductName: $("#txtProductName").val(),
+            ProductManager: ids,
+            ProductDetail: $("#txtProductDetail").val(),
+            TradeId: $("#selTreade").val(),
+            TypeId: $("input[name='ProductType']:checked").val(),
+            AddressId: $("#selAddress").val(),
+            StageId: $("#selStages").val()
+        }
+        //添加
+        $.ajax({
+            url: "/Product/AddProduct",
+            type: "POST",
+            dataType: "json",
+            data: {
+                Products: products
+            },
+            success: function (res) {
+                if (res.Status) {
+                    alert(res.Message);
+                    location.href = "/Product/ProductInfoPage";
+                }
+                else {
+                    alert(res.Message);
+                }
+            }
+        })
+    }
+
+//$("#AddProduct").click(function () {
+
+
+//})
+</script>
 

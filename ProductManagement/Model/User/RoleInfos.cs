@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace Model.User
 {
-    /// <summary>
-    /// 用户登录模型
-    /// </summary>
-    public  class UserLogin
+    public class RoleInfos
     {
         /// <summary>
-        /// 用户名
+        /// 角色id
         /// </summary>
-        public string UserName { get; set; }
+        public int RoleId { get; set; }
         /// <summary>
-        /// 用户密码
+        /// 角色名称
         /// </summary>
-        public string UserPassword { get; set; }
+        public string RoleName { get; set; }
     }
 }

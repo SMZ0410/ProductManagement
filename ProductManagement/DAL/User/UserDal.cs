@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Model.User;
 using Dapper;
 using System.Data;
-
+using Model;
 
 namespace DAL.User
 {
@@ -21,14 +21,15 @@ namespace DAL.User
         /// <summary>
         /// 获取连接数据库字符串
         /// </summary>
-        private string connStr = ConfigurationManager.AppSettings["connectionString"];
+        private readonly string connStr = ConfigurationManager.AppSettings["connectionString"];
+
 
 
         /// <summary>
         /// 获取用户基本信息
         /// </summary>
         /// <returns></returns>
-        public List<UserInfo> GetUsers()
+        public List<UserInfo> GetUsers(string uname)
         {
             List<UserInfo> list = new List<UserInfo>();
             using (IDbConnection conn = new SqlConnection(connStr))
@@ -37,8 +38,8 @@ namespace DAL.User
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
-                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1";
-                list = conn.Query<UserInfo>(sql).ToList();
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1 AND u.UserName LIKE @username";
+                list = conn.Query<UserInfo>(sql, new { username = "%" + uname + "%" }).ToList();
                 return list;
             }
         }
@@ -64,16 +65,118 @@ namespace DAL.User
         /// </summary>
         /// <param name="user">用户登录信息</param>
         /// <returns></returns>
-        public int UserLogin(UserLogin user)
+        public UserLogModel UserLogin(UserLogModel user)
+        { 
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"SELECT u.UserId, u.UserName,r.RoleName FROM dbo.UserInfo u
+                                        JOIN dbo.UserRoleMapInfo m ON u. UserId = m.UserId
+                                        JOIN dbo.RoleInfo r ON m.RoleId = r.RoleId
+                                        WHERE UserName = @username  AND UserPassword = @userpassword";
+
+                //获取用户id并返回 
+                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
+                return userinfo;
+            }
+        }
+
+        /// <summary>
+        /// 获得地址的下拉值
+        /// </summary>
+        /// <returns></returns>
+        public List<AddressInfo> GetAddress()
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username AND UserPassword=@userpassword";
+                List<AddressInfo> list = new List<AddressInfo>();
+                var sql = "SELECT AddressName FROM dbo.AddressInfo";
+                list = conn.Query<AddressInfo>(sql).ToList();
+                return list;
+            }
 
-                //获取用户id并返回
-                var userId = conn.QueryFirstOrDefault<int>(sql, new { username = user.UserName, userpassword = user.UserPassword });
+
+        }
+
+        /// <summary>
+        /// 获取角色的下拉值
+        /// </summary>
+        /// <returns></returns>
+        public List<RoleInfos> GetRoles()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<RoleInfos> list = new List<RoleInfos>();
+                var sql = $"SELECT * FROM dbo.RoleInfo";
+                list = conn.Query<RoleInfos>(sql).ToList();
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="users"></param>
+        /// <returns></returns>
+        public int UserAdd(UserAdd users)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                var sql = @"EXEC dbo.P_UserAddInfo  @userName, 
+                               @userPassword,
+                                @salt, 
+                               @email,
+                                 @creatorId, 
+                                 @roleId, @addressId ";
+
+                var iu = conn.Execute(sql, new { userName = users.UserName, userPassword = users.UserPassword, salt = users.Salt, email = users.Email, creatorId = users.CreatorId, roleId = users.RoleId, addressId = users.AddressId });
+                return iu;
+            }
+
+        }
+
+        /// <summary>
+        /// 根据用户名&邮箱判断该用户是否存在
+        /// 返回用户id
+        /// </summary>
+        public int IsExistUserNameEmail(string userName, string email)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = $"SELECT * FROM dbo.UserInfo WHERE UserName = @tusername AND Email=@temail";
+                int userId = conn.QueryFirstOrDefault<int>(sql, new { tusername = userName, temail = email });
                 return userId;
             }
+        }
+
+        /// <summary>
+        /// 重置用户密码
+        /// </summary>
+        /// <returns>影响行数</returns>
+        public int ResetUserPasswod(string userName, string newPassword)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE dbo.UserInfo SET UserPassword=@userpassword WHERE UserName=@username  ";
+                int res = conn.Execute(sql, new { userpassword = newPassword, username = userName });
+                return res;
+            }
+        }
+
+        /// <summary>
+        /// 逻辑删除用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int UserDel(int id)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in ('" + id + "')";
+                var res = conn.Execute(sql);
+
+                return res;
+            }
+
         }
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SDKClient.Api.Request.Product;
 using SDKClient.Api.Response.Product;
 using SDKClient.Api.Response.DropDownList;
-using SDKClient.Api.Request.DropDownList;
+using SDKClient.Api.Request.DropDownList;  
 
 namespace BLL.Product
 {
@@ -139,6 +139,55 @@ namespace BLL.Product
                 response.Manages = list;
                 response.Message = $"获取产品经理信息成功，共{list.Count}条数据";
             }
+            return response;
+        }
+        /// <summary>
+        /// 添加产品信息
+        /// </summary>
+        /// <returns></returns>
+        public ProductAddResponse ProductAdd(ProductAddRequest request)
+        {
+            ProductAddResponse response = new ProductAddResponse();
+
+            var res = ProductDal.Instance.AddProduct(request.Products);
+
+            if (res > 0)
+            {
+                response.Status = true;
+                response.Message = "添加成功";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "添加失败";
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 删除产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductDeleteResponse DeleteProduct(ProductDeleteRequest request)
+        {
+            ProductDeleteResponse response = new ProductDeleteResponse();
+
+           
+            var res = ProductDal.Instance.DeleteProduct(request.Ids);
+
+            if (res>0)
+            {
+                response.Status = true;
+                response.Message = "删除成功";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "删除失败";
+            }
+
             return response;
         }
     }
