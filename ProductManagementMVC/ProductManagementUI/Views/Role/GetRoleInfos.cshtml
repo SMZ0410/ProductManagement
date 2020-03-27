@@ -6,10 +6,10 @@
 <h2>角色信息</h2>
 
 <input type="text" id="RoleName" placeholder="请输入角色名称" />
-<input type="button" value="查询" id="BtnQuery"/>
+<input type="button" value="查询" id="BtnQuery" />
 
-<table>
-    <thead class="table">
+<table class="table">
+    <thead>
         <tr>
             <td>编号</td>
             <td>角色名称</td>
@@ -46,18 +46,39 @@
                         + "<td>" + this.RoleName + "</td>"
                         + "<td>" + this.privilegeName + "</td>"
                         + "<td>" + this.UserNum + "</td>"
-                        + "<td><input type='button' value='编辑' /><input type='button' value='删除' /></td>"
+                        + "<td><input type='button' value='编辑' /><a onclick='Del(" + this.RoleId + ")'>删除</a></td>"
                         + "</tr>";
                     tr += st;
                 });
                 $("#tb").html(tr);
             }
         });
+    }
+    $("#BtnQuery").click(function () {
+        var rolename = $("#RoleName").val();
+        RoleQuery(rolename);
+    });
 
-        $("#BtnQuery").click(function () {
-            var rolename = $("#RoleName").val();
-            RoleQuery(rolename);
-        });
 
+
+    function Del(RoleId) {
+        var obj = {
+            RoleAll : {
+                RoleId:RoleId
+            }
+        }
+        if (confirm("确定删除吗·qin~~")) {
+            $.ajax({
+                url: '/Role/DeleteRole',
+                type: 'post',
+                dataType: 'json',
+                data: obj,
+                success: function (data) {
+                    if (data > 0) {
+                        alert('删除成功');
+                    }
+                }
+            })
+        }
     }
 </script>

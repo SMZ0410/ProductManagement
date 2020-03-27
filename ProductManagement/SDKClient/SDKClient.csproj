@@ -51,6 +51,7 @@
     <Compile Include="Api\Request\Product\ProductGetRequest.cs" />
     <Compile Include="Api\Request\Product\ProductUpdateRequest.cs" />
     <Compile Include="Api\Request\Role\RoleGetRequest.cs" />
+    <Compile Include="Api\Request\Role\RoleUpdateRequest.cs" />
     <Compile Include="Api\Request\User\UserGetRequest.cs" />
     <Compile Include="Api\Request\User\UserLoginRequest.cs" />
     <Compile Include="Api\Response\DropDownList\DropDownAddressReponse.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Api\Response\Product\ProductDeleteResponse.cs" />
     <Compile Include="Api\Response\Product\ProductUpdateResponse.cs" />
     <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
+    <Compile Include="Api\Response\Role\RoleUpdateResponse.cs" />
     <Compile Include="Api\Response\User\UserGetResponse.cs" />
     <Compile Include="Api\Response\User\UserLoginResponse.cs" />
     <Compile Include="Api\Response\Product\ProductGetResponse.cs" />
