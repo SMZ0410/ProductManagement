@@ -83,7 +83,7 @@ namespace BLL.Product
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public ProductEditResponse ExitProducts(ProductEditRequest request)
+        public ProductEditResponse EditProducts(ProductEditRequest request)
         {
             return ApiRequestHelper.Post<ProductEditRequest, ProductEditResponse>(request);
         }

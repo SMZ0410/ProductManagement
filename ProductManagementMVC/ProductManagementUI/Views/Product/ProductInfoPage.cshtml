@@ -137,7 +137,7 @@
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.StageName + "</td>"
                         + "<td>" + this.ProductDetail + "</td>"
-                        + "<td><a onclick='Update(" + this.ProductId + ")'><img id='u437-1_img' class='img u437_img' src='images/product/icon-edit_u437.png'></a></td>"
+                        + "<td><a href='/Product/ProductUpdatePage?PId="+ this.ProductId +"'>修改</a></td>"
                         + "</tr>";
                     i++;
                 })
@@ -186,9 +186,5 @@
             });
         }
         }
-    //跳转到修改
-    function Update(Id) {
-        location.href = "/Product/ProductUpdPage/" + Id;
-    }
 </script>
 

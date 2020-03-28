@@ -8,7 +8,7 @@ namespace SDKClient.Api.Request.Product
 {
     public class ProductEditRequest:BaseRequest
     {
-        public int ProductId { get; set; }
+        public int PId { get; set; }
 
         /// <summary>
         /// 重写基类路径

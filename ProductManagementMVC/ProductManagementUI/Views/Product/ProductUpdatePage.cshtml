@@ -1,9 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "ProductUpdPage";
+    ViewBag.Title = "ProductUpdatePage";
 }
 
 <h2>修改产品信息</h2>
+
+<input id="val" type="hidden" value="@ViewBag.pid" />
 
 <table class="table">
     <tr>
@@ -75,6 +77,7 @@
 
 <script src="~/ReferencesFile/Template/vendor/jquery/jquery.min.js"></script>
 
+
 <script>
     $().ready(function () {
         //获取应用行业
@@ -126,29 +129,35 @@
             }
         })
 
+        
         //获取信息
+        var pid = $("#val").val();
         $.ajax({
-            url: "/Product/ExitProduct",
+            url: "/Product/EditProduct",
             type: "POST",
             dataType: "json",
             data: {
-                Id
+                PId: pid
             },
             success: function (res) {
-                $("#txtProductName").val(res.ProductName),
-                    $("#selManager").val(), (res.UserId),
-                    $("#txtProductDetail").val(res.ProductDetail),
-                    $("#selTreade").val(res.TradeId),
-                    $("input[name='ProductType']:checked").val(res.TypeId),
-                    $("#selAddress").val(res.AddressId),
-                    $("#selStages").val(res.StageId)
+                $("#txtProductName").val(res.ProductInfo.ProductName),
+                    $("#selManager").val(res.ProductInfo.UserId),
+                    $("#txtProductDetail").val(res.ProductInfo.ProductDetail),
+                    $("#selTreade").val(res.ProductInfo.TradeId),
+                    $("input[name='ProductType']:checked").each(function () {
+                        if (this.value == res.ProductInfo.TypeId) {
+                            this.checked = true;
+                        }
+                    })
+                    $("#selAddress").val(res.ProductInfo.AddressId),
+                    $("#selStages").val(res.ProductInfo.StageId)
             }
         })
     })
 
     //修改
     function ProductUpdate() {
-       
+
         //添加对象
         var products = {
             ProductName: $("#txtProductName").val(),
@@ -179,4 +188,3 @@
         })
     }
 </script>
-

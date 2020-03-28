@@ -180,14 +180,14 @@ namespace DAL.Product
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ProductEditAdd EditProduct(int productId)
+        public ProductEditAdd EditProduct(int pid)
         {
             using (IDbConnection conn=new SqlConnection(connStr))
             {
                 ProductEditAdd info = new ProductEditAdd();
                 string sql = $"SELECT * FROM v_Product WHERE ProductId=@id";
 
-                info = conn.QueryFirstOrDefault<ProductEditAdd>(sql,new { id=productId });
+                info = conn.QueryFirstOrDefault<ProductEditAdd>(sql, new { id = pid });
                 return info;
             }
         }
@@ -195,12 +195,14 @@ namespace DAL.Product
         /// 修改产品信息
         /// </summary>
         /// <returns></returns>
-        public int UpdateProduct(ProductEditAdd ProAdd)
+        public int UpdateProduct(ProductUpdate ProUpd)
         {
             using (IDbConnection conn=new SqlConnection(connStr))
             {
                 //update set typeid＝newtypeid where typeid＝oldtypeid and productid＝productid
-                int res =0;
+                string sql = $"UPDATE ProductInfo SET ProductName='{ProUpd.ProductName}',ProductDetail='{ProUpd.ProductDetail}',TradeId='{ProUpd.NewTradeId}',TypeId='{ProUpd.NewTypeId}',AddressId='{ProUpd.NewAddressId}',StageId='{ProUpd.NewStageId}',UserId='{ProUpd.NewUserId}' where ProductId='{ProUpd.ProductId}'";
+
+                var res = conn.Execute(sql);
                 return res;
             }
         }

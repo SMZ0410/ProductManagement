@@ -199,14 +199,14 @@ namespace BLL.Product
         {
             ProductEditResponse response = new ProductEditResponse();
 
-            if (request.ProductId<0)
+            if (request.PId<0)
             {
                 response.Status = false;
                 response.Message = "网络错误";
                 return response;
             }
 
-            var res = ProductDal.Instance.EditProduct(request.ProductId);
+            var res = ProductDal.Instance.EditProduct(request.PId);
             if (res!=null)
             {
                 response.Status = true;

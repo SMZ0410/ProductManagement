@@ -94,8 +94,9 @@ namespace ProductManagementUI.Controllers
         /// 编辑产品视图
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProductUpdPage()
+        public ActionResult ProductUpdatePage(int pid)
         {
+            ViewBag.pid = pid;
             return View();
         }
 
@@ -103,9 +104,10 @@ namespace ProductManagementUI.Controllers
         /// 获取产品单条信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult ExitProduct(ProductEditRequest request)
+        [HttpPost]
+        public JsonResult EditProduct(ProductEditRequest request)
         {
-            return Json(ProductBll.Instance.ExitProducts(request));
+            return Json(ProductBll.Instance.EditProducts(request));
         }
 
         /// <summary>

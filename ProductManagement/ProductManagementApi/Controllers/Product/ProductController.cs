@@ -100,7 +100,7 @@ namespace ProductManagementApi.Controllers.Product
         }
 
         /// <summary>
-        /// 获取产品单条信息
+        /// 修改产品信息
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
