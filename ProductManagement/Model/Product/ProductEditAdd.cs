@@ -6,28 +6,40 @@ using System.Threading.Tasks;
 
 namespace Model.Product
 {
-
-    public class ProductQuery
+    public class ProductEditAdd
     {
+        
+        /// <summary>
+        /// 产品名称
+        /// </summary>
+        public string ProductName { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string ProductDetail { get; set; }
         /// <summary>
         /// 应用行业
         /// </summary>
         public int TradeId { get; set; }
         /// <summary>
-        /// 产品阶段
+        /// 产品类型
         /// </summary>
-        public int StageId { get; set; }
+        public int TypeId { get; set; }
         /// <summary>
         /// 归属地
         /// </summary>
         public int AddressId { get; set; }
         /// <summary>
+        /// 产品阶段
+        /// </summary>
+        public int StageId { get; set; }
+        /// <summary>
         /// 产品经理
         /// </summary>
         public int UserId { get; set; }
         /// <summary>
-        /// 产品名称
+        /// 产品id
         /// </summary>
-        public string ProductName { get; set; }
+        public int ProductId { get; set; }
     }
 }

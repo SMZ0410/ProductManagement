@@ -35,6 +35,7 @@
 <body>
     <input type="hidden" id="hideusername" />
     <input type="hidden" id="hiderolename" />
+    <input type="hidden" id="hideuserid" />
     <div class="page login-page">
         <div class="container d-flex align-items-center">
             <div class="form-holder has-shadow">
@@ -44,7 +45,7 @@
                         <div class="info d-flex align-items-center">
                             <div class="content">
                                 <div class="logo">
-                                    <h1>后台产品管理系统</h1>
+                                    <h1> 沪棋产品 </h1>
                                 </div>
                                 <p>Background product management system.</p>
                             </div>
@@ -114,8 +115,9 @@
             success: function (res) {
                 if (res.Status) { 
                     $("#hideusername").val(res.User.UserName);
+                    $("#hideuserid").val(res.User.UserId);
                     $("#hiderolename").val(res.User.RoleName);
-                    location.href = "/Home/Index?userName="+ $("#hideusername").val()+"&roleName="+$("#hiderolename").val();
+                    location.href = "/Home/Index?userName="+ $("#hideusername").val()+"&roleName="+$("#hiderolename").val()+"&userId="+ $("#hideuserid").val();
                 }
                 else {
                     alert(res.Message);

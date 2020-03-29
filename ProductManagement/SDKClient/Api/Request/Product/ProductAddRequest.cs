@@ -10,7 +10,7 @@ namespace SDKClient.Api.Request.Product
 {
     public class ProductAddRequest:BaseRequest
     {
-        public  ProductAdd Products { get; set; }
+        public  ProductEditAdd Products { get; set; }
         /// <summary>
         /// 重写基类路径
         /// </summary>

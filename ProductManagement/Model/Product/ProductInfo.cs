@@ -28,7 +28,7 @@ namespace Model
         /// <summary>
         /// 产品经理
         /// </summary>
-        public string ProductManager { get; set; }
+        public string UName { get; set; }
         /// <summary>
         /// 应用行业
         /// </summary>

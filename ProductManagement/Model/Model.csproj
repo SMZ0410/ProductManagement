@@ -43,10 +43,11 @@
   <ItemGroup>
     <Compile Include="Product\AddressInfo.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="Product\ProductAdd.cs" />
+    <Compile Include="Product\ProductEditAdd.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="Product\ProductManageInfo.cs" />
     <Compile Include="Product\ProductQuery.cs" />
+    <Compile Include="Product\ProductUpdate.cs" />
     <Compile Include="Product\StageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleInfo\PostRoleModel.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="User\UserAdd.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="User\UserLogModel.cs" />
+    <Compile Include="User\UserUpdatePassword.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

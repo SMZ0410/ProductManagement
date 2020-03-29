@@ -64,7 +64,7 @@ namespace BLL.ApiRequest
                 }
                 else
                 { 
-                    return new TResponse() {Status=false, Message =obj.Message };
+                    return new TResponse() {Status=false, Message =obj.Message};
                 }
             }
             return new TResponse() { Status = false,Message = "请求失败,请检查网络" }; ;
