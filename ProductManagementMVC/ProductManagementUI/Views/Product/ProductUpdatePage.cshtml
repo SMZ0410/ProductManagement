@@ -159,7 +159,9 @@
     function ProductUpdate() {
 
         //添加对象
+        var pid = $("#val").val();
         var products = {
+            ProductId:pid,
             ProductName: $("#txtProductName").val(),
             UserId: $("#selManager").val(),
             ProductDetail: $("#txtProductDetail").val(),

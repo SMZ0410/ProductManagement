@@ -230,12 +230,12 @@ namespace BLL.Product
             if (res > 0)
             {
                 response.Status = true;
-                response.Message = "添加成功";
+                response.Message = "修改成功";
             }
             else
             {
                 response.Status = false;
-                response.Message = "添加失败";
+                response.Message = "修改失败";
             }
 
             return response;

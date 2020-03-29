@@ -195,16 +195,22 @@ namespace DAL.Product
         /// 修改产品信息
         /// </summary>
         /// <returns></returns>
-        public int UpdateProduct(ProductUpdate ProUpd)
+        public int UpdateProduct(ProductUpdate Upd)
         {
             using (IDbConnection conn=new SqlConnection(connStr))
             {
-                //update set typeid＝newtypeid where typeid＝oldtypeid and productid＝productid
-                string sql = $"UPDATE ProductInfo SET ProductName='{ProUpd.ProductName}',ProductDetail='{ProUpd.ProductDetail}',TradeId='{ProUpd.NewTradeId}',TypeId='{ProUpd.NewTypeId}',AddressId='{ProUpd.NewAddressId}',StageId='{ProUpd.NewStageId}',UserId='{ProUpd.NewUserId}' where ProductId='{ProUpd.ProductId}'";
+                string sql = @"EXEC dbo.p_UpdateProduct @productId,
+                                                        @productName,
+                                                        @userId,
+                                                        @productDetail,
+                                                        @tradeId,
+                                                        @typeId,
+                                                        @addressId,
+                                                        @stageId ";
 
-                var res = conn.Execute(sql);
+                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId });
                 return res;
             }
         }
-    }
+    }  
 }
