@@ -310,5 +310,28 @@ namespace BLL.User
             }
             return response;
         }
+
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserUptResponse UserUpt(UserUptRequest request)
+        {
+            UserUptResponse response = new UserUptResponse();
+            var res = UserDal.Instance.UserUpt(request.ID);
+            if (res <= 0)
+            {
+                response.Status = false;
+                response.Message = "修改失败，请重试";
+            }
+            else
+            {
+                response.Status = true;
+                response.Message = "修改成功";
+            }
+            return response;
+        }
     }
 }

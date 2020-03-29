@@ -1,9 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "UserAdd";
+﻿@{
+    ViewBag.Title = "UserUpdate";
 }
-
-<h2>添加用户</h2>
 <table class="table table-bordered">
     <tr>
         <td style="color:#808080;font-size:20px">用户名称:</td>
@@ -46,7 +43,7 @@
     </tr>
     <tr>
         <td>
-            <input id="btnAdd" type="button" value="完成" class="btn btn-light" onclick="useradd()" />
+            <input id="btnUpt" type="button" value="完成" class="btn btn-light" onclick="userUpt()" />
         </td>
         <td>
             <input id="btnOut" type="reset" value="取消" class="btn btn-group" />
@@ -56,9 +53,8 @@
 </table>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
 <script>
-    $().ready(function () {
+     $().ready(function () {
         //获取归属地
         $.ajax({
             url: "/User/GetAddress",
@@ -78,13 +74,13 @@
             dataType: "json",
             success: function (res) {
                 $(res.Roles).each(function () {
-                    var pj = "<option value='" + this.RoleId + "'>" + this.RoleName + "</option>"
+                    var pj = "<option values='" + this.RoleId + "'>" + this.RoleName + "</option>"
                     $("#seleRole").append(pj);
                 })
             }
         })
     })
-    function useradd() {
+      function userUpt() {
         var obj = {
             UserName: $("#txtName").val(),
             UserPassword: $("#txtPwd").val(),
@@ -93,22 +89,20 @@
             RoleId: $("#seleRole").val()
         };
         $.ajax({
-            url: "/User/GeUserAdd",
+            url: "/User/UserUpt",
             type: "POST",
             data: { Users: obj },
             dataType: "json",
             success: function (res) {
                 if (res.Status) {
                     alert(res.Message);
-                    location.href = '/User/UserShow';
+                    location.href = 'User/UserShow';
                 }
                 else {
                     alert(res.Message);
                 }
             }
         })
-
-    }
 
 </script>
 

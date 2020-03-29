@@ -93,6 +93,14 @@ namespace BLL.User
             return ApiRequestHelper.Post<UserDeleteRequest, UserDeleteResponse>(request);
         }
 
-
+        /// <summary>
+        /// 用户修改
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserUptResponse UserUpt(UserUptRequest request)
+        {
+            return ApiRequestHelper.Post<UserUptRequest, UserUptResponse>(request);
+        }
     }
 }

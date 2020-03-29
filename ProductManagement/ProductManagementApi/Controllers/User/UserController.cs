@@ -104,5 +104,16 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.UserDelete(request);
         }
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserUptResponse UserUpt(UserUptRequest request)
+        {
+            return UserBll.Instance.UserUpt(request);
+        }
     }
 }

@@ -171,7 +171,7 @@ namespace DAL.User
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in ('" + id + "')";
+                string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in (" + id + ")";
                 var res = conn.Execute(sql, new { ID = id });
                 return res;
             }
@@ -185,11 +185,12 @@ namespace DAL.User
         /// <returns></returns>
         public int UserUpt(int id)
         {
-            using (resource)
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
-
+                string sql = "";
+                var res = conn.Execute(sql, new { ID = id });
+                return res;
             }
-            return 0;
         }
 
     }

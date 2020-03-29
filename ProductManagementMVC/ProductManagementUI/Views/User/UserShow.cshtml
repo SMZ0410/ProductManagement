@@ -19,11 +19,10 @@
     </tr>
     <tbody id="xs">
 </table>
-<input id="UserDel" type="button" value="批量删除" name="ud" onclick="userdel()"  class="btn btn-danger">
+<input id="UserDel" type="button" value="批量删除" name="ud" onclick="userdel()" class="btn btn-danger">
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
 
 <script>
     $().ready(function () {
@@ -47,7 +46,7 @@
                         + "<td>" + this.UserName + "</td>"
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.RoleName + "</td>"
-                        + "<td><a onclick='Update(" + this.UserId + ")'>编辑</a></td>"
+                        + "<td><a onclick='Update(" + this.ID + ")'>编辑</a></td>"
                         + "</tr>"
                 })
                 $("#xs").html(oppo);
@@ -74,7 +73,7 @@
         }
         if (confirm("确认删除吗？？")) {
             $.ajax({
-                urk: "User/UserDelete",
+                url: "/User/UserDelete",
                 type: "POST",
                 dataType: "json",
                 data: { id },
@@ -90,7 +89,7 @@
             });
         }
     }
-
+   
 </script>
 
 

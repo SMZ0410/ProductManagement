@@ -45,6 +45,7 @@
     <Compile Include="Api\Request\DropDownList\DropDownAddressRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownManageRequest.cs" />
     <Compile Include="Api\Request\User\UserDeleteRequest.cs" />
+    <Compile Include="Api\Request\User\UserUptRequest.cs" />
     <Compile Include="Api\Response\DropDownList\DropDownRoleReponse.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownRoleRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownStageRequest.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Api\Response\User\UserLoginResponse.cs" />
     <Compile Include="Api\Response\Product\ProductGetResponse.cs" />
     <Compile Include="Api\Response\User\UserAddResponse.cs" />
+    <Compile Include="Api\Response\User\UserUptResponse.cs" />
     <Compile Include="BaseRequest.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

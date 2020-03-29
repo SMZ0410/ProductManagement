@@ -131,12 +131,32 @@ namespace ProductManagementUI.Controllers
         }
 
         /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserUpdate()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 逻辑删除用户信息
         /// </summary>
         /// <returns></returns>
         public JsonResult UserDelete(UserDeleteRequest getAddress)
         {
             return Json(UserBll.Instance.UserDelete(getAddress));
+        }
+
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult UserUpt(UserUptRequest request)
+        {
+            return Json(UserBll.Instance.UserUpt(request));
         }
     }
 }
