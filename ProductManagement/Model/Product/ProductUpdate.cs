@@ -21,27 +21,26 @@ namespace Model.Product
         /// </summary>
         public int TradeId { get; set; }
 
-        public int NewTradeId { get; set; }
         /// <summary>
         /// 产品类型
         /// </summary>
         public int TypeId { get; set; }
-        public int NewTypeId { get; set; }
+        
         /// <summary>
         /// 归属地
         /// </summary>
         public int AddressId { get; set; }
-        public int NewAddressId { get; set; }
+        
         /// <summary>
         /// 产品阶段
         /// </summary>
         public int StageId { get; set; }
-        public int NewStageId { get; set; }
+        
         /// <summary>
         /// 产品经理
         /// </summary>
         public int UserId { get; set; }
-        public int NewUserId { get; set; }
+        
         /// <summary>
         /// 产品id
         /// </summary>

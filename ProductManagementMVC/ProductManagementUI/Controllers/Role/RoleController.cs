@@ -31,7 +31,7 @@ namespace ProductManagementUI.Controllers.Role
         }
 
         /// <summary>
-        /// 逻辑删除
+        /// 获取逻辑删除方法
         /// </summary>
         /// <param name="getRequest"></param>
         /// <returns></returns>
@@ -39,6 +39,26 @@ namespace ProductManagementUI.Controllers.Role
         {
 
             return Json(RoleBll.Instance.PutRole(request), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 添加角色信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddRole()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 获取添加角色信息方法
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult PostRole(RolePostRequest request)
+        {
+
+            return Json(RoleBll.Instance.AddRole(request));
         }
 
     }
