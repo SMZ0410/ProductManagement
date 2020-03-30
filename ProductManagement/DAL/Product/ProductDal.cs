@@ -206,9 +206,10 @@ namespace DAL.Product
                                                         @tradeId,
                                                         @typeId,
                                                         @addressId,
-                                                        @stageId ";
+                                                        @stageId,
+                                                        @updatorId";
 
-                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId });
+                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId, updatorId=Upd.UpdatorId });
                 return res;
             }
         }

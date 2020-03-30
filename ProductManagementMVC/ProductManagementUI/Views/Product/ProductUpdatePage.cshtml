@@ -18,9 +18,7 @@
     <tr>
         <td style="color:#808080;font-size:20px">应用行业：</td>
         <td>
-            <select id="selTreade" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
-            </select>
+            <select id="selTreade" style="width:500px;height:30px"></select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
@@ -36,18 +34,14 @@
     <tr>
         <td style="color:#808080;font-size:20px">归属地：</td>
         <td>
-            <select id="selAddress" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
-            </select>
+            <select id="selAddress" style="width:500px;height:30px"></select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
     <tr>
         <td style="color:#808080;font-size:20px">产品阶段：</td>
         <td>
-            <select id="selStages" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
-            </select>
+            <select id="selStages" style="width:500px;height:30px"></select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
@@ -61,9 +55,7 @@
     <tr>
         <td style="color:#808080;font-size:20px">产品经理：</td>
         <td>
-            <select id="selManager" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
-            </select>
+            <select id="selManager" style="width:500px;height:30px"></select>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
@@ -75,8 +67,8 @@
     </tr>
 </table>
 
-<script src="~/ReferencesFile/Template/vendor/jquery/jquery.min.js"></script>
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
     $().ready(function () {
@@ -129,7 +121,7 @@
             }
         })
 
-        
+
         //获取信息
         var pid = $("#val").val();
         $.ajax({
@@ -149,27 +141,28 @@
                             this.checked = true;
                         }
                     })
-                    $("#selAddress").val(res.ProductInfo.AddressId),
+                $("#selAddress").val(res.ProductInfo.AddressId),
                     $("#selStages").val(res.ProductInfo.StageId)
             }
         })
     })
 
-    //修改
+    //修改产品功能
     function ProductUpdate() {
 
-        //添加对象
+
         var pid = $("#val").val();
 
-        var products = {
-            ProductId:pid,
+        var obj = {
+            ProductId: pid,
             ProductName: $("#txtProductName").val(),
             UserId: $("#selManager").val(),
             ProductDetail: $("#txtProductDetail").val(),
             TradeId: $("#selTreade").val(),
             TypeId: $("input[name='ProductType']:checked").val(),
             AddressId: $("#selAddress").val(),
-            StageId: $("#selStages").val()
+            StageId: $("#selStages").val(),
+            UpdatorId: $("#userid").val()
         }
 
         $.ajax({
@@ -177,7 +170,7 @@
             type: "POST",
             dataType: "json",
             data: {
-                Products: products
+                ProductUpd: obj
             },
             success: function (res) {
                 if (res.Status) {

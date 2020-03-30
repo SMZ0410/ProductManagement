@@ -226,7 +226,7 @@ namespace BLL.Product
         {
             ProductUpdateResponse response = new ProductUpdateResponse();
 
-            var res = ProductDal.Instance.UpdateProduct(request.Products);
+            var res = ProductDal.Instance.UpdateProduct(request.ProductUpd);
             if (res > 0)
             {
                 response.Status = true;
