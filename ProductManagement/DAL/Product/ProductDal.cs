@@ -29,9 +29,9 @@ namespace DAL.Product
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT * FROM v_Products";
+                string sql = @"SELECT * FROM v_Product";
 
-                if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.ProductId > 0 || !string.IsNullOrEmpty(query.ProductName))
+                if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.UserId > 0 || !string.IsNullOrEmpty(query.ProductName))
                 {
                     sql += " WHERE 1=1";
 
@@ -47,9 +47,9 @@ namespace DAL.Product
                     {
                         sql += " AND AddressId = @addressId ";
                     }
-                    if (query.ProductId > 0)
+                    if (query.UserId > 0)
                     {
-                        sql += " AND ProductId = @productId ";
+                        sql += " AND UserId = @userId ";
                     }
                     if (!string.IsNullOrEmpty(query.ProductName))
                     {
@@ -57,7 +57,7 @@ namespace DAL.Product
                     }
                 }
 
-                list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, productId = query.ProductId, productName = "%" + query.ProductName + "%" }).ToList();
+                list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, userId = query.UserId, productName = "%" + query.ProductName + "%" }).ToList();
 
                 return list;
             }
@@ -117,7 +117,7 @@ namespace DAL.Product
         }
 
         /// <summary>
-        /// 获取应用行业的下拉显示
+        /// 获取产品经理下拉显示
         /// </summary>
         /// <returns></returns>
         public List<ProductManageInfo> GetManages()
@@ -126,7 +126,10 @@ namespace DAL.Product
             {
                 List<ProductManageInfo> list = new List<ProductManageInfo>();
 
-                string sql = $"SELECT * FROM ProductInfo";
+                string sql = @"SELECT us.UserId,us.UserName as UName FROM dbo.UserInfo AS us
+                                JOIN dbo.UserRoleMapInfo AS r ON us.UserId=r.UserId
+                                JOIN dbo.RoleInfo AS ro ON r.RoleId=ro.RoleId
+                                WHERE us.Status=1 AND ro.RoleName='产品经理'";
 
                 list = conn.Query<ProductManageInfo>(sql).ToList();
 
@@ -139,18 +142,18 @@ namespace DAL.Product
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public int AddProduct(ProductAdd info)
+        public int AddProduct(ProductEditAdd info)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = @"EXEC dbo.p_Product @productName,
-                                                  @productManage,
+                string sql = @"EXEC dbo.p_Products @productName,
+                                                  @userId,
                                                   @productDetail,
                                                   @tradeId, 
                                                   @typeId,
                                                   @addressId,
                                                   @stageId";
-                var res = conn.Execute(sql, new { productName = info.ProductName, productManage = info.ProductManager, productDetail = info.ProductDetail, tradeId = info.TradeId, typeId = info.TypeId, addressId = info.AddressId, stageId = info.StageId });
+                var res = conn.Execute(sql, new { productName = info.ProductName, userId = info.UserId, productDetail = info.ProductDetail, tradeId = info.TradeId, typeId = info.TypeId, addressId = info.AddressId, stageId = info.StageId });
 
                 return res;
             }
@@ -177,11 +180,37 @@ namespace DAL.Product
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ProductInfo ExitProduct(int id)
+        public ProductEditAdd EditProduct(int pid)
         {
-            ProductInfo info = new ProductInfo();
+            using (IDbConnection conn=new SqlConnection(connStr))
+            {
+                ProductEditAdd info = new ProductEditAdd();
+                string sql = $"SELECT * FROM v_Product WHERE ProductId=@id";
 
-            return info;
+                info = conn.QueryFirstOrDefault<ProductEditAdd>(sql, new { id = pid });
+                return info;
+            }
         }
-    }
+        /// <summary>
+        /// 修改产品信息
+        /// </summary>
+        /// <returns></returns>
+        public int UpdateProduct(ProductUpdate Upd)
+        {
+            using (IDbConnection conn=new SqlConnection(connStr))
+            {
+                string sql = @"EXEC dbo.p_UpdateProduct @productId,
+                                                        @productName,
+                                                        @userId,
+                                                        @productDetail,
+                                                        @tradeId,
+                                                        @typeId,
+                                                        @addressId,
+                                                        @stageId ";
+
+                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId });
+                return res;
+            }
+        }
+    }  
 }

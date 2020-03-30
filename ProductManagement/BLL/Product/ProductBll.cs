@@ -117,7 +117,7 @@ namespace BLL.Product
         }
 
         /// <summary>
-        /// 获取应用行业的下拉
+        /// 获取产品经理的下拉
         /// </summary>
         /// <returns></returns>
         public DropDownManageReponse GetManages(DropDownManageRequest request)
@@ -174,7 +174,6 @@ namespace BLL.Product
         {
             ProductDeleteResponse response = new ProductDeleteResponse();
 
-           
             var res = ProductDal.Instance.DeleteProduct(request.Ids);
 
             if (res>0)
@@ -186,6 +185,57 @@ namespace BLL.Product
             {
                 response.Status = false;
                 response.Message = "删除失败";
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 获取单条信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductEditResponse EditProduct(ProductEditRequest request)
+        {
+            ProductEditResponse response = new ProductEditResponse();
+
+            if (request.PId<0)
+            {
+                response.Status = false;
+                response.Message = "网络错误";
+                return response;
+            }
+
+            var res = ProductDal.Instance.EditProduct(request.PId);
+            if (res!=null)
+            {
+                response.Status = true;
+                response.Message = "请求成功";
+                response.ProductInfo = res;
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 修改产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public ProductUpdateResponse UpdateProduct(ProductUpdateRequest request)
+        {
+            ProductUpdateResponse response = new ProductUpdateResponse();
+
+            var res = ProductDal.Instance.UpdateProduct(request.Products);
+            if (res > 0)
+            {
+                response.Status = true;
+                response.Message = "修改成功";
+            }
+            else
+            {
+                response.Status = false;
+                response.Message = "修改失败";
             }
 
             return response;

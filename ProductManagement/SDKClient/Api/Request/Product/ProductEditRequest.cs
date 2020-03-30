@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDKClient.Api.Request.DropDownList
+namespace SDKClient.Api.Request.Product
 {
-    public class DropDownAddressRequest:BaseRequest
+    public class ProductEditRequest:BaseRequest
     {
+        public int PId { get; set; }
+
         /// <summary>
         /// 重写基类路径
         /// </summary>
         /// <returns></returns>
         public override string GetApiName()
         {
-            return "api/Product/GetAddress";
+            return "api/Product/EditProduct";
         }
     }
 }

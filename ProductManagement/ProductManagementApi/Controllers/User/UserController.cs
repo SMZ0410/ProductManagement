@@ -104,5 +104,18 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.UserDelete(request);
         }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return UserBll.Instance.UpdateUserPassword(request);
+        }
+
+
     }
 }

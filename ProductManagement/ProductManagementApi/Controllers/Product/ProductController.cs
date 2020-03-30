@@ -87,5 +87,27 @@ namespace ProductManagementApi.Controllers.Product
         {
             return ProductBll.Instance.DeleteProduct(request);
         }
+
+        /// <summary>
+        /// 获取产品单条信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ProductEditResponse EditProduct(ProductEditRequest request)
+        {
+            return ProductBll.Instance.EditProduct(request);
+        }
+
+        /// <summary>
+        /// 修改产品信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ProductUpdateResponse UpdateProducts(ProductUpdateRequest request)
+        {
+            return ProductBll.Instance.UpdateProduct(request);
+        }
     }
 }

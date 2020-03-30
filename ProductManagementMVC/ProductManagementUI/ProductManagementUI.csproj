@@ -630,7 +630,8 @@
     <Content Include="Views\Product\ProductAddPage.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\User\UserAdd.cshtml" />
-    <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\User\UpdateUserPasswordPage.cshtml" />
+    <Content Include="Views\Product\ProductUpdatePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

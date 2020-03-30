@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.Product
 {
-    public class ProductAdd
+    public class ProductEditAdd
     {
         
         /// <summary>
@@ -36,6 +36,10 @@ namespace Model.Product
         /// <summary>
         /// 产品经理
         /// </summary>
-        public string ProductManager { get; set; }
+        public int UserId { get; set; }
+        /// <summary>
+        /// 产品id
+        /// </summary>
+        public int ProductId { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BLL.ApiRequest;
 using SDKClient.Api.Request.DropDownList;
 using SDKClient.Api.Request.User;
+using SDKClient.Api.Response;
 using SDKClient.Api.Response.DropDownList;
 using SDKClient.Api.Response.User;
 
@@ -91,6 +92,16 @@ namespace BLL.User
         public UserDeleteResponse UserDelete(UserDeleteRequest request)
         {
             return ApiRequestHelper.Post<UserDeleteRequest, UserDeleteResponse>(request);
+        }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return ApiRequestHelper.Post<UserUpdPwdRequest, UserUpdPwdResponse>(request);
         }
 
 

@@ -179,5 +179,20 @@ namespace DAL.User
 
         }
 
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public int UpdateUserPassword(UserUpdatePassword user)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE dbo.UserInfo SET UserPassword=@userpassword WHERE UserId =@userid";
+                var res= conn.Execute(sql, new { userpassword=user.UserPassword,userid=user.UserId });
+                return res;
+            }
+        }
+
     }
 }

@@ -28,7 +28,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <td><input id="Checkbox1" type="checkbox" /></td>
+            <td><input id="Checkbox1" type="checkbox" />全选</td>
             <td>编号</td>
             <td>产品名称</td>
             <td>创建时间</td>
@@ -90,7 +90,7 @@
             dataType: "json",
             success: function (res) {
                 $(res.Manages).each(function () {
-                    var tp = "<option value='" + this.ProductId + "'>" + this.ProductManager + "</option>"
+                    var tp = "<option value='" + this.UserId + "'>" + this.UName + "</option>"
                     $("#selManage").append(tp);
                 })
             }
@@ -132,12 +132,12 @@
                         + "<td>" + i + "</td>"
                         + "<td>" + this.ProductName + "</td>"
                         + "<td>" + this.CreateTime + "</td>"
-                        + "<td>" + this.ProductManager + "</td>"
+                        + "<td>" + this.UName + "</td>"
                         + "<td>" + this.TradeName + "</td>"
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.StageName + "</td>"
                         + "<td>" + this.ProductDetail + "</td>"
-                        + "<td><a onclick='Update(" + this.ProductId + ")'>修改</a></td>"
+                        + "<td><a href='/Product/ProductUpdatePage?PId="+ this.ProductId +"'>修改</a></td>"
                         + "</tr>";
                     i++;
                 })
@@ -185,6 +185,6 @@
                 }
             });
         }
-    }
+        }
 </script>
 
