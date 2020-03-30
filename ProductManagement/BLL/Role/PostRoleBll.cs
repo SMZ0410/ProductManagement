@@ -16,27 +16,27 @@ namespace BLL.Role
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public RolePostResponse PostRole(RolePostRequest request)
-        {
-            RolePostResponse response = new RolePostResponse();
-            if (string.IsNullOrEmpty(request.RoleAll.RoleName))
-            {
-                response.Status = false;
-                response.Message = "角色名称为空";
-                return response;
-            }
+        //public RolePostResponse PostRole(RolePostRequest request)
+        //{
+        //    RolePostResponse response = new RolePostResponse();
+        //    if (string.IsNullOrEmpty(request.RoleAll.RoleName))
+        //    {
+        //        response.Status = false;
+        //        response.Message = "角色名称为空";
+        //        return response;
+        //    }
 
-            var str = PostRoleDal.Instance.PostRole(request.RoleAll);
-            if (str < 0)
-            {
-                response.Status = false;
-                response.Message = "出错了";
-            }
-            else
-            {
-                response.Message = "恭喜成功";
-            }
-            return response;
-        }
+        //    var str = PostRoleDal.Instance.PostRole(request.RoleAll);
+        //    if (str < 0)
+        //    {
+        //        response.Status = false;
+        //        response.Message = "出错了";
+        //    }
+        //    else
+        //    {
+        //        response.Message = "恭喜成功";
+        //    }
+        //    return response;
+        //}
     }
 }
