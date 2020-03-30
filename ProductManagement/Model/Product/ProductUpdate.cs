@@ -45,5 +45,9 @@ namespace Model.Product
         /// 产品id
         /// </summary>
         public int ProductId { get; set; }
+        /// <summary>
+        /// 修改人id
+        /// </summary>
+        public int UpdatorId { get; set; }
     }
 }
