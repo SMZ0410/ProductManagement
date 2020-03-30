@@ -8,5 +8,6 @@ namespace SDKClient.Api.Response.Role
 {
     public class RolePostResponse : BaseResponse
     {
+        //返回类
     }
 }
