@@ -297,7 +297,7 @@ namespace BLL.User
         public UserDeleteResponse UserDelete(UserDeleteRequest request)
         {
             UserDeleteResponse response = new UserDeleteResponse();
-            int id = 0;
+            
             var res = UserDal.Instance.UserDelete(request.ID);
             if (res <= 0)
             {
