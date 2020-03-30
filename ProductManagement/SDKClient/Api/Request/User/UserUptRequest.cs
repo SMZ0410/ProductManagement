@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace SDKClient.Api.Request.User
 {
     public class UserUptRequest : BaseRequest
     {
-        public int ID { get; set; }
+        public UserUptInfo GetUptInfo { get; set; }
 
         public override string GetApiName()
         {

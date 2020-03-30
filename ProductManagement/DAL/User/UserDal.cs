@@ -202,13 +202,16 @@ namespace DAL.User
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int UserUpt(int id)
+        public int UserUpt(UserUptInfo info)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
 
-                string sql = "EXEC dbo.P_UserUpt @userId , @userName , @userPassword , @salt , @email , @creatorId , @role,   @addressId  ";
-                var res = conn.Execute(sql, new { sql, new { userName = users.UserName, userPassword = users.UserPassword, salt = users.Salt, email = users.Email, creatorId = users.CreatorId, roleId = users.RoleId, addressId = users.AddressId } });
+                string sql = @"EXEC dbo.P_UserUpt @userId ,
+                                        @userName , @userPassword , 
+                                        @salt , @email , @creatorId , 
+                                        @role,   @addressId  ";
+                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName, userPassword = info.UserPassword, salt = info.Salt, email = info.Email, creatorId = info.CreatorId, role = info.RoleId, addressId = info.AddressId });
                 return res;
             }
         }

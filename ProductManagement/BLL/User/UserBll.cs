@@ -345,7 +345,7 @@ namespace BLL.User
         public UserUptResponse UserUpt(UserUptRequest request)
         {
             UserUptResponse response = new UserUptResponse();
-            var res = UserDal.Instance.UserUpt(request.ID);
+            var res = UserDal.Instance.UserUpt(request.GetUptInfo);
             if (res <= 0)
             {
                 response.Status = false;
