@@ -10,7 +10,7 @@
 <input id="SubSel" type="button" value="查找" onclick="seleName()" class="btn btn-group" />
 <table class="table table-bordered">
     <tr>
-        <th><input id="Checkbox1" type="checkbox" /></th>
+        <th><input id="Checkbox1" type="checkbox" />全选</th>
         <th>编号</th>
         <th>用户名称</th>
         <th>所属地</th>
@@ -26,7 +26,14 @@
 
 <script>
     $().ready(function () {
+        //全选
+        $("#Checkbox1").click(function () {
+            $("[type=checkbox]").each(function () {
+                this.checked = $("#Checkbox1").prop("checked");
+            })
+        })
         seleName("");
+
     });
     function seleName(username) {
         var obj = {
@@ -57,6 +64,9 @@
             seleName(username);
         });
     }
+
+
+
     //批量删除
     function userdel() {
         var id = "";
@@ -89,7 +99,7 @@
             });
         }
     }
-   
+
 </script>
 
 

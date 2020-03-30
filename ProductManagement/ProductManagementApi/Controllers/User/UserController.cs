@@ -106,6 +106,17 @@ namespace ProductManagementApi.Controllers.User
         }
 
         /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserEditResponse UserEdit(UserEditRequest request)
+        {
+            return UserBll.Instance.UserEdit(request);
+        }
+
+        /// <summary>
         /// 修改用户信息
         /// </summary>
         /// <param name="request"></param>

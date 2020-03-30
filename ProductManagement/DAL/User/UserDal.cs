@@ -177,6 +177,25 @@ namespace DAL.User
             }
 
         }
+        /// <summary>
+        /// 获取用户胡的单条信息
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public UserAdd EditUser(int uid)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                UserAdd info = new UserAdd();
+                string sql = @"SELECT u.UserId,u.UserName,a.AddressName,ro.RoleName FROM dbo.UserInfo u
+                                    JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
+                                    JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
+                                    JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId={ " + uid + "}";
+                info = conn.QueryFirstOrDefault<UserAdd>(sql, new { id = uid });
+                return info;
+            }
+        }
 
         /// <summary>
         /// 修改用户信息
@@ -187,8 +206,9 @@ namespace DAL.User
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = "";
-                var res = conn.Execute(sql, new { ID = id });
+
+                string sql = "EXEC dbo.P_UserUpt @userId , @userName , @userPassword , @salt , @email , @creatorId , @role,   @addressId  ";
+                var res = conn.Execute(sql, new { sql, new { userName = users.UserName, userPassword = users.UserPassword, salt = users.Salt, email = users.Email, creatorId = users.CreatorId, roleId = users.RoleId, addressId = users.AddressId } });
                 return res;
             }
         }

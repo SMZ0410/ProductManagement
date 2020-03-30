@@ -75,10 +75,10 @@ namespace BLL.User
             }
 
             //调用dal层方法 拿到返回id
-            var  user = UserDal.Instance.UserLogin(request.User);
+            var user = UserDal.Instance.UserLogin(request.User);
 
             //如果id>0登陆成功
-            if (user!=null)
+            if (user != null)
             {
                 response.Message = "登陆成功！";
                 response.User = user;
@@ -204,7 +204,7 @@ namespace BLL.User
                 response.Message = "邮箱为空";
                 return response;
             }
-            if (request.Users.AddressId<=0)
+            if (request.Users.AddressId <= 0)
             {
                 response.Status = false;
                 response.Message = "请选择地址";
@@ -226,11 +226,11 @@ namespace BLL.User
             //开始获取盐
             var salt = Generate.GenerateSalt();
             //获取md5加密密码
-            var pwd = MD5Encrypt.MD5Encrypt32(request.Users.UserPassword+salt);
+            var pwd = MD5Encrypt.MD5Encrypt32(request.Users.UserPassword + salt);
             request.Users.UserPassword = pwd;
             request.Users.Salt = salt;
             var res = UserDal.Instance.UserAdd(request.Users);
-            if (res<0)
+            if (res < 0)
             {
                 response.Status = false;
                 response.Message = "添加失败";
@@ -250,14 +250,14 @@ namespace BLL.User
         {
             DropDownAddressReponse reponse = new DropDownAddressReponse();
             var list = UserDal.Instance.GetAddress();
-            if (list.Count<=0)
+            if (list.Count <= 0)
             {
                 reponse.Message = "获取失败，请稍后再试";
                 reponse.Status = false;
             }
             else
             {
-                
+
                 reponse.TrAddress = list;
                 reponse.Message = $"获取数据成功，共获取{list}条数据";
             }
@@ -298,7 +298,7 @@ namespace BLL.User
         {
             UserDeleteResponse response = new UserDeleteResponse();
             var res = UserDal.Instance.UserDelete(request.ID);
-            if (res<=0)
+            if (res <= 0)
             {
                 response.Status = false;
                 response.Message = "删除失败，请重试";
@@ -311,6 +311,31 @@ namespace BLL.User
             return response;
         }
 
+
+        /// <summary>
+        /// 获取单挑数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserEditResponse UserEdit(UserEditRequest request)
+        {
+            UserEditResponse response = new UserEditResponse();
+            if (request.Uid < 0)
+            {
+                response.Status = false;
+                response.Message = "网络错误请重试";
+                return response;
+            }
+
+            var res = UserDal.Instance.EditUser(request.Uid);
+            if(res!=null)
+             {
+                response.Status = true;
+                response.Message = "请求成功";
+                response.GetUsers = res;
+             }
+            return response;
+        }
 
         /// <summary>
         /// 修改用户信息

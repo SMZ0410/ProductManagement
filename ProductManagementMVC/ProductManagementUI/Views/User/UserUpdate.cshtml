@@ -1,6 +1,11 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "UserUpdate";
 }
+
+<h2>修改用户信息</h2>
+<input id="val" type="hidden" value="@ViewBag.uid" />
+
 <table class="table table-bordered">
     <tr>
         <td style="color:#808080;font-size:20px">用户名称:</td>
@@ -54,7 +59,7 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
-     $().ready(function () {
+    $().ready(function () {
         //获取归属地
         $.ajax({
             url: "/User/GetAddress",
@@ -79,8 +84,25 @@
                 })
             }
         })
+
+        var uid = $("#val").val();
+        $.ajax({
+            url: "/User/UserEdit",
+            type: "POST",
+            dataType: "json",
+            data: { uid },
+            success: function (res) {
+                $("#txtName").val(res.GetUsers.UserName),
+                    $("#txtPwd").val(res.GetUsers.UserPassword),
+                    $("#txtEmail").val(res.GetUsers.Email),
+                    $("#seleAddress").val(res.GetUsers.AddressId),
+                    $("#seleRole").val(res.GetUsers.RoleId)
+            })
+    }
     })
-      function userUpt() {
+})
+
+    function userUpt() {
         var obj = {
             UserName: $("#txtName").val(),
             UserPassword: $("#txtPwd").val(),
@@ -105,4 +127,6 @@
         })
 
 </script>
+
+
 

@@ -84,6 +84,16 @@ namespace BLL.User
         }
 
         /// <summary>
+        /// 获取用户单条数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserEditResponse UserEdit(UserEditRequest request)
+        {
+            return ApiRequestHelper.Post<UserEditRequest, UserEditResponse>(request);
+        }
+
+        /// <summary>
         /// 逻辑删除
         /// </summary>
         /// <param name="request"></param>

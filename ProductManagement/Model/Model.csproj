@@ -58,6 +58,7 @@
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="User\UserLogModel.cs" />
     <Compile Include="User\UserUpdatePassword.cs" />
+    <Compile Include="User\UserUptInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

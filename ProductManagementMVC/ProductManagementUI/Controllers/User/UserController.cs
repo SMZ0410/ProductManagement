@@ -148,6 +148,15 @@ namespace ProductManagementUI.Controllers
             return Json(UserBll.Instance.UserDelete(getAddress));
         }
 
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult UserEdit(UserEditRequest request)
+        {
+            return Json(UserBll.Instance.UserEdit(request));
+        }
 
         /// <summary>
         /// 修改用户信息
