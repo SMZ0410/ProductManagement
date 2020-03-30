@@ -78,7 +78,7 @@
             dataType: "json",
             success: function (res) {
                 $(res.Roles).each(function () {
-                    var pj = "<option values='" + this.RoleId + "'>" + this.RoleName + "</option>"
+                    var pj = "<option value='" + this.RoleId + "'>" + this.RoleName + "</option>"
                     $("#seleRole").append(pj);
                 })
             }

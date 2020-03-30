@@ -210,12 +210,12 @@ namespace BLL.User
                 response.Message = "请选择地址";
                 return response;
             }
-            //if (request.Users.RoleId <= 0)
-            //{
-            //    response.Status = false;
-            //    response.Message = "请选择角色";
-            //    return response;
-            //}
+            if (request.Users.RoleId <= 0)
+            {
+                response.Status = false;
+                response.Message = "请选择角色";
+                return response;
+            }
             if (request.Users.CreatorId <= 0)
             {
                 response.Status = false;
