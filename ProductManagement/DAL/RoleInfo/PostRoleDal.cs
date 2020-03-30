@@ -5,19 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using Model.RoleInfo;
 using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
+using Dapper;
 
 namespace DAL.RoleInfo
 {
-    public class PostRoleDal
+    public class PostRoleDal : BaseDal<PostRoleDal>
     {
+        private string conStr = ConfigurationManager.AppSettings["connectionString"];
+
+        /// <summary>
+        /// 添加角色信息
+        /// </summary>
+        /// <param name="postRole"></param>
+        /// <returns></returns>
         public int PostRole(PostRoleModel postRole)
         {
-            int list = 0;
-            using (SqlConnection scon = new SqlConnection("Server=.;uid=sa;pwd=1234;database=ProductManageDB"))
+
+            using (IDbConnection coon = new SqlConnection(conStr))
             {
-                SqlCommand scom = new SqlCommand("AddRoleInfos", scon);
+                var sql = @"EXEC dbo.AddRoleInfos @RoleName,
+                            @RoleDescribe,
+                            @CreatorId,
+                            @PrivilegeId,
+                            @privilegeName,
+                            @privilegeDescribe,
+                            @UserId";
+                var result = coon.Execute(sql, new { RoleName = postRole.RoleName, RoleDescribe = "", CreatorId = 0, PrivilegeId = 0, privilegeName = postRole.privilegeName, privilegeDescribe = "", UserId = 1 });
+
+                return result;
             }
-            return list;
         }
 
     }
