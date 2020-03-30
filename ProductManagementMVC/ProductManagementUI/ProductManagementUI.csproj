@@ -46,7 +46,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="SDKClient">
+    <Reference Include="SDKClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\SDKClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -631,9 +632,9 @@
     <Content Include="Views\User\UserAdd.cshtml" />
     <Content Include="Views\User\UpdateUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductUpdatePage.cshtml" />
-	<Content Include="Views\User\UserUpdate.cshtml" />
+    <Content Include="Views\User\UserUpdate.cshtml" />
     <Content Include="Views\Role\AddRole.cshtml" />
-    <Content Include="Views\Role\UpdateRole.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -186,50 +186,50 @@ namespace BLL.User
         {
             UserAddResponse response = new UserAddResponse();
             //非空判断
-            if (string.IsNullOrEmpty(request.User.UserName))
+            if (string.IsNullOrEmpty(request.Users.UserName))
             {
                 response.Status = false;
                 response.Message = "用户名为空";
                 return response;
             }
-            if (string.IsNullOrEmpty(request.User.UserPassword))
+            if (string.IsNullOrEmpty(request.Users.UserPassword))
             {
                 response.Status = false;
                 response.Message = "密码为空";
                 return response;
             }
-            if (string.IsNullOrEmpty(request.User.Email))
+            if (string.IsNullOrEmpty(request.Users.Email))
             {
                 response.Status = false;
                 response.Message = "邮箱为空";
                 return response;
             }
-            if (request.User.AddressId <= 0)
+            if (request.Users.AddressId <= 0)
             {
                 response.Status = false;
                 response.Message = "请选择地址";
                 return response;
             }
-            //if (request.Users.RoleId <= 0)
-            //{
-            //    response.Status = false;
-            //    response.Message = "请选择角色";
-            //    return response;
-            //}
-            if (request.User.CreatorId <= 0)
+            if (request.Users.RoleId <= 0)
             {
                 response.Status = false;
-                response.Message = "系统繁忙，creatorid<=0";
+                response.Message = "请选择角色";
                 return response;
             }
+            //if (request.Users.CreatorId <= 0)
+            //{
+            //    response.Status = false;
+            //    response.Message = "系统繁忙，creatorid<=0";
+            //    return response;
+            //}
 
             //开始获取盐
             var salt = Generate.GenerateSalt();
             //获取md5加密密码
-            var pwd = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
-            request.User.UserPassword = pwd;
-            request.User.Salt = salt;
-            var res = UserDal.Instance.UserAdd(request.User);
+            var pwd = MD5Encrypt.MD5Encrypt32(request.Users.UserPassword + salt);
+            request.Users.UserPassword = pwd;
+            request.Users.Salt = salt;
+            var res = UserDal.Instance.UserAdd(request.Users);
             if (res < 0)
             {
                 response.Status = false;
@@ -297,7 +297,6 @@ namespace BLL.User
         public UserDeleteResponse UserDelete(UserDeleteRequest request)
         {
             UserDeleteResponse response = new UserDeleteResponse();
-            
             var res = UserDal.Instance.UserDelete(request.ID);
             if (res <= 0)
             {
@@ -312,49 +311,6 @@ namespace BLL.User
             return response;
         }
 
-        /// <summary>
-        /// 修改个人密码
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
-        {
-            UserUpdPwdResponse response = new UserUpdPwdResponse();
-            if (request.User.UserId<=0)
-            {
-                response.Status = false;
-                response.Message = "网络错误，请重新登录 userid<=0";
-                return response;
-            }
-            if (string.IsNullOrEmpty(request.User.UserPassword))
-            {
-                response.Status = false;
-                response.Message = "请输入新密码";
-                return response;
-            }
-
-            //获取用户盐
-            var salt = UserDal.Instance.GetSaltByUserName(request.User.UName);
-
-            //加密用户密码
-            var password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword+salt);
-
-            //给对象赋值
-            request.User.UserPassword = password;
-
-            //调用dal层方法ResetUserPasswod
-            int res = UserDal.Instance.UpdateUserPassword(request.User);
-            if (res>0)
-            { 
-                response.Message = "修改成功，请重新登录"; 
-            }
-            else
-            {
-                response.Status = false;
-                response.Message = "修改失败，请检查网络";
-            }
-            return response;
-        }
 
         /// <summary>
         /// 获取单挑数据
@@ -372,12 +328,12 @@ namespace BLL.User
             }
 
             var res = UserDal.Instance.EditUser(request.Uid);
-            if (res != null)
-            {
+            if(res!=null)
+             {
                 response.Status = true;
                 response.Message = "请求成功";
-                response.GetUsers = res;
-            }
+                response.UserEdit = res;
+             }
             return response;
         }
 
@@ -402,6 +358,5 @@ namespace BLL.User
             }
             return response;
         }
-
     }
 }

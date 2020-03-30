@@ -55,6 +55,7 @@
     <Compile Include="Product\TradeInfo.cs" />
     <Compile Include="User\RoleInfos.cs" />
     <Compile Include="User\UserAdd.cs" />
+    <Compile Include="User\UserEditInfo.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="User\UserLogModel.cs" />
     <Compile Include="User\UserUpdatePassword.cs" />
