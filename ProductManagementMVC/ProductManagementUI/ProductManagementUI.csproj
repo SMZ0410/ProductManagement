@@ -632,6 +632,8 @@
     <Content Include="Views\User\UserAdd.cshtml" />
     <Content Include="Views\User\UpdateUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductUpdatePage.cshtml" />
+    <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\Role\UpdateRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -38,7 +38,7 @@ namespace ProductManagementUI.Controllers.Role
         public JsonResult DeleteRole(RoleUpdateRequest request)
         {
 
-            return Json(RoleBll.Instance.PutRole(request), JsonRequestBehavior.AllowGet);
+            return Json(RoleBll.Instance.DeleteRole(request), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -61,5 +61,25 @@ namespace ProductManagementUI.Controllers.Role
             return Json(RoleBll.Instance.AddRole(request));
         }
 
+
+        /// <summary>
+        /// 编辑角色信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateRole(int RoleId)
+        {
+            ViewBag.RoleId = RoleId;
+            return View();
+        }
+
+        /// <summary>
+        /// 获取修改 角色信息方法
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult PutRole(RolePutRequest request)
+        {
+            return Json(RoleBll.Instance.UpdateRole(request));
+        }
     }
 }
