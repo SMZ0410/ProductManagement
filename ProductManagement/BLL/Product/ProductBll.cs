@@ -149,6 +149,43 @@ namespace BLL.Product
         {
             ProductAddResponse response = new ProductAddResponse();
 
+            //非空判断
+            if (string.IsNullOrEmpty(request.Products.ProductName))
+            {
+                response.Status = false;
+                response.Message = "产品名称不能为空";
+                return response;
+            }
+            if (request.Products.TradeId<=0)
+            {
+                response.Status = false;
+                response.Message = "请选择应用行业";
+                return response;
+            }
+            if (request.Products.AddressId <= 0)
+            {
+                response.Status = false;
+                response.Message = "请选择归属地";
+                return response;
+            }
+            if (request.Products.StageId <= 0)
+            {
+                response.Status = false;
+                response.Message = "请选择产品阶段";
+                return response;
+            }
+            if (string.IsNullOrEmpty(request.Products.ProductDetail))
+            {
+                response.Status = false;
+                response.Message = "产品描述不能为空";
+                return response;
+            }
+            if (request.Products.UserId <= 0)
+            {
+                response.Status = false;
+                response.Message = "请选择产品经理";
+                return response;
+            }
             var res = ProductDal.Instance.AddProduct(request.Products);
 
             if (res > 0)
@@ -199,7 +236,7 @@ namespace BLL.Product
         {
             ProductEditResponse response = new ProductEditResponse();
 
-            if (request.PId<0)
+            if (request.PId < 0)
             {
                 response.Status = false;
                 response.Message = "网络错误";
@@ -207,7 +244,7 @@ namespace BLL.Product
             }
 
             var res = ProductDal.Instance.EditProduct(request.PId);
-            if (res!=null)
+            if (res != null)
             {
                 response.Status = true;
                 response.Message = "请求成功";

@@ -26,9 +26,6 @@ namespace ProductManagementUI.Controllers
         /// <returns></returns>
         public ActionResult UserLoginPage()
         {
-            Session["UserName"] = "";
-            Session["RoleName"] = "";
-            Session["UserId"] = 0;
             return View();
         }
 
@@ -102,6 +99,7 @@ namespace ProductManagementUI.Controllers
         {
             return View();
         }
+        [HttpPost]
         /// <summary>
         /// 获取用户添加信息方法
         /// </summary>
@@ -133,13 +131,41 @@ namespace ProductManagementUI.Controllers
         }
 
         /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserUpdate()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 逻辑删除用户信息
         /// </summary>
         /// <returns></returns>
-        public JsonResult UserDelete()
+        public JsonResult UserDelete(UserDeleteRequest getAddress)
         {
-            UserDeleteRequest getAddress = new UserDeleteRequest();
             return Json(UserBll.Instance.UserDelete(getAddress));
+        }
+
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult UserEdit(UserEditRequest request)
+        {
+            return Json(UserBll.Instance.UserEdit(request));
+        }
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult UserUpt(UserUptRequest request)
+        {
+            return Json(UserBll.Instance.UserUpt(request));
         }
 
         /// <summary>
@@ -155,7 +181,7 @@ namespace ProductManagementUI.Controllers
         /// 修改个人密码
         /// </summary>
         /// <returns></returns>
-        public JsonResult UpdateUserPassword(UserUpdPwdRequest request)
+        public ActionResult UpdateUserPassword(UserUpdPwdRequest request)
         {
             return Json(UserBll.Instance.UpdateUserPassword(request));
         }

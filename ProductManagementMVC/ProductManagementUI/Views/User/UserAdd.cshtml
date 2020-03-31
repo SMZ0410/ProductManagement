@@ -2,58 +2,77 @@
 @{
     ViewBag.Title = "UserAdd";
 }
+ 
 
-<h2>添加用户</h2>
-<table class="table table-bordered">
-    <tr>
-        <td style="color:#808080;font-size:20px">用户名称:</td>
-        <td>
-            <input id="txtName" type="text" placeholder="请输入" style="width:500px;height:30px" />
-        </td>
-        <td style="color:#808080">*必填项，最多50个字符串</td>
-    </tr>
-    <tr>
-        <td style="color:#808080;font-size:20px">用户密码:</td>
-        <td>
-            <input id="txtPwd" type="text" placeholder="请输入" style="width:500px;height:30px" />
-        </td>
-        <td style="color:#808080">*必填项，最多50个字符串</td>
-    </tr>
-    <tr>
-        <td style="color:#808080;font-size:20px">邮箱:</td>
-        <td>
-            <input id="txtEmail" type="text" placeholder="请输入" style="width:500px;height:30px" />
-        </td>
-        <td style="color:#808080">*必填项，最多50个字符串</td>
-    </tr>
-    <tr>
-        <td style="color:#808080;font-size:20px">所在地:</td>
-        <td>
-            <select id="seleAddress" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
-            </select>
-        </td>
-        <td style="color:#808080">*必填项</td>
-    </tr>
-    <tr>
-        <td style="color:#808080;font-size:20px">关联角色:</td>
-        <td>
-            <select id="seleRole" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
-            </select>
-        </td>
-        <td style="color:#808080">*必填项</td>
-    </tr>
-    <tr>
-        <td>
-            <input id="btnAdd" type="button" value="完成" class="btn btn-light" onclick="useradd()" />
-        </td>
-        <td>
-            <input id="btnOut" type="reset" value="取消" class="btn btn-group" />
-        </td>
-    </tr>
-    <tr>
-</table>
+
+
+<div class="col-lg-12">
+    <div class="card" style="width:1200px ;margin-left:0px;margin-top:16px">
+
+        <div class="card-header d-flex align-items-center">
+            <h3 class="h3">添加用户</h3>
+        </div>
+
+        <div class="card-body" style="margin-left:10%">
+
+            
+            <div class="form-group">
+                <label class="form-control-label">用户名</label>
+                <div style="width:600px">
+                    <input id="txtName" type="text" placeholder="用户名_UserName" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">密码</label>
+                <div style="width:600px">
+                    <input id="txtPwd" type="password" placeholder="密码_Password" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">邮箱</label>
+                <div style="width:600px">
+                    <input id="txtEmail" type="text" placeholder="邮箱_Email" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label">所在地</label>
+                <div style="width:600px">
+                    <select id="seleAddress" name="account" class="form-control mb-3">
+                        <option value="0">---请选择---</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label">关联角色</label>
+                <div style="width:600px">
+                    <select id="seleRole" name="account" class="form-control mb-3">
+                        <option value="0">---请选择---</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="line"></div>
+
+            <div class="form-group" style="float:left;margin-top:30px">
+                <div class="col-sm-4 offset-sm-3">
+                    <button id="btnAdd" class="btn btn-primary" onclick="useradd()">保存_Save</button>
+                </div>
+            </div>
+            <div class="form-group" style="float:left;margin-left:30px;margin-top:30px">
+                <div class="col-sm-4 offset-sm-3">
+                    <a href="/Home/Index" class="btn btn-default">返回</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
@@ -78,37 +97,38 @@
             dataType: "json",
             success: function (res) {
                 $(res.Roles).each(function () {
-                    var pj = "<option values='" + this.RoleId + "'>" + this.RoleName + "</option>"
+                    var pj = "<option value='" + this.RoleId + "'>" + this.RoleName + "</option>"
                     $("#seleRole").append(pj);
                 })
             }
         })
     })
-         function useradd() {
-            var obj = {
-                UserName: $("#txtName").val(),
-                UserPassword: $("#txtPwd").val(),
-                Email: $("#txtEmail").val(),
-                AddressId: $("#seleAddress").val(),
-                RoleId: $("#seleRole").val()
-            };
-             $.ajax({
-                 url: "/User/GeUserAdd",
-                 data: { Users: obj },
-                type: "POST",
-                dataType: "json",
-                success: function (res) {
-                    if (res.Status) {
-                        alert(res.Message);
-                        location.href = 'User/UserShow';
-                    }
-                    else {
-                        alert(res.Message);
-                    }
+    function useradd() {
+        var obj = {
+            CreatorId:$("#userid").val(),
+            UserName: $("#txtName").val(),
+            UserPassword: $("#txtPwd").val(),
+            Email: $("#txtEmail").val(),
+            AddressId: $("#seleAddress").val(),
+            RoleId: $("#seleRole").val()
+        };
+        $.ajax({
+            url: "/User/GeUserAdd",
+            type: "POST",
+            data: { Users: obj },
+            dataType: "json",
+            success: function (res) {
+                if (res.Status) {
+                    alert(res.Message);
+                    location.href = '/User/UserShow';
                 }
-            })
+                else {
+                    alert(res.Message);
+                }
+            }
+        })
 
-        }
+    }
 
 </script>
 

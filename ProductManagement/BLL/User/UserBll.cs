@@ -186,25 +186,25 @@ namespace BLL.User
         {
             UserAddResponse response = new UserAddResponse();
             //非空判断
-            if (string.IsNullOrEmpty(request.Users.UserName))
+            if (string.IsNullOrEmpty(request.User.UserName))
             {
                 response.Status = false;
                 response.Message = "用户名为空";
                 return response;
             }
-            if (string.IsNullOrEmpty(request.Users.UserPassword))
+            if (string.IsNullOrEmpty(request.User.UserPassword))
             {
                 response.Status = false;
                 response.Message = "密码为空";
                 return response;
             }
-            if (string.IsNullOrEmpty(request.Users.Email))
+            if (string.IsNullOrEmpty(request.User.Email))
             {
                 response.Status = false;
                 response.Message = "邮箱为空";
                 return response;
             }
-            if (request.Users.AddressId <= 0)
+            if (request.User.AddressId <= 0)
             {
                 response.Status = false;
                 response.Message = "请选择地址";
@@ -216,7 +216,7 @@ namespace BLL.User
             //    response.Message = "请选择角色";
             //    return response;
             //}
-            if (request.Users.CreatorId <= 0)
+            if (request.User.CreatorId <= 0)
             {
                 response.Status = false;
                 response.Message = "系统繁忙，creatorid<=0";
@@ -226,10 +226,10 @@ namespace BLL.User
             //开始获取盐
             var salt = Generate.GenerateSalt();
             //获取md5加密密码
-            var pwd = MD5Encrypt.MD5Encrypt32(request.Users.UserPassword + salt);
-            request.Users.UserPassword = pwd;
-            request.Users.Salt = salt;
-            var res = UserDal.Instance.UserAdd(request.Users);
+            var pwd = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
+            request.User.UserPassword = pwd;
+            request.User.Salt = salt;
+            var res = UserDal.Instance.UserAdd(request.User);
             if (res < 0)
             {
                 response.Status = false;
@@ -298,7 +298,7 @@ namespace BLL.User
         {
             UserDeleteResponse response = new UserDeleteResponse();
             int id = 0;
-            var res = UserDal.Instance.UserDel(id);
+            var res = UserDal.Instance.UserDelete(request.ID);
             if (res <= 0)
             {
                 response.Status = false;
@@ -342,7 +342,7 @@ namespace BLL.User
             //给对象赋值
             request.User.UserPassword = password;
 
-            //调用dal层方法
+            //调用dal层方法ResetUserPasswod
             int res = UserDal.Instance.UpdateUserPassword(request.User);
             if (res>0)
             { 
@@ -355,5 +355,53 @@ namespace BLL.User
             }
             return response;
         }
+
+        /// <summary>
+        /// 获取单挑数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserEditResponse UserEdit(UserEditRequest request)
+        {
+            UserEditResponse response = new UserEditResponse();
+            if (request.Uid < 0)
+            {
+                response.Status = false;
+                response.Message = "网络错误请重试";
+                return response;
+            }
+
+            var res = UserDal.Instance.EditUser(request.Uid);
+            if (res != null)
+            {
+                response.Status = true;
+                response.Message = "请求成功";
+                response.GetUsers = res;
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserUptResponse UserUpt(UserUptRequest request)
+        {
+            UserUptResponse response = new UserUptResponse();
+            var res = UserDal.Instance.UserUpt(request.GetUptInfo);
+            if (res <= 0)
+            {
+                response.Status = false;
+                response.Message = "修改失败，请重试";
+            }
+            else
+            {
+                response.Status = true;
+                response.Message = "修改成功";
+            }
+            return response;
+        }
+
     }
 }

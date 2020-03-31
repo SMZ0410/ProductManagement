@@ -66,7 +66,7 @@ namespace DAL.User
         /// <param name="user">用户登录信息</param>
         /// <returns></returns>
         public UserLogModel UserLogin(UserLogModel user)
-        { 
+        {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = @"SELECT u.UserId, u.UserName,r.RoleName FROM dbo.UserInfo u
@@ -75,7 +75,7 @@ namespace DAL.User
                                         WHERE UserName = @username  AND UserPassword = @userpassword";
 
                 //获取用户id并返回 
-                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
+                var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userinfo;
             }
         }
@@ -163,23 +163,6 @@ namespace DAL.User
         }
 
         /// <summary>
-        /// 逻辑删除用户信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int UserDel(int id)
-        {
-            using (IDbConnection conn = new SqlConnection(connStr))
-            {
-                string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in ('" + id + "')";
-                var res = conn.Execute(sql);
-
-                return res;
-            }
-
-        }
-
-        /// <summary>
         /// 修改个人密码
         /// </summary>
         /// <param name="userId"></param>
@@ -189,7 +172,60 @@ namespace DAL.User
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = "UPDATE dbo.UserInfo SET UserPassword=@userpassword WHERE UserId =@userid";
-                var res= conn.Execute(sql, new { userpassword=user.UserPassword,userid=user.UserId });
+                var res = conn.Execute(sql, new { userpassword = user.UserPassword, userid = user.UserId });
+                return res;
+            }
+        }
+        /// <summary>
+        /// 逻辑删除用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int UserDelete(string id)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = $"UPDATE  dbo.UserInfo SET Status=0 WHERE UserId in (" + id + ")";
+                var res = conn.Execute(sql, new { ID = id });
+                return res;
+            }
+
+        }
+        /// <summary>
+        /// 获取用户胡的单条信息
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public UserAdd EditUser(int uid)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                UserAdd info = new UserAdd();
+                string sql = @"SELECT u.UserId,u.UserName,a.AddressName,ro.RoleName FROM dbo.UserInfo u
+                                    JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
+                                    JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
+                                    JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId={ " + uid + "}";
+                info = conn.QueryFirstOrDefault<UserAdd>(sql, new { id = uid });
+                return info;
+            }
+        }
+
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int UserUpt(UserUptInfo info)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+
+                string sql = @"EXEC dbo.P_UserUpt @userId ,
+                                        @userName , @userPassword , 
+                                        @salt , @email , @creatorId , 
+                                        @role,   @addressId  ";
+                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName, userPassword = info.UserPassword, salt = info.Salt, email = info.Email, creatorId = info.CreatorId, role = info.RoleId, addressId = info.AddressId });
                 return res;
             }
         }

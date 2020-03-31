@@ -20,9 +20,9 @@
     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input id="txtname" type="text" style="width:150px;height:30px" placeholder="请输入产品名称" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input id="ProductQuery" type="button" value="搜索" class="btn btn-primary" />
 
-    <input id="DelProduct" type="button" style="float:right" name="ck" value="批量删除" class="btn btn-danger" onclick="Delete()" /><br /><br />
+    <input id="AddProduct" type="button" style="float:right" name="ck" value="添加产品" class="btn btn-danger" onclick="ProductAdd()" /><br /><br />
 </div>
 
 
@@ -45,10 +45,16 @@
     <tbody id="tb"></tbody>
 </table>
 
+<input id="DelProduct" type="button" style="float:left" name="ck" value="批量删除" class="btn btn-danger" onclick="Delete()" />
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
     $().ready(function () {
+
+            //菜单样式
+        $("#productlist").addClass("active");
+
         //获取应用行业
         $.ajax({
             url: "/Product/GetTreade",
@@ -107,15 +113,15 @@
 
         QueryProduct();
     })
-
+    //查询列表
     function QueryProduct() {
         var query = {
-                TradeId: $("#selTrea").val(),
-                StageId: $("#selStage").val(),
-                AddressId: $("#selAddress").val(),
-                ProductId: $("#selManage").val(),
-                ProductName: $("#txtname").val()
-            }
+            TradeId: $("#selTrea").val(),
+            StageId: $("#selStage").val(),
+            AddressId: $("#selAddress").val(),
+            ProductId: $("#selManage").val(),
+            ProductName: $("#txtname").val()
+        }
 
         //产品列表显示
         $.ajax({
@@ -123,23 +129,23 @@
             type: "POST",
             dataType: "json",
             data: {
-                Query:query
+                Query: query
             },
             success: function (res) {
-                var i = 1;
+                var i = 1001;
                 var ts = "";
                 $(res.Products).each(function () {
                     ts += "<tr>"
                         + "<td><input id='Checkbox1' name='ck' type='checkbox' value='" + this.ProductId + "' /></td>"
                         + "<td>" + i + "</td>"
                         + "<td>" + this.ProductName + "</td>"
-                        + "<td>" + this.CreateTime + "</td>"
+                        + "<td>" + ChangeDateFormat(this.CreateTime) + "</td>"
                         + "<td>" + this.UName + "</td>"
                         + "<td>" + this.TradeName + "</td>"
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.StageName + "</td>"
                         + "<td>" + this.ProductDetail + "</td>"
-                        + "<td><a href='/Product/ProductUpdatePage?PId="+ this.ProductId +"'>修改</a></td>"
+                        + "<td><a href='/Product/ProductUpdatePage?PId=" + this.ProductId + "'>修改</a></td>"
                         + "</tr>";
                     i++;
                 })
@@ -148,10 +154,22 @@
         })
 
         $("#ProductQuery").click(function () {
-            
+
             QueryProduct();
         })
     }
+    //时间转换
+    function ChangeDateFormat(val) {
+        if (val != null) {
+            var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+            //月份为0-11，所以+1，月份小于10时补个0
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        return "";
+    }
+
     //删除产品信息（逻辑删除）
     function Delete() {
         var ids = "";
@@ -188,5 +206,9 @@
             });
         }
         }
+    //添加跳转页面
+    function ProductAdd() {
+        location.href = "/Product/ProductAddPage";
+    }
 </script>
 

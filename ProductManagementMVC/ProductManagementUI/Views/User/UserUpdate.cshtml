@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "UserUpdate";
+}
+
+<h2>修改用户信息</h2>
+<input id="val" type="hidden" value="@ViewBag.uid" />
+
+<table class="table table-bordered">
+    <tr>
+        <td style="color:#808080;font-size:20px">用户名称:</td>
+        <td>
+            <input id="txtName" type="text" placeholder="请输入" style="width:500px;height:30px" />
+        </td>
+        <td style="color:#808080">*必填项，最多50个字符串</td>
+    </tr>
+    <tr>
+        <td style="color:#808080;font-size:20px">用户密码:</td>
+        <td>
+            <input id="txtPwd" type="text" placeholder="请输入" style="width:500px;height:30px" />
+        </td>
+        <td style="color:#808080">*必填项，最多50个字符串</td>
+    </tr>
+    <tr>
+        <td style="color:#808080;font-size:20px">邮箱:</td>
+        <td>
+            <input id="txtEmail" type="text" placeholder="请输入" style="width:500px;height:30px" />
+        </td>
+        <td style="color:#808080">*必填项，最多50个字符串</td>
+    </tr>
+    <tr>
+        <td style="color:#808080;font-size:20px">所在地:</td>
+        <td>
+            <select id="seleAddress" style="width:500px;height:30px">
+                <option value="0">---请选择---</option>
+            </select>
+        </td>
+        <td style="color:#808080">*必填项</td>
+    </tr>
+    <tr>
+        <td style="color:#808080;font-size:20px">关联角色:</td>
+        <td>
+            <select id="seleRole" style="width:500px;height:30px">
+                <option value="0">---请选择---</option>
+            </select>
+        </td>
+        <td style="color:#808080">*必填项</td>
+    </tr>
+    <tr>
+        <td>
+            <input id="btnUpt" type="button" value="完成" class="btn btn-light" onclick="userUpt()" />
+        </td>
+        <td>
+            <input id="btnOut" type="reset" value="取消" class="btn btn-group" />
+        </td>
+    </tr>
+    <tr>
+</table>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $().ready(function () {
+        //获取归属地
+        $.ajax({
+            url: "/User/GetAddress",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.TrAddress).each(function () {
+                    var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
+                    $("#seleAddress").append(tp);
+                })
+            }
+        })
+        //获取角色
+        $.ajax({
+            url: "/User/GetRoles",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Roles).each(function () {
+                    var pj = "<option values='" + this.RoleId + "'>" + this.RoleName + "</option>"
+                    $("#seleRole").append(pj);
+                })
+            }
+        })
+
+        var uid = $("#val").val();
+        $.ajax({
+            url: "/User/UserEdit",
+            type: "POST",
+            dataType: "json",
+            data: { uid },
+            success: function (res) {
+                $("#txtName").val(res.GetUsers.UserName),
+                    $("#txtPwd").val(res.GetUsers.UserPassword),
+                    $("#txtEmail").val(res.GetUsers.Email),
+                    $("#seleAddress").val(res.GetUsers.AddressId),
+                    $("#seleRole").val(res.GetUsers.RoleId)
+            })
+    }
+    })
+})
+
+    function userUpt() {
+        var obj = {
+            UserName: $("#txtName").val(),
+            UserPassword: $("#txtPwd").val(),
+            Email: $("#txtEmail").val(),
+            AddressId: $("#seleAddress").val(),
+            RoleId: $("#seleRole").val()
+        };
+        $.ajax({
+            url: "/User/UserUpt",
+            type: "POST",
+            data: { Users: obj },
+            dataType: "json",
+            success: function (res) {
+                if (res.Status) {
+                    alert(res.Message);
+                    location.href = 'User/UserShow';
+                }
+                else {
+                    alert(res.Message);
+                }
+            }
+        })
+
+</script>
+
+
+

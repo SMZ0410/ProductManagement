@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace SDKClient.Api.Request.User
 {
-    /// <summary>
-    /// 用户添加请求
-    /// </summary>
-    public  class UserAddRequest : BaseRequest
+    public class UserUptRequest : BaseRequest
     {
-        public UserAdd User { get; set; }
+        public UserUptInfo GetUptInfo { get; set; }
+
         public override string GetApiName()
         {
-            return "api/User/UserAdd";
+            return "api/User/UserUpt";
         }
     }
 }
