@@ -42,11 +42,11 @@ namespace ProductManagementApi.Controllers.Role
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public RolePostResponse PostRole(RolePostRequest request)
-        //{
-        //    return PostRoleBll.Instance.PostRole(request);
-        //}
+        [HttpPost]
+        public RolePostResponse PostRole(RolePostRequest request)
+        {
+            return PostRoleBll.Instance.PostRole(request);
+        }
 
     }
 }
