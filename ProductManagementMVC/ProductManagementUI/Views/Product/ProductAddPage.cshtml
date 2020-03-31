@@ -77,6 +77,11 @@
 
 <script>
     $().ready(function () {
+
+        //菜单样式
+        $("#productadd").addClass("active");
+
+
         //获取应用行业
         $.ajax({
             url: "/Product/GetTreade",
@@ -129,7 +134,7 @@
 
     //添加的点击事件
     function ProductAdd() {
-        
+
         //添加对象
         var products = {
             ProductName: $("#txtProductName").val(),
