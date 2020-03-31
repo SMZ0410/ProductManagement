@@ -186,25 +186,25 @@ namespace BLL.User
         {
             UserAddResponse response = new UserAddResponse();
             //非空判断
-            if (string.IsNullOrEmpty(request.Users.UserName))
+            if (string.IsNullOrEmpty(request.User.UserName))
             {
                 response.Status = false;
                 response.Message = "用户名为空";
                 return response;
             }
-            if (string.IsNullOrEmpty(request.Users.UserPassword))
+            if (string.IsNullOrEmpty(request.User.UserPassword))
             {
                 response.Status = false;
                 response.Message = "密码为空";
                 return response;
             }
-            if (string.IsNullOrEmpty(request.Users.Email))
+            if (string.IsNullOrEmpty(request.User.Email))
             {
                 response.Status = false;
                 response.Message = "邮箱为空";
                 return response;
             }
-            if (request.Users.AddressId <= 0)
+            if (request.User.AddressId <= 0)
             {
                 response.Status = false;
                 response.Message = "请选择地址";
@@ -216,7 +216,7 @@ namespace BLL.User
             //    response.Message = "请选择角色";
             //    return response;
             //}
-            if (request.Users.CreatorId <= 0)
+            if (request.User.CreatorId <= 0)
             {
                 response.Status = false;
                 response.Message = "系统繁忙，creatorid<=0";
@@ -226,10 +226,10 @@ namespace BLL.User
             //开始获取盐
             var salt = Generate.GenerateSalt();
             //获取md5加密密码
-            var pwd = MD5Encrypt.MD5Encrypt32(request.Users.UserPassword + salt);
-            request.Users.UserPassword = pwd;
-            request.Users.Salt = salt;
-            var res = UserDal.Instance.UserAdd(request.Users);
+            var pwd = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
+            request.User.UserPassword = pwd;
+            request.User.Salt = salt;
+            var res = UserDal.Instance.UserAdd(request.User);
             if (res < 0)
             {
                 response.Status = false;
