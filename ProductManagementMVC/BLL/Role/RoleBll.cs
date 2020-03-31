@@ -22,13 +22,23 @@ namespace BLL.Role
         }
 
         /// <summary>
-        /// 修改以及逻辑删除
+        /// 逻辑删除
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         public RoleUpdateResponse PutRole(RoleUpdateRequest request)
         {
             return ApiRequestHelper.Post<RoleUpdateRequest, RoleUpdateResponse>(request);
+        }
+
+        /// <summary>
+        /// 添加角色信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public RolePostResponse AddRole(RolePostRequest request)
+        {
+            return ApiRequestHelper.Post<RolePostRequest, RolePostResponse>(request);
         }
 
     }

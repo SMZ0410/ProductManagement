@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace SDKClient.Api.Request.User
 {
-    public class UserDeleteRequest:BaseRequest
+    public class UserEditRequest:BaseRequest
     {
-        public string ID { get; set; }
+
+        public int Uid { get; set; }
 
         public override string GetApiName()
         {
-            return "api/User/UserDelete";
+            return "";
         }
     }
 }

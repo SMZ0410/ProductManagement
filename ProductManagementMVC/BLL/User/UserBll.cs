@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using BLL.ApiRequest;
 using SDKClient.Api.Request.DropDownList;
 using SDKClient.Api.Request.User;
-using SDKClient.Api.Response;
 using SDKClient.Api.Response.DropDownList;
 using SDKClient.Api.Response.User;
 
@@ -85,6 +84,16 @@ namespace BLL.User
         }
 
         /// <summary>
+        /// 获取用户单条数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public UserEditResponse UserEdit(UserEditRequest request)
+        {
+            return ApiRequestHelper.Post<UserEditRequest, UserEditResponse>(request);
+        }
+
+        /// <summary>
         /// 逻辑删除
         /// </summary>
         /// <param name="request"></param>
@@ -95,15 +104,13 @@ namespace BLL.User
         }
 
         /// <summary>
-        /// 修改个人密码
+        /// 用户修改
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        public UserUptResponse UserUpt(UserUptRequest request)
         {
-            return ApiRequestHelper.Post<UserUpdPwdRequest, UserUpdPwdResponse>(request);
+            return ApiRequestHelper.Post<UserUptRequest, UserUptResponse>(request);
         }
-
-
     }
 }

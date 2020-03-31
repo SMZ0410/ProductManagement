@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.RoleInfo;
 
-namespace SDKClient.Api.Request.User
+namespace SDKClient.Api.Request.Role
 {
-    public class UserDeleteRequest:BaseRequest
+    public class RolePostRequest : BaseRequest
     {
-        public string ID { get; set; }
+        public PostRoleModel RoleAll { get; set; }
 
         public override string GetApiName()
         {
-            return "api/User/UserDelete";
+            return "api/Role/PostRole";
         }
     }
 }

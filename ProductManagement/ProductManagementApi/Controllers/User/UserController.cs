@@ -106,16 +106,25 @@ namespace ProductManagementApi.Controllers.User
         }
 
         /// <summary>
-        /// 修改个人密码
+        /// 获取单条数据
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        public UserEditResponse UserEdit(UserEditRequest request)
         {
-            return UserBll.Instance.UpdateUserPassword(request);
+            return UserBll.Instance.UserEdit(request);
         }
 
-
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public UserUptResponse UserUpt(UserUptRequest request)
+        {
+            return UserBll.Instance.UserUpt(request);
+        }
     }
 }

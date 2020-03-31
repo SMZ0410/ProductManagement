@@ -199,7 +199,7 @@ namespace BLL.Product
         {
             ProductEditResponse response = new ProductEditResponse();
 
-            if (request.PId<0)
+            if (request.PId < 0)
             {
                 response.Status = false;
                 response.Message = "网络错误";
@@ -207,7 +207,7 @@ namespace BLL.Product
             }
 
             var res = ProductDal.Instance.EditProduct(request.PId);
-            if (res!=null)
+            if (res != null)
             {
                 response.Status = true;
                 response.Message = "请求成功";
@@ -226,7 +226,7 @@ namespace BLL.Product
         {
             ProductUpdateResponse response = new ProductUpdateResponse();
 
-            var res = ProductDal.Instance.UpdateProduct(request.Products);
+            var res = ProductDal.Instance.UpdateProduct(request.ProductUpd);
             if (res > 0)
             {
                 response.Status = true;

@@ -1,14 +1,11 @@
-﻿using Model;
-using System;
+﻿using Dapper;
+using Model;
+using Model.Product;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using Dapper;
-using Model.Product;
+using System.Linq;
 
 namespace DAL.Product
 {
@@ -168,7 +165,7 @@ namespace DAL.Product
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = $"update ProductInfo set Status=0 where ProductId in ("+ids+")";
+                string sql = $"update ProductInfo set Status=0 where ProductId in (" + ids + ")";
 
                 var res = conn.Execute(sql, new { Ids = ids });
 
@@ -182,7 +179,7 @@ namespace DAL.Product
         /// <returns></returns>
         public ProductEditAdd EditProduct(int pid)
         {
-            using (IDbConnection conn=new SqlConnection(connStr))
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
                 ProductEditAdd info = new ProductEditAdd();
                 string sql = $"SELECT * FROM v_Product WHERE ProductId=@id";
@@ -197,7 +194,7 @@ namespace DAL.Product
         /// <returns></returns>
         public int UpdateProduct(ProductUpdate Upd)
         {
-            using (IDbConnection conn=new SqlConnection(connStr))
+            using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = @"EXEC dbo.p_UpdateProduct @productId,
                                                         @productName,
@@ -206,9 +203,10 @@ namespace DAL.Product
                                                         @tradeId,
                                                         @typeId,
                                                         @addressId,
-                                                        @stageId ";
+                                                        @stageId,
+                                                        @updatorId";
 
-                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId });
+                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId, updatorId=Upd.UpdatorId });
                 return res;
             }
         }

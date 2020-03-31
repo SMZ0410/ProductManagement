@@ -27,7 +27,7 @@ namespace ProductManagementApi.Controllers.Role
         }
 
         /// <summary>
-        /// 修改以及逻辑删除
+        /// 逻辑删除
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -36,6 +36,17 @@ namespace ProductManagementApi.Controllers.Role
         {
             return UpdateRoleBll.Instance.PutRole(request);
         }
+
+        /// <summary>
+        /// 添加角色信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        //[HttpPost]
+        //public RolePostResponse PostRole(RolePostRequest request)
+        //{
+        //    return PostRoleBll.Instance.PostRole(request);
+        //}
 
     }
 }
