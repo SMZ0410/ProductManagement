@@ -21,16 +21,7 @@ namespace Model.User
         /// </summary>
         public string UserName { get; set; }
 
-        /// <summary>
-        /// 用户密码
-        /// </summary>
-        public string UserPassword { get; set; }
-
-        /// <summary>
-        /// 盐
-        /// </summary>
-        public string Salt { get; set; }
-        /// <summary>
+         /// <summary>
         /// 邮箱
         /// </summary>
         public string Email { get; set; }

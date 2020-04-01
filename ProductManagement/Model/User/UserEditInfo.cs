@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model.User
 {
+    /// <summary>
+    /// 反填数据库
+    /// </summary>
     public class UserEditInfo
     {
         /// <summary>
