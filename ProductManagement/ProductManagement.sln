@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagementApi", "ProductManagementApi\ProductManagementApi.csproj", "{593E7AB7-29FB-4354-A2D2-4198EB1C047A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41F3C306-01EA-4F29-9752-0DC8A3679DFC} = {41F3C306-01EA-4F29-9752-0DC8A3679DFC}
+		{5BA7D0FA-2A05-45B3-A776-B3377AA6A9EA} = {5BA7D0FA-2A05-45B3-A776-B3377AA6A9EA}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{45E286F7-C9EA-4B0C-B2B8-D673CE321A80}"
 EndProject

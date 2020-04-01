@@ -134,8 +134,9 @@ namespace ProductManagementUI.Controllers
         /// 修改用户信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult UserUpdate()
+        public ActionResult UserUpdate(int uid)
         {
+            ViewBag.uid = uid;
             return View();
         }
 

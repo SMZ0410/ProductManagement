@@ -332,7 +332,7 @@ namespace BLL.User
              {
                 response.Status = true;
                 response.Message = "请求成功";
-                response.GetUsers = res;
+                response.UserEdit = res;
              }
             return response;
         }

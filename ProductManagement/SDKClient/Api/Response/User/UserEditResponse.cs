@@ -9,6 +9,6 @@ namespace SDKClient.Api.Response.User
 {
     public class UserEditResponse : BaseResponse
     {
-        public UserAdd  GetUsers { get; set; }
+        public UserEditInfo   UserEdit { get; set; }
     }
 }

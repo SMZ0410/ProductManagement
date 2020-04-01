@@ -15,13 +15,6 @@
         <td style="color:#808080">*必填项，最多50个字符串</td>
     </tr>
     <tr>
-        <td style="color:#808080;font-size:20px">用户密码:</td>
-        <td>
-            <input id="txtPwd" type="text" placeholder="请输入" style="width:500px;height:30px" />
-        </td>
-        <td style="color:#808080">*必填项，最多50个字符串</td>
-    </tr>
-    <tr>
         <td style="color:#808080;font-size:20px">邮箱:</td>
         <td>
             <input id="txtEmail" type="text" placeholder="请输入" style="width:500px;height:30px" />
@@ -32,7 +25,6 @@
         <td style="color:#808080;font-size:20px">所在地:</td>
         <td>
             <select id="seleAddress" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
             </select>
         </td>
         <td style="color:#808080">*必填项</td>
@@ -41,7 +33,6 @@
         <td style="color:#808080;font-size:20px">关联角色:</td>
         <td>
             <select id="seleRole" style="width:500px;height:30px">
-                <option value="0">---请选择---</option>
             </select>
         </td>
         <td style="color:#808080">*必填项</td>
@@ -79,33 +70,40 @@
             dataType: "json",
             success: function (res) {
                 $(res.Roles).each(function () {
-                    var pj = "<option values='" + this.RoleId + "'>" + this.RoleName + "</option>"
+                    var pj = "<option value='" + this.RoleId + "'>" + this.RoleName + "</option>"
                     $("#seleRole").append(pj);
                 })
             }
         })
 
+        //反填
         var uid = $("#val").val();
         $.ajax({
             url: "/User/UserEdit",
             type: "POST",
             dataType: "json",
-            data: { uid },
+            data: {
+                Uid: uid
+            },
             success: function (res) {
-                $("#txtName").val(res.GetUsers.UserName),
-                    $("#txtPwd").val(res.GetUsers.UserPassword),
-                    $("#txtEmail").val(res.GetUsers.Email),
-                    $("#seleAddress").val(res.GetUsers.AddressId),
-                    $("#seleRole").val(res.GetUsers.RoleId)
-            })
-    }
-    })
-})
+                $("#txtName").val(res.UserEdit.UserName),
+                    $("#txtEmail").val(res.UserEdit.Email),
+                    $("#seleAddress").val(res.UserEdit.AddressId),
+                    $("#seleRole").val(res.UserEdit.RoleId)
+            }
 
+        })
+
+    })
+
+
+    //修改产品功能
     function userUpt() {
+        var uid = $("#val").val();
         var obj = {
+            UserId: uid,
+            UpdatorId: $("#userid").val(),
             UserName: $("#txtName").val(),
-            UserPassword: $("#txtPwd").val(),
             Email: $("#txtEmail").val(),
             AddressId: $("#seleAddress").val(),
             RoleId: $("#seleRole").val()
@@ -113,19 +111,19 @@
         $.ajax({
             url: "/User/UserUpt",
             type: "POST",
-            data: { Users: obj },
+            data: { GetUptInfo: obj },
             dataType: "json",
             success: function (res) {
                 if (res.Status) {
                     alert(res.Message);
-                    location.href = 'User/UserShow';
+                    location.href = "/User/UserShow";
                 }
                 else {
                     alert(res.Message);
                 }
             }
         })
-
+    }
 </script>
 
 
