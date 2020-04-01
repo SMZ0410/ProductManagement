@@ -32,9 +32,9 @@ namespace ProductManagementApi.Controllers.Role
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public RoleUpdateResponse UpdateRole(RoleUpdateRequest request)
+        public RoleUpdateResponse DeleteRole(RoleUpdateRequest request)
         {
-            return UpdateRoleBll.Instance.PutRole(request);
+            return UpdateRoleBll.Instance.DeleteRole(request);
         }
 
         /// <summary>
@@ -42,11 +42,22 @@ namespace ProductManagementApi.Controllers.Role
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public RolePostResponse PostRole(RolePostRequest request)
-        //{
-        //    return PostRoleBll.Instance.PostRole(request);
-        //}
+        [HttpPost]
+        public RolePostResponse PostRole(RolePostRequest request)
+        {
+            return PostRoleBll.Instance.PostRole(request);
+        }
+
+        /// <summary>
+        /// 修改角色信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public RolePutResponse PutRole(RolePutRequest request)
+        {
+            return UpdateRoleBll.Instance.UpdateRole(request);
+        }
 
     }
 }

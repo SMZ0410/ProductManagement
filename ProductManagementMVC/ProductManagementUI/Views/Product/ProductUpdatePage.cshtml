@@ -141,7 +141,7 @@
                             this.checked = true;
                         }
                     })
-                $("#selAddress").val(res.ProductInfo.AddressId),
+                    $("#selAddress").val(res.ProductInfo.AddressId),
                     $("#selStages").val(res.ProductInfo.StageId)
             }
         })
@@ -152,7 +152,7 @@
 
 
         var pid = $("#val").val();
-
+        //获取产品对象
         var obj = {
             ProductId: pid,
             ProductName: $("#txtProductName").val(),

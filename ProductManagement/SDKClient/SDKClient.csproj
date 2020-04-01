@@ -46,6 +46,7 @@
     <Compile Include="Api\Request\DropDownList\DropDownManageRequest.cs" />
     <Compile Include="Api\Request\Product\ProductEditRequest.cs" />
     <Compile Include="Api\Request\Role\RolePostRequest.cs" />
+    <Compile Include="Api\Request\Role\RolePutRequest.cs" />
     <Compile Include="Api\Request\User\UserDeleteRequest.cs" />
     <Compile Include="Api\Request\User\UserEditRequest.cs" />
     <Compile Include="Api\Request\User\UserUpdPwdRequest.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Api\Request\User\UserResetPwdRequest.cs" />
     <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
     <Compile Include="Api\Response\Role\RolePostResponse.cs" />
+    <Compile Include="Api\Response\Role\RolePutResponse.cs" />
+    <Compile Include="Api\Response\User\UserUpdPwdResponse.cs" />
     <Compile Include="Api\Response\User\UserDeleteResponse.cs" />
     <Compile Include="Api\Response\User\UserEditResponse.cs" />
     <Compile Include="Api\Response\User\UserResetPwdResponse.cs" />

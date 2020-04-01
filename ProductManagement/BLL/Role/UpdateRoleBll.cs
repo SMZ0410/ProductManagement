@@ -11,11 +11,16 @@ namespace BLL.Role
 {
     public class UpdateRoleBll : BaseBll<UpdateRoleBll>
     {
-        public RoleUpdateResponse PutRole(RoleUpdateRequest request)
+        /// <summary>
+        /// 逻辑删除
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public RoleUpdateResponse DeleteRole(RoleUpdateRequest request)
         {
             RoleUpdateResponse response = new RoleUpdateResponse();
 
-            var str = UpdateRoleDal.Instance.PutRole(request.RoleAll);
+            var str = UpdateRoleDal.Instance.DeleteRole(request.RoleAll);
 
             if (str <= 0)
             {
@@ -29,5 +34,30 @@ namespace BLL.Role
             }
             return response;
         }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public RolePutResponse UpdateRole(RolePutRequest request)
+        {
+            RolePutResponse response = new RolePutResponse();
+
+            var str = UpdateRoleDal.Instance.UpdateRole(request.RoleAll);
+
+            if (str < 0)
+            {
+                response.Status = false;
+                response.Message = "出错了";
+            }
+            else
+            {
+                response.Status = true;
+                response.Message = "恭喜成功";
+            }
+            return response;
+        }
+
     }
 }

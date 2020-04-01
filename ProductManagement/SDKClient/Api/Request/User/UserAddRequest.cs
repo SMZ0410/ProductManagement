@@ -12,7 +12,7 @@ namespace SDKClient.Api.Request.User
     /// </summary>
     public  class UserAddRequest : BaseRequest
     {
-        public UserAdd Users { get; set; }
+        public UserAdd User { get; set; }
         public override string GetApiName()
         {
             return "api/User/UserAdd";

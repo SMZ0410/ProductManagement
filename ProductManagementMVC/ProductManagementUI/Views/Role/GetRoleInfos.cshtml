@@ -47,7 +47,7 @@
                         + "<td>" + this.RoleName + "</td>"
                         + "<td>" + this.privilegeName + "</td>"
                         + "<td>" + this.UserNum + "</td>"
-                        + "<td><input type='button' value='编辑' /><a onclick='Del(" + this.RoleId + ")'>删除</a></td>"
+                        + "<td><a href='/Role/UpdateRole?RoleId=" + this.RoleId + "'>编辑</a><a onclick='Del(" + this.RoleId + ")'>删除</a></td>"
                         + "</tr>";
                     tr += st;
                 });
