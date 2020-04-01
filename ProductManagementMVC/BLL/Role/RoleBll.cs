@@ -26,7 +26,7 @@ namespace BLL.Role
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public RoleUpdateResponse PutRole(RoleUpdateRequest request)
+        public RoleUpdateResponse DeleteRole(RoleUpdateRequest request)
         {
             return ApiRequestHelper.Post<RoleUpdateRequest, RoleUpdateResponse>(request);
         }
@@ -39,6 +39,16 @@ namespace BLL.Role
         public RolePostResponse AddRole(RolePostRequest request)
         {
             return ApiRequestHelper.Post<RolePostRequest, RolePostResponse>(request);
+        }
+
+        /// <summary>
+        /// 修改角色信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public RolePutResponse UpdateRole(RolePutRequest request)
+        {
+            return ApiRequestHelper.Post<RolePutRequest, RolePutResponse>(request);
         }
 
     }
