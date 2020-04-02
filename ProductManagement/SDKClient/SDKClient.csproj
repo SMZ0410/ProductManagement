@@ -77,7 +77,6 @@
     <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
     <Compile Include="Api\Response\Role\RolePostResponse.cs" />
     <Compile Include="Api\Response\Role\RolePutResponse.cs" />
-    <Compile Include="Api\Response\User\UserUpdPwdResponse.cs" />
     <Compile Include="Api\Response\User\UserDeleteResponse.cs" />
     <Compile Include="Api\Response\User\UserEditResponse.cs" />
     <Compile Include="Api\Response\User\UserResetPwdResponse.cs" />

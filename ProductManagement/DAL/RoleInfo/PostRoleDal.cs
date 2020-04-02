@@ -32,7 +32,7 @@ namespace DAL.RoleInfo
                             @privilegeName,
                             @privilegeDescribe,
                             @UserId";
-                var result = coon.Execute(sql, new { RoleName = postRole.RoleName, RoleDescribe = "", CreatorId = 0, PrivilegeId = 0, privilegeName = postRole.privilegeName, privilegeDescribe = "", UserId = 1 });
+                var result = coon.Execute(sql, new { RoleName = postRole.RoleName, RoleDescribe = postRole.RoleDescribe, CreatorId = 0, PrivilegeId = 1, privilegeName = postRole.privilegeName, privilegeDescribe = postRole.privilegeDescribe, UserId = 1 });
 
                 return result;
             }
