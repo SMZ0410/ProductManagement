@@ -128,7 +128,16 @@ namespace DAL.User
                                  @creatorId, 
                                  @roleId, @addressId ";
 
-                var iu = conn.Execute(sql, new { userName = users.UserName, userPassword = users.UserPassword, salt = users.Salt, email = users.Email, creatorId = users.CreatorId, roleId = users.RoleId, addressId = users.AddressId });
+                var iu = conn.Execute(sql, new
+                {
+                    userName = users.UserName,
+                    userPassword = users.UserPassword,
+                    salt = users.Salt,
+                    email = users.Email,
+                    creatorId = users.CreatorId,
+                    roleId = users.RoleId,
+                    addressId = users.AddressId
+                });
                 return iu;
             }
 
@@ -202,11 +211,11 @@ namespace DAL.User
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 UserEditInfo info = new UserEditInfo();
-                string sql = @"SELECT u.UserId,u.UserName,a.AddressName,ro.RoleName FROM dbo.UserInfo u
+                string sql = @"SELECT u.UserName,u.Email,a.AddressId,ro.RoleId FROM dbo.UserInfo u
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
-                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId={ " + uid + "}";
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId=@id";
                 info = conn.QueryFirstOrDefault<UserEditInfo>(sql, new { id = uid });
                 return info;
             }
@@ -226,7 +235,7 @@ namespace DAL.User
                                         @userName ,  
                                         @email  , @updatorId ,
                                         @role,   @addressId  ";
-                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName,   email = info.Email, updatorId=info.UpdatorId, role = info.RoleId, addressId = info.AddressId });
+                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName, email = info.Email, updatorId = info.UpdatorId, role = info.RoleId, addressId = info.AddressId });
                 return res;
             }
         }
