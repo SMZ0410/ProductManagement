@@ -230,7 +230,7 @@ namespace DAL.User
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-
+                //存储过程语句
                 string sql = @"EXEC dbo.P_UserUpt @userId ,
                                         @userName ,  
                                         @email  , @updatorId ,
