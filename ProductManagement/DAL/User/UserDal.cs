@@ -74,7 +74,7 @@ namespace DAL.User
                                         JOIN dbo.RoleInfo r ON m.RoleId = r.RoleId
                                         WHERE UserName = @username  AND UserPassword = @userpassword";
 
-                //获取用户id并返回 
+                //获取用户信息并返回 
                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userinfo;
             }
@@ -223,18 +223,10 @@ namespace DAL.User
             {
 
                 string sql = @"EXEC dbo.P_UserUpt @userId ,
-                                        @userName ,
-                                         @email , @updatorId , 
+                                        @userName ,  
+                                        @email  , @updatorId ,
                                         @role,   @addressId  ";
-                var res = conn.Execute(sql, new
-                {
-                    userId = info.UserId,
-                    userName = info.UserName,
-                    email = info.Email,
-                    creatorId = info.UpdatorId,
-                    role = info.RoleId,
-                    addressId = info.AddressId
-                });
+                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName,   email = info.Email, updatorId=info.UpdatorId, role = info.RoleId, addressId = info.AddressId });
                 return res;
             }
         }
