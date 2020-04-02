@@ -216,12 +216,12 @@ namespace BLL.User
             //    response.Message = "请选择角色";
             //    return response;
             //}
-            if (request.User.CreatorId <= 0)
-            {
-                response.Status = false;
-                response.Message = "系统繁忙，creatorid<=0";
-                return response;
-            }
+            //if (request.User.CreatorId <= 0)
+            //{
+            //    response.Status = false;
+            //    response.Message = "系统繁忙，creatorid<=0";
+            //    return response;
+            //}
 
             //开始获取盐
             var salt = Generate.GenerateSalt();
@@ -297,7 +297,7 @@ namespace BLL.User
         public UserDeleteResponse UserDelete(UserDeleteRequest request)
         {
             UserDeleteResponse response = new UserDeleteResponse();
-            int id = 0;
+            
             var res = UserDal.Instance.UserDelete(request.ID);
             if (res <= 0)
             {
@@ -376,7 +376,7 @@ namespace BLL.User
             {
                 response.Status = true;
                 response.Message = "请求成功";
-                response.GetUsers = res;
+                response.UserEdit = res;
             }
             return response;
         }
@@ -390,6 +390,7 @@ namespace BLL.User
         {
             UserUptResponse response = new UserUptResponse();
             var res = UserDal.Instance.UserUpt(request.GetUptInfo);
+            //判断
             if (res <= 0)
             {
                 response.Status = false;
@@ -398,7 +399,7 @@ namespace BLL.User
             else
             {
                 response.Status = true;
-                response.Message = "修改成功";
+                response.Message = "修改成功哦";
             }
             return response;
         }

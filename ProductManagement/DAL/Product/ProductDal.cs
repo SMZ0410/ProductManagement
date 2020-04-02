@@ -26,7 +26,7 @@ namespace DAL.Product
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT * FROM v_Product";
+                string sql = @"SELECT * FROM v_Product  ORDER BY ProductId DESC ";
 
                 if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.UserId > 0 || !string.IsNullOrEmpty(query.ProductName))
                 {
@@ -197,14 +197,14 @@ namespace DAL.Product
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = @"EXEC dbo.p_UpdateProduct @productId,
-                                                        @productName,
-                                                        @userId,
-                                                        @productDetail,
-                                                        @tradeId,
-                                                        @typeId,
-                                                        @addressId,
-                                                        @stageId,
-                                                        @updatorId";
+	                                                    @productName',
+	                                                    @userId,
+	                                                    @productDetail,
+	                                                    @tradeId,
+	                                                    @typeId,
+	                                                    @addressId,
+	                                                    @stageId,
+	                                                    @updatorId ";
 
                 var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId, updatorId=Upd.UpdatorId });
                 return res;

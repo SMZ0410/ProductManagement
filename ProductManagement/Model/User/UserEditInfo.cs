@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Model.User
 {
     /// <summary>
-    /// 修改表
+    /// 反填数据库
     /// </summary>
-    public class UserUptInfo
+    public class UserEditInfo
     {
         /// <summary>
         /// 用户id
@@ -20,19 +20,18 @@ namespace Model.User
         /// 用户姓名
         /// </summary>
         public string UserName { get; set; }
-
+        /// <summary>
+        /// 用户密码
+        /// </summary>
         public string UserPassword { get; set; }
+        /// <summary>
+        /// 盐
+        /// </summary>
+        public string Salt { get; set; }
         /// <summary>
         /// 邮箱
         /// </summary>
         public string Email { get; set; }
-        /// <summary>
-        /// 修改人id
-        /// </summary>
-        public int UpdatorId { get; set; }
-
-        public int Salt { get; set; }
-
         /// <summary>
         /// 角色id
         /// </summary>
@@ -41,8 +40,5 @@ namespace Model.User
         /// 地址id
         /// </summary>
         public int AddressId { get; set; }
-
-
-
     }
 }

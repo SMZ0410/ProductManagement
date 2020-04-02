@@ -46,7 +46,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="SDKClient">
+    <Reference Include="SDKClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\SDKClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -138,6 +139,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-1.10.2.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -631,8 +633,9 @@
     <Content Include="Views\User\UserAdd.cshtml" />
     <Content Include="Views\User\UpdateUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductUpdatePage.cshtml" />
-	<Content Include="Views\User\UserUpdate.cshtml" />
+    <Content Include="Views\User\UserUpdate.cshtml" />
     <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Role\UpdateRole.cshtml" />
   </ItemGroup>
   <ItemGroup>

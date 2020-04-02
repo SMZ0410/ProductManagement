@@ -38,7 +38,7 @@ namespace DAL.User
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
-                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1 AND u.UserName LIKE @username";
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId WHERE u.Status = 1 AND u.UserName LIKE @username  order by  UserId  desc";
                 list = conn.Query<UserInfo>(sql, new { username = "%" + uname + "%" }).ToList();
                 return list;
             }
@@ -74,7 +74,7 @@ namespace DAL.User
                                         JOIN dbo.RoleInfo r ON m.RoleId = r.RoleId
                                         WHERE UserName = @username  AND UserPassword = @userpassword";
 
-                //获取用户id并返回 
+                //获取用户信息并返回 
                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userinfo;
             }
@@ -128,7 +128,16 @@ namespace DAL.User
                                  @creatorId, 
                                  @roleId, @addressId ";
 
-                var iu = conn.Execute(sql, new { userName = users.UserName, userPassword = users.UserPassword, salt = users.Salt, email = users.Email, creatorId = users.CreatorId, roleId = users.RoleId, addressId = users.AddressId });
+                var iu = conn.Execute(sql, new
+                {
+                    userName = users.UserName,
+                    userPassword = users.UserPassword,
+                    salt = users.Salt,
+                    email = users.Email,
+                    creatorId = users.CreatorId,
+                    roleId = users.RoleId,
+                    addressId = users.AddressId
+                });
                 return iu;
             }
 
@@ -176,6 +185,7 @@ namespace DAL.User
                 return res;
             }
         }
+
         /// <summary>
         /// 逻辑删除用户信息
         /// </summary>
@@ -196,23 +206,23 @@ namespace DAL.User
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public UserAdd EditUser(int uid)
+        public UserEditInfo EditUser(int uid)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                UserAdd info = new UserAdd();
-                string sql = @"SELECT u.UserId,u.UserName,a.AddressName,ro.RoleName FROM dbo.UserInfo u
+                UserEditInfo info = new UserEditInfo();
+                string sql = @"SELECT u.UserName,u.Email,a.AddressId,ro.RoleId FROM dbo.UserInfo u
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
-                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId={ " + uid + "}";
-                info = conn.QueryFirstOrDefault<UserAdd>(sql, new { id = uid });
+                                    JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId=@id";
+                info = conn.QueryFirstOrDefault<UserEditInfo>(sql, new { id = uid });
                 return info;
             }
         }
 
         /// <summary>
-        /// 修改用户信息
+        /// 修改用户信息。
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -220,12 +230,12 @@ namespace DAL.User
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-
+                //存储过程语句
                 string sql = @"EXEC dbo.P_UserUpt @userId ,
-                                        @userName , @userPassword , 
-                                        @salt , @email , @creatorId , 
+                                        @userName , 
+                                         @email , @updatorId , 
                                         @role,   @addressId  ";
-                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName, userPassword = info.UserPassword, salt = info.Salt, email = info.Email, creatorId = info.CreatorId, role = info.RoleId, addressId = info.AddressId });
+                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName,  salt = info.Salt, email = info.Email, updatorId = info.UpdatorId, role = info.RoleId, addressId = info.AddressId });
                 return res;
             }
         }
