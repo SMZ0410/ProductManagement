@@ -51,7 +51,7 @@
     <tr>
         <td style="color:#808080;font-size:20px">产品描述：</td>
         <td>
-            <textarea id="txtProductDetail" rows="2" cols="20" placeholder="请输入产品描述" style="width:500px;height:30px"></textarea>
+            <textarea id="txtProductDetail" rows="2" cols="20" placeholder="请输入产品描述" style="width:500px"></textarea>
         </td>
         <td style="color:#808080">*必填项</td>
     </tr>
@@ -144,8 +144,8 @@
             AddressId: $("#selAddress").val(),
             StageId: $("#selStages").val()
         }
-        
-        
+
+
         //添加
         $.ajax({
             url: "/Product/AddProduct",
