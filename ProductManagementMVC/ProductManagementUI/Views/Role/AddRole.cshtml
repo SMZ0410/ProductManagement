@@ -32,6 +32,10 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
+    $().ready(function () {
+               //菜单样式
+        $("#usersmanage").addClass("active");
+    });
     function roleadd() {
         var obj = {
             RoleName: $("#RoleName").val(),
