@@ -75,7 +75,7 @@
                         + "<td>" + this.UserName + "</td>"
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.RoleName + "</td>"
-                        + "<td><button onclick='Update(" + this.ID + ")'   class=' btn-link'>编辑</button></td>"
+                        + "<td><a href='/User/UserUpdate?Uid=" + this.UserId + "'> 编辑</a></td>"
                         + "</tr>"
                 })
                 $("#xs").html(oppo);

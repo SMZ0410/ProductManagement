@@ -216,12 +216,12 @@ namespace BLL.User
             //    response.Message = "请选择角色";
             //    return response;
             //}
-            if (request.User.CreatorId <= 0)
-            {
-                response.Status = false;
-                response.Message = "系统繁忙，creatorid<=0";
-                return response;
-            }
+            //if (request.User.CreatorId <= 0)
+            //{
+            //    response.Status = false;
+            //    response.Message = "系统繁忙，creatorid<=0";
+            //    return response;
+            //}
 
             //开始获取盐
             var salt = Generate.GenerateSalt();

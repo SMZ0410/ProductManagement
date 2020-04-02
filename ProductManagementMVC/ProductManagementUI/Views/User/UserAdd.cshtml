@@ -113,7 +113,7 @@
         $.ajax({
             url: "/User/GeUserAdd",
             type: "POST",
-            data: { Users: obj },
+            data: { User: obj },
             dataType: "json",
             success: function (res) {
                 if (res.Status) {
