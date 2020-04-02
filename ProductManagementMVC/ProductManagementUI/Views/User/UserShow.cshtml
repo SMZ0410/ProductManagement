@@ -69,16 +69,18 @@
             dataType: "json",
             data: obj,
             success: function (res) {
+                var i = 1001;
                 var oppo = "";
                 $(res.Users).each(function () {
                     oppo += "<tr>"
                         + "<td><input id='Checkbox1' class='checkbox-template' name='ud' type='checkbox' value='" + this.UserId + "' /></td>"
-                        + "<td>" + this.UserId + "</td>"
+                        + "<td>" + i + "</td>"
                         + "<td>" + this.UserName + "</td>"
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.RoleName + "</td>"
                         + "<td><a href='/User/UserUpdate?Uid=" + this.UserId + "'> 编辑</a></td>"
                         + "</tr>"
+                    i++;
                 })
                 $("#xs").html(oppo);
             }
