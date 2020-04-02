@@ -74,7 +74,7 @@ namespace DAL.User
                                         JOIN dbo.RoleInfo r ON m.RoleId = r.RoleId
                                         WHERE UserName = @username  AND UserPassword = @userpassword";
 
-                //获取用户id并返回 
+                //获取用户信息并返回 
                 var userinfo = conn.QueryFirstOrDefault<UserLogModel>(sql, new { username = user.UserName, userpassword = user.UserPassword });
                 return userinfo;
             }
