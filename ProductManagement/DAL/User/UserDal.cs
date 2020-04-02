@@ -176,6 +176,7 @@ namespace DAL.User
                 return res;
             }
         }
+
         /// <summary>
         /// 逻辑删除用户信息
         /// </summary>
@@ -196,23 +197,23 @@ namespace DAL.User
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public UserAdd EditUser(int uid)
+        public UserEditInfo EditUser(int uid)
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                UserAdd info = new UserAdd();
+                UserEditInfo info = new UserEditInfo();
                 string sql = @"SELECT u.UserId,u.UserName,a.AddressName,ro.RoleName FROM dbo.UserInfo u
                                     JOIN dbo.UserAddressMapInfo ua ON ua.UserId = u.UserId
                                     JOIN dbo.AddressInfo a ON a.AddressId = ua.AddressId
                                     JOIN dbo.UserRoleMapInfo r ON r.UserId = u.UserId
                                     JOIN dbo.RoleInfo ro ON ro.RoleId = r.RoleId where u.UserId={ " + uid + "}";
-                info = conn.QueryFirstOrDefault<UserAdd>(sql, new { id = uid });
+                info = conn.QueryFirstOrDefault<UserEditInfo>(sql, new { id = uid });
                 return info;
             }
         }
 
         /// <summary>
-        /// 修改用户信息
+        /// 修改用户信息。
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

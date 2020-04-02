@@ -7,13 +7,16 @@ using Model.RoleInfo;
 
 namespace SDKClient.Api.Request.Role
 {
-    public class RoleUpdateRequest : BaseRequest
+    /// <summary>
+    /// 修改
+    /// </summary>
+    public class RolePutRequest : BaseRequest
     {
         public PostRoleModel RoleAll { get; set; }
 
         public override string GetApiName()
         {
-            return "api/Role/DeleteRole";
+            return "api/Role/PutRole";
         }
     }
 }

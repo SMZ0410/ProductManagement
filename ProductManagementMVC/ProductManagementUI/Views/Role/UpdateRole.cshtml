@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "AddRole";
+    ViewBag.Title = "UpdateRole";
 }
 
+<input id="val" type="hidden" value="@ViewBag.RoleId" />
 
 <table class="table">
     <tr>
@@ -16,24 +17,32 @@
     <tr>
         <td></td>
         <td>
-            <input type="button" value="确定" onclick="roleadd()"/>
+            <input type="button" value="确定" onclick="roleadd()" />
             <input type="button" value="取消" onclick="location.href='/Role/GetRoleInfos'" />
         </td>
     </tr>
 </table>
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
-    function roleadd() {
+    function roleadd(RoleId) {
+
+        var RoleId = $("#val").val();
+
         var obj = {
+            RoleId: RoleId,
+            PrivilegeId: RoleId,
             RoleName: $("#RoleName").val(),
             privilegeName: $("#privilegeName").val()
         };
         $.ajax({
-            url: '/Role/PostRole',
+            url: '/Role/PutRole',
             type: 'post',
             dataType: 'json',
-            data: { RoleAll : obj },
+            data: {
+                RoleAll:obj
+            },
             success: function (data) {
                 if (data.Status) {
                     alert(data.Message);

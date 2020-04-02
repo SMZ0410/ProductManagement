@@ -13,7 +13,7 @@ namespace SDKClient.Api.Request.User
 
         public override string GetApiName()
         {
-            return "";
+            return "api/User/UserEdit";
         }
     }
 }
