@@ -213,7 +213,7 @@ namespace DAL.User
         }
 
         /// <summary>
-        /// 修改用户信息
+        /// 修改用户信息。
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
