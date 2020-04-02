@@ -21,7 +21,8 @@ namespace Model.User
         /// </summary>
         public string UserName { get; set; }
 
-         /// <summary>
+        public string UserPassword { get; set; }
+        /// <summary>
         /// 邮箱
         /// </summary>
         public string Email { get; set; }
@@ -29,6 +30,8 @@ namespace Model.User
         /// 修改人id
         /// </summary>
         public int UpdatorId { get; set; }
+
+        public int Salt { get; set; }
 
         /// <summary>
         /// 角色id
