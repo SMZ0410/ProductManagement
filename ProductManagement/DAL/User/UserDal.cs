@@ -223,10 +223,18 @@ namespace DAL.User
             {
 
                 string sql = @"EXEC dbo.P_UserUpt @userId ,
-                                        @userName , @userPassword , 
-                                        @salt , @email , @creatorId , 
+                                        @userName ,
+                                         @email , @updatorId , 
                                         @role,   @addressId  ";
-                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName, userPassword = info.UserPassword, salt = info.Salt, email = info.Email, creatorId = info.CreatorId, role = info.RoleId, addressId = info.AddressId });
+                var res = conn.Execute(sql, new
+                {
+                    userId = info.UserId,
+                    userName = info.UserName,
+                    email = info.Email,
+                    creatorId = info.UpdatorId,
+                    role = info.RoleId,
+                    addressId = info.AddressId
+                });
                 return res;
             }
         }
