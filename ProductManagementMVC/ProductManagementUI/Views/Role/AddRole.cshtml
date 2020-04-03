@@ -4,30 +4,44 @@
 }
 
 
-<table class="table">
-    <tr>
-        <td>角色名称</td>
-        <td><input type="text" name="RoleName" id="RoleName" /></td>
-    </tr>
-    <tr>
-        <td>权限名称</td>
-        <td><input type="text" name="privilegeName" id="privilegeName" /></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <input type="button" value="确定" onclick="roleadd()"/>
-            <input type="button" value="取消" onclick="location.href='/Role/GetRoleInfos'" />
-        </td>
-    </tr>
-</table>
+    <table class="table">
+        <tr>
+            <td>角色名称</td>
+            <td><input type="text" name="RoleName" id="RoleName" /></td>
+        </tr>
+        <tr>
+            <td>角色描述</td>
+            <td><input type="text" name="RoleDescribe" id="RoleDescribe" /></td>
+        </tr>
+        <tr>
+            <td>权限名称</td>
+            <td><input type="text" name="privilegeName" id="privilegeName" /></td>
+        </tr>
+        <tr>
+            <td>权限描述</td>
+            <td><input type="text" name="privilegeDescribe" id="privilegeDescribe" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" value="确定" onclick="roleadd()" />
+                <input type="button" value="取消" onclick="location.href='/Role/GetRoleInfos'" />
+            </td>
+        </tr>
+    </table>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
+    $().ready(function () {
+               //菜单样式
+        $("#usersmanage").addClass("active");
+    });
     function roleadd() {
         var obj = {
             RoleName: $("#RoleName").val(),
-            privilegeName: $("#privilegeName").val()
+            RoleDescribe: $("#RoleDescribe").val(),
+            privilegeName: $("#privilegeName").val(),
+            privilegeDescribe: $("#privilegeDescribe").val()
         };
         $.ajax({
             url: '/Role/PostRole',
