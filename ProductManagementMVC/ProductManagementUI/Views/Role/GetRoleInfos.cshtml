@@ -55,16 +55,18 @@
             dataType: 'json',
             data: obj,
             success: function (data) {
+                var i = 1001;
                 var tr = "";
                 $(data.RoleInfo).each(function () {
                     var st = "<tr>"
-                        + "<td>" + this.RoleId + "</td>"
+                        + "<td>" + i + "</td>"
                         + "<td>" + this.RoleName + "</td>"
                         + "<td>" + this.privilegeName + "</td>"
                         + "<td>" + this.UserNum + "</td>"
                         + "<td><a href='/Role/UpdateRole?RoleId=" + this.RoleId + "'>编辑&nbsp;&nbsp;  </a><a style='color:brown'  onclick='Del(" + this.RoleId + ")'> &nbsp;&nbsp;删除</a></td>"
                         + "</tr>";
                     tr += st;
+                    i++;
                 });
                 $("#tb").html(tr);
             }
