@@ -53,5 +53,26 @@ namespace DAL.RoleInfo
             }
         }
 
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="RoleId"></param>
+        /// <returns></returns>
+        public PostRoleModel GetRoleById(int RoleId)
+        {
+            using (IDbConnection coon = new SqlConnection(conStr))
+            {
+                PostRoleModel info = new PostRoleModel();
+
+                string sql = @"SELECT ri.RoleName,p.privilegeName FROM dbo.RoleInfo ri 
+                                JOIN RolePrivilegeMapInfo rp ON rp.RoleId = ri.RoleId
+                                JOIN dbo.PrivilegeInfo p ON p.PrivilegeId = rp.PrivilegeId WHERE ri.RoleId = @roleId";
+
+                info = coon.QueryFirstOrDefault<PostRoleModel>(sql, new { roleId = RoleId });
+                return info;
+
+            }
+        }
+
     }
 }

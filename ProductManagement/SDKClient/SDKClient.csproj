@@ -45,6 +45,7 @@
     <Compile Include="Api\Request\DropDownList\DropDownAddressRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownManageRequest.cs" />
     <Compile Include="Api\Request\Product\ProductEditRequest.cs" />
+    <Compile Include="Api\Request\Role\RoleByIdRequest.cs" />
     <Compile Include="Api\Request\Role\RolePostRequest.cs" />
     <Compile Include="Api\Request\Role\RolePutRequest.cs" />
     <Compile Include="Api\Request\User\UserDeleteRequest.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Api\Response\Product\ProductUpdateResponse.cs" />
     <Compile Include="Api\Request\User\UserForgotPwdRequest.cs" />
     <Compile Include="Api\Request\User\UserResetPwdRequest.cs" />
+    <Compile Include="Api\Response\Role\RoleByIdResponse.cs" />
     <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
     <Compile Include="Api\Response\Role\RolePostResponse.cs" />
     <Compile Include="Api\Response\Role\RolePutResponse.cs" />
@@ -98,6 +100,25 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\Model.dll" />
+    <Content Include="bin\Debug\Model.pdb" />
+    <Content Include="bin\Debug\SDKClient.dll" />
+    <Content Include="bin\Debug\SDKClient.pdb" />
+    <Content Include="obj\Debug\SDKClient.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\SDKClient.dll" />
+    <Content Include="obj\Debug\SDKClient.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\SDKClient.csproj.CopyComplete" />
+    <None Include="obj\Debug\SDKClient.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\SDKClient.csprojAssemblyReference.cache" />
+    <None Include="obj\Release\SDKClient.csproj.CoreCompileInputs.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
