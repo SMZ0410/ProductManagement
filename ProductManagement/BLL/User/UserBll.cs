@@ -159,6 +159,17 @@ namespace BLL.User
             //将新密码加盐进行md5加密
             var salt = UserDal.Instance.GetSaltByUserName(decryptusername);
             var encryptionPassword = MD5Encrypt.MD5Encrypt32(request.NewPassword + salt);
+
+            //判断新密码是否和旧密码一致
+            var uid = UserDal.Instance.CheckPassword(decryptusername,encryptionPassword);
+            if (uid>0)
+            {
+                response.Status = false;
+                response.Message = "不能使用最近使用过的密码，请重新输入";
+                return response;
+            }
+        
+
             //调用dal层重置密码方法
             int res = UserDal.Instance.ResetUserPasswod(decryptusername, encryptionPassword);
 
@@ -338,6 +349,15 @@ namespace BLL.User
 
             //加密用户密码
             var password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword+salt);
+
+            //判断新密码是否和旧密码一致
+            var uid = UserDal.Instance.CheckPassword(request.User.UName, password);
+            if (uid >0)
+            {
+                response.Status = false;
+                response.Message = "不能使用最近使用过的密码，请重新输入";
+                return response;
+            }
 
             //给对象赋值
             request.User.UserPassword = password;

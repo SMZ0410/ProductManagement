@@ -158,6 +158,21 @@ namespace DAL.User
         }
 
         /// <summary>
+        /// 检查新密码是否和旧密码一致
+        /// </summary>
+        /// <returns></returns>
+        public int CheckPassword(string userName,string newPassword)
+        {
+            int res = 0;
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username  AND UserPassword = @newpassword";
+                res = conn.QueryFirstOrDefault<int>(sql,new { username=userName, newpassword=newPassword });
+            }
+            return res;
+        }
+
+        /// <summary>
         /// 重置用户密码
         /// </summary>
         /// <returns>影响行数</returns>

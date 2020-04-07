@@ -126,5 +126,15 @@ namespace ProductManagementApi.Controllers.User
         {
             return UserBll.Instance.UserUpt(request);
         }
+
+        /// <summary>
+        /// 修改个人密码
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
+        {
+            return UserBll.Instance.UpdateUserPassword(request);
+        }
     }
 }

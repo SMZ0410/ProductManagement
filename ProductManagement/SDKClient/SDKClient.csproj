@@ -98,6 +98,25 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\Model.dll" />
+    <Content Include="bin\Debug\Model.pdb" />
+    <Content Include="bin\Debug\SDKClient.dll" />
+    <Content Include="bin\Debug\SDKClient.pdb" />
+    <Content Include="obj\Debug\SDKClient.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\SDKClient.dll" />
+    <Content Include="obj\Debug\SDKClient.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\SDKClient.csproj.CopyComplete" />
+    <None Include="obj\Debug\SDKClient.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\SDKClient.csprojAssemblyReference.cache" />
+    <None Include="obj\Release\SDKClient.csproj.CoreCompileInputs.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
