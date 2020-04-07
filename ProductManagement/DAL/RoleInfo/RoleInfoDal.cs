@@ -24,13 +24,16 @@ namespace DAL.RoleInfo
         {
             List<RoleInfoModel> list = new List<RoleInfoModel>();
             using (IDbConnection coon = new SqlConnection(conStr))
-            {
-                string sql = @"SELECT ri.RoleId,ri.RoleName,p.privilegeName,
-                                        (SELECT COUNT(*) FROM dbo.UserInfo)AS UserNum FROM dbo.RoleInfo ri 
-                                        JOIN RolePrivilegeMapInfo rp ON ri.RoleId = rp.RoleId 
-                                        JOIN PrivilegeInfo p ON rp.PrivilegeId = p.PrivilegeId 
-                                        JOIN dbo.UserRoleMapInfo u ON ri.RoleId = u.RoleId 
-                                        JOIN dbo.UserInfo ui ON ui.UserId = u.RoleId WHERE ri.RoleName LIKE @rolename AND ri.Status = 1";
+            {               
+                string sql = @"SELECT r.RoleId,r.RoleName,p.privilegeName,t.UserNum
+                                FROM dbo.RoleInfo r 
+                                JOIN dbo.RolePrivilegeMapInfo m ON r.RoleId=m.RoleId
+                                JOIN dbo.PrivilegeInfo p ON p.PrivilegeId=m.PrivilegeId
+                                INNER JOIN 
+                                (SELECT  r.RoleId,COUNT(1) AS UserNum FROM dbo.RoleInfo r 
+                                JOIN dbo.UserRoleMapInfo m ON m.RoleId=r.RoleId
+                                JOIN dbo.UserInfo u ON m.UserId =u.UserId 
+                                GROUP BY r.RoleId) AS t ON r.RoleId=t.RoleId WHERE r.RoleName LIKE @rolename AND r.Status = 1";
 
                 list = coon.Query<RoleInfoModel>(sql, new { rolename = "%"+RoleName+"%" }).ToList();
                 return list;
