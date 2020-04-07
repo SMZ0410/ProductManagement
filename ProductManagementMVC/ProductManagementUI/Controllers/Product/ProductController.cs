@@ -15,6 +15,9 @@ namespace ProductManagementUI.Controllers
 {
     public class ProductController : Controller
     {
+        LogHelper logHelper = new LogHelper();
+
+
         // GET: Product
         /// <summary>
         /// 产品列表显示
@@ -22,6 +25,7 @@ namespace ProductManagementUI.Controllers
         /// <returns></returns>
         public ActionResult ProductInfoPage()
         {
+            logHelper.WriteLog("ProductInfoPage", "产品列表显示");
             return View();
         }
         /// <summary>

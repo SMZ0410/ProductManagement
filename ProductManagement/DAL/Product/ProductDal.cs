@@ -26,11 +26,11 @@ namespace DAL.Product
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT * FROM v_Product  ORDER BY ProductId DESC ";
+                string sql = @"SELECT * FROM v_Product ORDER BY CreateTime DESC ";
 
                 if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.UserId > 0 || !string.IsNullOrEmpty(query.ProductName))
                 {
-                    sql += " WHERE 1=1";
+                    sql += " WHERE 1=1 ORDER BY CreateTime DESC ";
 
                     if (query.TradeId > 0)
                     {
@@ -197,7 +197,7 @@ namespace DAL.Product
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = @"EXEC dbo.p_UpdateProduct @productId,
-	                                                    @productName',
+	                                                    @productName,
 	                                                    @userId,
 	                                                    @productDetail,
 	                                                    @tradeId,
