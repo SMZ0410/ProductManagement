@@ -3,7 +3,7 @@
     ViewBag.Title = "GetRoleInfos";
 }
 
-  
+
 
 <div class="col-lg-6">
     <div class="card" style="width:1200px; margin-left:0px;margin-top:16px">
@@ -16,7 +16,7 @@
 
             <button type="button" id="BtnQuery" style="margin-top:20px" class="btn btn-outline-primary" onclick="seleName()">查 找</button>
 
-
+            <input id="AddRole" type="button" style="float:right" name="ck" value="添加角色" class="btn btn-outline-dark" onclick="UserRole()" />
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -33,16 +33,16 @@
                     <tbody id="tb"></tbody>
                 </table>
             </div>
-        </div> 
+        </div>
     </div>
-</div> 
+</div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
 
     $().ready(function () {
-          $("#usersmanage").addClass("active");
+        $("#usersmanage").addClass("active");
         RoleQuery("");
     });
     function RoleQuery(rolename) {
@@ -81,8 +81,8 @@
 
     function Del(RoleId) {
         var obj = {
-            RoleAll : {
-                RoleId:RoleId
+            RoleAll: {
+                RoleId: RoleId
             }
         }
         if (confirm("确定删除吗·qin~~")) {
@@ -97,6 +97,10 @@
                     }
                 }
             })
-        } 
+        }
+    }
+
+    function UserRole() {
+        location.href = "/Role/AddRole";
     }
 </script>
