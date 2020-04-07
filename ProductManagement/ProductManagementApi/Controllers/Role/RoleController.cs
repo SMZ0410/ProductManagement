@@ -59,5 +59,16 @@ namespace ProductManagementApi.Controllers.Role
             return UpdateRoleBll.Instance.UpdateRole(request);
         }
 
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public RoleByIdResponse GetRoleById(RoleByIdRequest request)
+        {
+            return UpdateRoleBll.Instance.GetRoleById(request);
+        }
+
     }
 }

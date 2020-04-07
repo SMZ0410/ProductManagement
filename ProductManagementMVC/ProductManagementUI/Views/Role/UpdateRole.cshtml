@@ -4,7 +4,7 @@
 }
 
 
-<input id="val" type="hidden" value="@ViewBag.RoleId" />
+<input id="val" type="hidden" value="@ViewBag.roleId" />
 
 <table class="table">
     <tr>
@@ -27,13 +27,30 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
-    function roleadd(RoleId) {
 
-        var RoleId = $("#val").val();
+    $().ready(function () {
+        var roleId = $("#val").val();
+        $.ajax({
+            url: '/Role/ByIdRole',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                RoleId: roleId
+            },
+            success: function (res) {
+                $("#RoleName").val(res.RoleAll.RoleName),
+                    $("#privilegeName").val(res.RoleAll.privilegeName)
+            }
+        })
+    })
+
+    function roleadd() {
+
+        var roleId = $("#val").val();
 
         var obj = {
-            RoleId: RoleId,
-            PrivilegeId: RoleId,
+            RoleId: roleId,
+            PrivilegeId: roleId,
             RoleName: $("#RoleName").val(),
             privilegeName: $("#privilegeName").val()
         };
@@ -42,12 +59,12 @@
             type: 'post',
             dataType: 'json',
             data: {
-                RoleAll:obj
+                RoleAll: obj
             },
             success: function (data) {
                 if (data.Status) {
                     alert(data.Message);
-                    location.href='/Role/GetRoleInfos'
+                    location.href = '/Role/GetRoleInfos'
                 }
                 else {
                     alert(data.Message);

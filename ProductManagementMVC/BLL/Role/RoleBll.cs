@@ -51,5 +51,15 @@ namespace BLL.Role
             return ApiRequestHelper.Post<RolePutRequest, RolePutResponse>(request);
         }
 
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public RoleByIdResponse RoleById(RoleByIdRequest request)
+        {
+            return ApiRequestHelper.Post<RoleByIdRequest, RoleByIdResponse>(request);
+        }
+
     }
 }

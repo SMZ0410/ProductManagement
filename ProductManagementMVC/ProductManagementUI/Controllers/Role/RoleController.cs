@@ -66,9 +66,9 @@ namespace ProductManagementUI.Controllers.Role
         /// 编辑角色信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult UpdateRole(int RoleId)
+        public ActionResult UpdateRole(int roleId)
         {
-            ViewBag.RoleId = RoleId;
+            ViewBag.roleId = roleId;
             return View();
         }
 
@@ -80,6 +80,16 @@ namespace ProductManagementUI.Controllers.Role
         public JsonResult PutRole(RolePutRequest request)
         {
             return Json(RoleBll.Instance.UpdateRole(request));
+        }
+
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public JsonResult ByIdRole(RoleByIdRequest request)
+        {
+            return Json(RoleBll.Instance.RoleById(request));
         }
     }
 }
