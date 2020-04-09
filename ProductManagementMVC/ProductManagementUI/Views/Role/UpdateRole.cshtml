@@ -49,6 +49,27 @@
 <script>
 
     $().ready(function () {
+        $("#usersmanage").addClass("active");
+        $("#exampledropdownDropdown").addClass("list-unstyled collapse show");
+
+        //权限相关
+        if ($("#privilege").val() == "普通用户") {
+            $("#productadd").remove();
+            $("#addrole").remove();
+            $("#useradd").remove();
+        }
+
+        if ($("#privilege").val() == "用户相关") {
+            $("#productadd").remove();
+        }
+
+        if ($("#privilege").val() == "产品相关") {
+            $("#addrole").remove();
+            $("#useradd").remove();
+        }
+
+
+        //加载数据
         var roleId = $("#val").val();
         $.ajax({
             url: '/Role/ByIdRole',

@@ -86,6 +86,26 @@
 
 <script>
     $().ready(function () {
+
+         //菜单样式
+        $("#productlist").addClass("active");
+
+           //权限相关
+        if ($("#privilege").val() == "普通用户") {
+            $("#productadd").remove();
+            $("#addrole").remove();
+            $("#useradd").remove();
+        }
+
+        if ($("#privilege").val() == "用户相关") {
+            $("#productadd").remove();
+        }
+
+        if ($("#privilege").val() == "产品相关") {
+            $("#addrole").remove();
+            $("#useradd").remove();
+        }
+
         //获取应用行业
         $.ajax({
             url: "/Product/GetTreade",

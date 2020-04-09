@@ -111,9 +111,9 @@
             data: obj,
             dataType: "json",
             success: function (res) {
-                if (res.Status) {   
+                if (res.Status) { 
                      //成功之后跳转页面并附带参数
-                    location.href = "/Home/Index?userName=" + res.User.UserName + "&roleName=" + res.User.RoleName + "&userId=" + res.User.UserId;
+                    location.href = "/Home/Index?userName=" + res.User.UserName + "&roleName=" + res.User.RoleName + "&userId=" + res.User.UserId+"&privilegeName="+res.User.privilegeName;
                 }
                 else {
                     alert(res.Message);

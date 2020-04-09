@@ -16,7 +16,6 @@
 
             <button type="button" id="BtnQuery" style="margin-top:20px" class="btn btn-outline-primary" onclick="seleName()">查 找</button>
 
-            <input id="AddRole" type="button" style="float:right" name="ck" value="添加角色" class="btn btn-outline-dark" onclick="UserRole()" />
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -27,7 +26,7 @@
                             <td>角色名称</td>
                             <td>功能权限</td>
                             <td>关联用户数</td>
-                            <td>操作</td>
+                            <td id="optd">操作</td>
                         </tr>
                     </thead>
                     <tbody id="tb"></tbody>
@@ -42,7 +41,31 @@
 <script>
 
     $().ready(function () {
+        //菜单样式
         $("#usersmanage").addClass("active");
+        $("#exampledropdownDropdown").addClass("list-unstyled collapse show");
+        $("#rolepage").addClass("active");
+
+
+        //权限相关
+        if ($("#privilege").val() == "普通用户") {
+            $("#productadd").remove();
+            $("#addrole").remove();
+            $("#useradd").remove();
+            $("#optd").remove();
+        }
+
+        if ($("#privilege").val() == "用户相关") {
+            $("#productadd").remove();
+        }
+
+        if ($("#privilege").val() == "产品相关") {
+            $("#addrole").remove();
+            $("#useradd").remove();
+               $("#optd").remove();
+        }
+
+        //加载数据
         RoleQuery("");
     });
     function RoleQuery(rolename) {
@@ -55,52 +78,60 @@
             dataType: 'json',
             data: obj,
             success: function (data) {
+
+
                 var i = 1001;
                 var tr = "";
                 $(data.RoleInfo).each(function () {
-                    var st = "<tr>"
-                        + "<td>" + i + "</td>"
-                        + "<td>" + this.RoleName + "</td>"
-                        + "<td>" + this.privilegeName + "</td>"
-                        + "<td>" + this.UserNum + "</td>"
-                        + "<td><a href='/Role/UpdateRole?RoleId=" + this.RoleId + "'>编辑&nbsp;&nbsp;  </a><a style='color:brown'  onclick='Del(" + this.RoleId + ")'> &nbsp;&nbsp;删除</a></td>"
-                        + "</tr>";
-                    tr += st;
-                    i++;
-                });
-                $("#tb").html(tr);
-            }
-        });
-    }
-    $("#BtnQuery").click(function () {
-        var rolename = $("#RoleName").val();
-        RoleQuery(rolename);
-    });
 
-
-
-    function Del(RoleId) {
-        var obj = {
-            RoleAll: {
-                RoleId: RoleId
-            }
-        }
-        if (confirm("确定删除吗·qin~~")) {
-            $.ajax({
-                url: '/Role/DeleteRole',
-                type: 'post',
-                dataType: 'json',
-                data: obj,
-                success: function (data) {
-                    if (data > 0) {
-                        alert('删除成功');
-                    }
+                    var td = "";
+                    if ($("#privilege").val() != "普通用户" &&$("#privilege").val() != "产品相关") {
+                    var td = "<td id='optd'><a href='/Role/UpdateRole?RoleId=" + this.RoleId + "'>编辑&nbsp;&nbsp;  </a><a style='color:brown'  onclick='Del(" + this.RoleId + ")'> &nbsp;&nbsp;删除</a></td>";
                 }
-            })
+
+                var st = "<tr>"
+                    + "<td>" + i + "</td>"
+                    + "<td>" + this.RoleName + "</td>"
+                    + "<td>" + this.privilegeName + "</td>"
+                    + "<td>" + this.UserNum + "</td>"
+                    + td
+                    + "</tr>";
+                tr += st;
+                i++;
+            });
+        $("#tb").html(tr);
+    }
+});
+}
+$("#BtnQuery").click(function () {
+    var rolename = $("#RoleName").val();
+    RoleQuery(rolename);
+});
+
+
+
+function Del(RoleId) {
+    var obj = {
+        RoleAll: {
+            RoleId: RoleId
         }
     }
-
-    function UserRole() {
-        location.href = "/Role/AddRole";
+    if (confirm("确定删除吗·qin~~")) {
+        $.ajax({
+            url: '/Role/DeleteRole',
+            type: 'post',
+            dataType: 'json',
+            data: obj,
+            success: function (data) {
+                if (data > 0) {
+                    alert('删除成功');
+                }
+            }
+        })
     }
+}
+
+function UserRole() {
+    location.href = "/Role/AddRole";
+}
 </script>
