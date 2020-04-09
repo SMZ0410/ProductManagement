@@ -42,12 +42,12 @@ namespace DAL.RoleInfo
             int result;
             using (IDbConnection coon = new SqlConnection(conStr))
             {
-                string sql = @"EXEC dbo.P_PutRole @RoleId,
-                               @RoleName,
-                               @PrivilegeId,
-                               @privilegeName";
+                string sql = @"EXEC dbo.p_UpdRole @roleId,
+                                                    @roleName,
+                                                    @privilegeId,
+                                                    @updatorId ";
 
-                result = coon.Query<PostRoleModel>(sql, new { RoleId = post.RoleId, RoleName = post.RoleName, PrivilegeId = post.PrivilegeId, privilegeName = post.privilegeName }).Count();
+                result = coon.Query<PostRoleModel>(sql, new { roleId = post.RoleId, roleName = post.RoleName, privilegeId = post.PrivilegeId, updatorId=post.UpdatorId }).Count();
 
                 return result;
             }
@@ -64,7 +64,7 @@ namespace DAL.RoleInfo
             {
                 PostRoleModel info = new PostRoleModel();
 
-                string sql = @"SELECT ri.RoleName,p.privilegeName FROM dbo.RoleInfo ri 
+                string sql = @"SELECT ri.RoleName,p.PrivilegeId FROM dbo.RoleInfo ri 
                                 JOIN RolePrivilegeMapInfo rp ON rp.RoleId = ri.RoleId
                                 JOIN dbo.PrivilegeInfo p ON p.PrivilegeId = rp.PrivilegeId WHERE ri.RoleId = @roleId";
 
