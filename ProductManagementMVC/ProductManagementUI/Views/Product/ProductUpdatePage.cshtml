@@ -30,9 +30,10 @@
             <div class="form-group">
                 <label class="form-control-label">产品类型</label>
                 <div style="width:600px">
-                    <input id="Radio1" type="radio" name="ProductType" value="1" checked="checked" />系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="Radio1" type="radio" name="ProductType" value="2" />产品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="Radio1" type="radio" name="ProductType" value="2" />方案
+                    <div id="divradio" class="i-checks">
+
+                    </div>
+
                 </div>
             </div>
             <div class="form-group">
@@ -87,10 +88,10 @@
 <script>
     $().ready(function () {
 
-         //菜单样式
+        //菜单样式
         $("#productlist").addClass("active");
 
-           //权限相关
+        //权限相关
         if ($("#privilege").val() == "普通用户") {
             $("#productadd").remove();
             $("#addrole").remove();
@@ -154,6 +155,18 @@
                 })
             }
         })
+        //获取类型信息
+        $.ajax({
+            url: "/Product/GetTypes",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Types).each(function () {
+                    var ra = " <input id='radioCustom1' type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
+                    $("#divradio").append(ra);
+                });
+            }
+        });
 
 
         //获取信息
@@ -169,13 +182,14 @@
                 $("#txtProductName").val(res.ProductInfo.ProductName),
                     $("#selManager").val(res.ProductInfo.UserId),
                     $("#txtProductDetail").val(res.ProductInfo.ProductDetail),
-                    $("#selTreade").val(res.ProductInfo.TradeId),
-                    $("input[name='ProductType']:checked").each(function () {
+                    $("#selTreade").val(res.ProductInfo.TradeId), 
+                    $("input[name='ProductType']").each(function () {
                         if (this.value == res.ProductInfo.TypeId) {
+                            alert(this.value)
                             this.checked = true;
                         }
                     })
-                    $("#selAddress").val(res.ProductInfo.AddressId),
+                $("#selAddress").val(res.ProductInfo.AddressId),
                     $("#selStages").val(res.ProductInfo.StageId)
             }
         })
