@@ -56,6 +56,27 @@
 
         //菜单样式
         $("#usersmanage").addClass("active");
+        $("#exampledropdownDropdown").addClass("list-unstyled collapse show");
+        $("#rolepage").addClass("active");
+
+         //权限相关
+        if ($("#privilege").val() == "普通用户") {
+            $("#productadd").remove();
+            $("#addrole").remove();
+            $("#useradd").remove();
+            $("#optd").remove();
+        }
+
+        if ($("#privilege").val() == "用户相关") {
+            $("#productadd").remove();
+        }
+
+        if ($("#privilege").val() == "产品相关") {
+            $("#addrole").remove();
+            $("#useradd").remove();
+               $("#optd").remove();
+        }
+
 
         //获取权限名称
         $.ajax({

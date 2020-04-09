@@ -23,14 +23,14 @@
                 <label class="form-control-label">应用行业</label>
                 <div style="width:600px">
                     <select id="selTreade" name="account" class="form-control mb-3">
-                       
+                        <option value="0">---请选择---</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="form-control-label">产品类型</label>
                 <div style="width:600px">
-                    <div id="divradio" name="ProductType" class="i-checks">
+                    <div id="divradio" class="i-checks">
 
                     </div>
 
@@ -40,7 +40,7 @@
                 <label class="form-control-label">归属地</label>
                 <div style="width:600px">
                     <select id="selAddress" name="account" class="form-control mb-3">
-                        
+                        <option value="0">---请选择---</option>
                     </select>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <label class="form-control-label">产品阶段</label>
                 <div style="width:600px">
                     <select id="selStages" name="account" class="form-control mb-3">
-                       
+                        <option value="0">---请选择---</option>
                     </select>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <label class="form-control-label">产品经理</label>
                 <div style="width:600px">
                     <select id="selManager" name="account" class="form-control mb-3">
-                        
+                        <option value="0">---请选择---</option>
                     </select>
                 </div>
             </div>
@@ -88,10 +88,10 @@
 <script>
     $().ready(function () {
 
-         //菜单样式
+        //菜单样式
         $("#productlist").addClass("active");
 
-           //权限相关
+        //权限相关
         if ($("#privilege").val() == "普通用户") {
             $("#productadd").remove();
             $("#addrole").remove();
@@ -155,7 +155,6 @@
                 })
             }
         })
-
         //获取类型信息
         $.ajax({
             url: "/Product/GetTypes",
@@ -168,6 +167,7 @@
                 });
             }
         });
+
 
         //获取信息
         var pid = $("#val").val();
@@ -182,13 +182,14 @@
                 $("#txtProductName").val(res.ProductInfo.ProductName),
                     $("#selManager").val(res.ProductInfo.UserId),
                     $("#txtProductDetail").val(res.ProductInfo.ProductDetail),
-                    $("#selTreade").val(res.ProductInfo.TradeId),
+                    $("#selTreade").val(res.ProductInfo.TradeId), 
                     $("input[name='ProductType']").each(function () {
                         if (this.value == res.ProductInfo.TypeId) {
+                            alert(this.value)
                             this.checked = true;
                         }
                     })
-                    $("#selAddress").val(res.ProductInfo.AddressId),
+                $("#selAddress").val(res.ProductInfo.AddressId),
                     $("#selStages").val(res.ProductInfo.StageId)
             }
         })
