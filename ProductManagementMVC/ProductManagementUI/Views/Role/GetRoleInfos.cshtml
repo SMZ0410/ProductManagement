@@ -122,8 +122,8 @@ function Del(RoleId) {
             type: 'post',
             dataType: 'json',
             data: obj,
-            success: function (data) {
-                if (data > 0) {
+            success: function (res) {
+                if (res > 0) {
                     alert('删除成功');
                 }
             }

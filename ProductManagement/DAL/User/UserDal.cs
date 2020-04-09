@@ -109,6 +109,7 @@ namespace DAL.User
             {
                 List<RoleInfos> list = new List<RoleInfos>();
                 var sql = $"SELECT * FROM dbo.RoleInfo";
+                //DISTINCT RoleName
                 list = conn.Query<RoleInfos>(sql).ToList();
                 return list;
             }
