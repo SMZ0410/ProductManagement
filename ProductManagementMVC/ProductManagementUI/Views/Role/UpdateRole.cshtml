@@ -69,9 +69,7 @@
             $("#useradd").remove();
         }
 
-
-        //加载数据
-
+        
         //获取权限名称
         $.ajax({
             url: "/Role/GePrivilege", 
@@ -84,6 +82,8 @@
                 })
             }
         })
+
+        //加载数据
 
         var roleId = $("#val").val();
         $.ajax({

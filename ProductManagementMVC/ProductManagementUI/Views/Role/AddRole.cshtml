@@ -56,6 +56,19 @@
 
         //菜单样式
         $("#usersmanage").addClass("active");
+
+        //获取权限名称
+        $.ajax({
+            url: "/Role/GePrivilege", 
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Privileges).each(function () {
+                    var tp = "<option value='" + this.PrivilegeId + "'>" + this.PrivilegeName + "</option>"
+                    $("#selPrivilege").append(tp);
+                })
+            }
+        })
     });
     function roleadd() {
         var obj = {

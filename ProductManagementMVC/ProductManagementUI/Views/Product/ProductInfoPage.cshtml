@@ -179,7 +179,7 @@
 
                     var td = "";
                     if ($("#privilege").val() != "普通用户" && $("#privilege").val() != "用户相关") {
-                        var td = "<td><a href='/Product/ProductUpdatePage?PId=" + this.ProductId + "'>修改</a></td>";
+                        var td = "<td><a href='/Product/ProductUpdatePage?PId=" + this.ProductId + "'>编辑</a></td>";
                     }
 
                     ts += "<tr>"
@@ -191,7 +191,7 @@
                         + "<td>" + this.TradeName + "</td>"
                         + "<td>" + this.AddressName + "</td>"
                         + "<td>" + this.StageName + "</td>"
-                        + "<td> <input type='button' class='btn-link' onclick='Prodefunc(" + this.ProductDetail + ")' data-toggle='modal' data-target='#myModal' value='" + this.ProductDetail.substring(0, 3) + "..." + "' /></td> ";
+                        + "<td> <input type='button' class='btn-link' onclick='Prodefunc(" + this.ProductDetail + ")' data-toggle='modal' data-target='#myModal' value='" + this.ProductDetail.substring(0, 3) + "..." + "' /></td> "
                     + td
                         + "</tr>";
                     i++;
