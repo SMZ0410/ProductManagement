@@ -58,7 +58,7 @@ namespace BLL.Role
             {
 
                 reponse.Privileges = list;
-                reponse.Message = $"获取数据成功，共获取{list}条数据";
+                reponse.Message = $"获取数据成功，共获取{list.Count}条数据";
             }
 
             return reponse;
