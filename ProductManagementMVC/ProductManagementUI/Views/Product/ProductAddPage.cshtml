@@ -28,15 +28,8 @@
             <div class="form-group">
                 <label class="form-control-label">产品类型</label>
                 <div style="width:600px">
-                    <div class="i-checks">
-                        <input id="radioCustom1" type="radio" value="1" name="ProductType" class="radio-template">
-                        <label for="radioCustom1">系统&nbsp;&nbsp;&nbsp;</label>
-                  
-                        <input id="radioCustom1" type="radio" value="2" name="ProductType" class="radio-template">
-                        <label for="radioCustom1">产品&nbsp;&nbsp;&nbsp;</label>
-           
-                        <input id="radioCustom1" type="radio" value="2" name="ProductType" class="radio-template">
-                        <label for="radioCustom1">方案&nbsp;&nbsp;&nbsp;</label>
+                    <div id="divradio" class="i-checks">
+                    
                     </div>
                
                 </div>
@@ -96,7 +89,7 @@
         //菜单样式
         $("#productadd").addClass("active");
 
-           //权限相关
+        //权限相关
         if ($("#privilege").val() == "普通用户") {
             $("#productadd").remove();
             $("#addrole").remove();
@@ -167,10 +160,13 @@
             type: "POST",
             dataType: "json",
             success: function (res) {
-                
+                $(res.Types).each(function () {
+                    var ra = " <input id='radioCustom1' type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
+                    $("#divradio").append(ra);
+                });
             }
-        })
-    })
+        });
+    });
 
     //添加的点击事件
     function ProductAdd() {
