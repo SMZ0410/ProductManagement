@@ -155,19 +155,7 @@
                 })
             }
         })
-        //获取类型信息
-        $.ajax({
-            url: "/Product/GetTypes",
-            type: "POST",
-            dataType: "json",
-            success: function (res) {
-                $(res.Types).each(function () {
-                    var ra = " <input id='radioCustom1' type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
-                    $("#divradio").append(ra);
-                });
-            }
-        });
-
+        
         //获取类型信息
         $.ajax({
             url: "/Product/GetTypes",
@@ -195,9 +183,8 @@
                     $("#selManager").val(res.ProductInfo.UserId),
                     $("#txtProductDetail").val(res.ProductInfo.ProductDetail),
                     $("#selTreade").val(res.ProductInfo.TradeId),
-                    $("input[name='ProductType']:checked").each(function () {
+                    $("input[name='ProductType']").each(function () {
                         if (this.value == res.ProductInfo.TypeId) {
-                            alert(this.value)
                             this.checked = true;
                         }
                     })
