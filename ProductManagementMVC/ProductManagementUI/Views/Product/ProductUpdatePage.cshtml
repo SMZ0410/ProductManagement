@@ -23,14 +23,14 @@
                 <label class="form-control-label">应用行业</label>
                 <div style="width:600px">
                     <select id="selTreade" name="account" class="form-control mb-3">
-                        <option value="0">---请选择---</option>
+                       
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="form-control-label">产品类型</label>
                 <div style="width:600px">
-                    <div id="divradio" class="i-checks">
+                    <div id="divradio" name="ProductType" class="i-checks">
 
                     </div>
 
@@ -40,7 +40,7 @@
                 <label class="form-control-label">归属地</label>
                 <div style="width:600px">
                     <select id="selAddress" name="account" class="form-control mb-3">
-                        <option value="0">---请选择---</option>
+                        
                     </select>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <label class="form-control-label">产品阶段</label>
                 <div style="width:600px">
                     <select id="selStages" name="account" class="form-control mb-3">
-                        <option value="0">---请选择---</option>
+                       
                     </select>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <label class="form-control-label">产品经理</label>
                 <div style="width:600px">
                     <select id="selManager" name="account" class="form-control mb-3">
-                        <option value="0">---请选择---</option>
+                        
                     </select>
                 </div>
             </div>
@@ -168,6 +168,18 @@
             }
         });
 
+        //获取类型信息
+        $.ajax({
+            url: "/Product/GetTypes",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Types).each(function () {
+                    var ra = " <input id='radioCustom1' type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
+                    $("#divradio").append(ra);
+                });
+            }
+        });
 
         //获取信息
         var pid = $("#val").val();
@@ -182,8 +194,8 @@
                 $("#txtProductName").val(res.ProductInfo.ProductName),
                     $("#selManager").val(res.ProductInfo.UserId),
                     $("#txtProductDetail").val(res.ProductInfo.ProductDetail),
-                    $("#selTreade").val(res.ProductInfo.TradeId), 
-                    $("input[name='ProductType']").each(function () {
+                    $("#selTreade").val(res.ProductInfo.TradeId),
+                    $("input[name='ProductType']:checked").each(function () {
                         if (this.value == res.ProductInfo.TypeId) {
                             alert(this.value)
                             this.checked = true;
