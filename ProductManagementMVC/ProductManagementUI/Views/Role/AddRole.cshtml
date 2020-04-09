@@ -27,13 +27,9 @@
             <div class="form-group">
                 <label class="form-control-label">权限名称</label>
                 <div style="width:600px">
-                    <input id="privilegeName" name="privilegeName" type="text" placeholder="权限名称_PrivilegeName" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-control-label">权限描述</label>
-                <div style="width:600px">
-                    <input id="privilegeDescribe" type="text" name="privilegeDescribe" placeholder="权限描述_PrivilegeDescribe" class="form-control">
+                    <select id="selPrivilege" name="account" class="form-control mb-3">
+                        <option value="0">---请选择---</option>
+                    </select>
                 </div>
             </div>
 
@@ -57,35 +53,28 @@
 
 <script>
     $().ready(function () {
+
         //菜单样式
-            //菜单样式
-        $("#usersmanage").addClass("active"); 
-        $("#exampledropdownDropdown").addClass("list-unstyled collapse show");
-        $("#addrole").addClass("active");
+        $("#usersmanage").addClass("active");
 
-        
-           //权限相关
-        if ($("#privilege").val() == "普通用户") {
-            $("#productadd").remove();
-            $("#addrole").remove();
-            $("#useradd").remove();
-        }
-
-        if ($("#privilege").val() == "用户相关") {
-            $("#productadd").remove();
-        }
-
-        if ($("#privilege").val() == "产品相关") {
-            $("#addrole").remove();
-            $("#useradd").remove();
-        }
+        //获取权限名称
+        $.ajax({
+            url: "/Role/GePrivilege",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Privileges).each(function () {
+                    var tp = "<option value='" + this.PrivilegeId + "'>" + this.PrivilegeName + "</option>"
+                    $("#selPrivilege").append(tp);
+                })
+            }
+        })
     });
     function roleadd() {
         var obj = {
             RoleName: $("#RoleName").val(),
             RoleDescribe: $("#RoleDescribe").val(),
-            privilegeName: $("#privilegeName").val(),
-            privilegeDescribe: $("#privilegeDescribe").val()
+            PrivilegeId: $("#selPrivilege").val()
         };
         $.ajax({
             url: '/Role/PostRole',

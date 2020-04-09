@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SDKClient.Api.Request.Role;
 using BLL.Role;
+using SDKClient.Api.Request.DropDownList;
 
 namespace ProductManagementUI.Controllers.Role
 {
@@ -90,6 +91,14 @@ namespace ProductManagementUI.Controllers.Role
         public JsonResult ByIdRole(RoleByIdRequest request)
         {
             return Json(RoleBll.Instance.RoleById(request));
+        }
+        /// <summary>
+        /// 获取权限名称
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GePrivilege(DorpDownPrivilegeRequest request)
+        {
+            return Json(RoleBll.Instance.GePrivilege(request));
         }
     }
 }

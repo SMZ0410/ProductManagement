@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using SDKClient.Api.Request.Role;
 using SDKClient.Api.Response.Role;
 using BLL.ApiRequest;
+using SDKClient.Api.Response.DropDownList;
+using SDKClient.Api.Request.DropDownList;
 
 namespace BLL.Role
 {
@@ -61,5 +63,15 @@ namespace BLL.Role
             return ApiRequestHelper.Post<RoleByIdRequest, RoleByIdResponse>(request);
         }
 
+        /// <summary>
+        /// 获取权限名称
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public DorpDownPrivilegeResponse GePrivilege(DorpDownPrivilegeRequest request)
+        {
+            return ApiRequestHelper.Post<DorpDownPrivilegeRequest, DorpDownPrivilegeResponse>(request);
+        }
+        
     }
 }

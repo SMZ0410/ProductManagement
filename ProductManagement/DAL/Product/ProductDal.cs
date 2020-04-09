@@ -210,5 +210,23 @@ namespace DAL.Product
                 return res;
             }
         }
+
+        /// <summary>
+        /// 获取类型显示
+        /// </summary>
+        /// <returns></returns>
+        public List<TypeInfo> GetTypes()
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<TypeInfo> list = new List<TypeInfo>();
+
+                string sql = $"SELECT * FROM TypeInfo";
+
+                list = conn.Query<TypeInfo>(sql).ToList();
+
+                return list;
+            }
+        }
     }  
 }

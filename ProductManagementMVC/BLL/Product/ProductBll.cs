@@ -96,5 +96,14 @@ namespace BLL.Product
         {
             return ApiRequestHelper.Post<ProductUpdateRequest, ProductUpdateResponse>(request);
         }
+        /// <summary>
+        /// 获取类型信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public DropDownTypeResponse GetTypes(DropDownTypeRequest request)
+        {
+            return ApiRequestHelper.Post<DropDownTypeRequest, DropDownTypeResponse>(request);
+        }
     }
 }

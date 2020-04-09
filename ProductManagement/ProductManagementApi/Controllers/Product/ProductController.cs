@@ -109,5 +109,16 @@ namespace ProductManagementApi.Controllers.Product
         {
             return ProductBll.Instance.UpdateProduct(request);
         }
+
+        /// <summary>
+        /// 获取类型信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public DropDownTypeResponse GetTypes(DropDownTypeRequest request)
+        {
+            return ProductBll.Instance.GetTypes(request);
+        }
     }
 }
