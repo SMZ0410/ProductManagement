@@ -59,5 +59,33 @@ namespace BLL.Role
             return response;
         }
 
+
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="RoleId"></param>
+        /// <returns></returns>
+        public RoleByIdResponse GetRoleById(RoleByIdRequest request)
+        {
+            RoleByIdResponse response = new RoleByIdResponse();
+
+            if (request.RoleId < 0)
+            {
+                response.Status = false;
+                response.Message = "网络错误";
+                return response;
+            }
+
+            var str = UpdateRoleDal.Instance.GetRoleById(request.RoleId);
+            if (str != null)
+            {
+                response.Status = true;
+                response.Message = "成功";
+                response.RoleAll = str;
+            }
+
+            return response;
+        }
+
     }
 }

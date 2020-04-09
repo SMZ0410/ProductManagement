@@ -26,11 +26,11 @@ namespace DAL.Product
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT * FROM v_Product ORDER BY CreateTime DESC ";
+                string sql = @"SELECT * FROM v_Product ";
 
                 if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.UserId > 0 || !string.IsNullOrEmpty(query.ProductName))
                 {
-                    sql += " WHERE 1=1 ORDER BY CreateTime DESC ";
+                    sql += " WHERE 1=1 ";
 
                     if (query.TradeId > 0)
                     {
@@ -54,7 +54,7 @@ namespace DAL.Product
                     }
                 }
 
-                list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, userId = query.UserId, productName = "%" + query.ProductName + "%" }).ToList();
+                 list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, userId = query.UserId, productName = "%" + query.ProductName + "%" }).ToList();
 
                 return list;
             }

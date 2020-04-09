@@ -42,15 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Request\DropDownList\DorpDownPrivilegeRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownAddressRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownManageRequest.cs" />
     <Compile Include="Api\Request\Product\ProductEditRequest.cs" />
+    <Compile Include="Api\Request\Role\RoleByIdRequest.cs" />
     <Compile Include="Api\Request\Role\RolePostRequest.cs" />
     <Compile Include="Api\Request\Role\RolePutRequest.cs" />
     <Compile Include="Api\Request\User\UserDeleteRequest.cs" />
     <Compile Include="Api\Request\User\UserEditRequest.cs" />
     <Compile Include="Api\Request\User\UserUpdPwdRequest.cs" />
     <Compile Include="Api\Request\User\UserUptRequest.cs" />
+    <Compile Include="Api\Response\DropDownList\DorpDownPrivilegeResponse.cs" />
     <Compile Include="Api\Response\DropDownList\DropDownRoleReponse.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownRoleRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownStageRequest.cs" />
@@ -74,6 +77,7 @@
     <Compile Include="Api\Response\Product\ProductUpdateResponse.cs" />
     <Compile Include="Api\Request\User\UserForgotPwdRequest.cs" />
     <Compile Include="Api\Request\User\UserResetPwdRequest.cs" />
+    <Compile Include="Api\Response\Role\RoleByIdResponse.cs" />
     <Compile Include="Api\Response\Role\RoleGetResponse.cs" />
     <Compile Include="Api\Response\Role\RolePostResponse.cs" />
     <Compile Include="Api\Response\Role\RolePutResponse.cs" />

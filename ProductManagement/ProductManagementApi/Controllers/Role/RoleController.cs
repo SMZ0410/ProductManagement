@@ -8,6 +8,8 @@ using SDKClient.Api.Request.Role;
 using SDKClient.Api.Response.Role;
 using BLL.Role;
 using ProductManagementApi.Auth;
+using SDKClient.Api.Response.DropDownList;
+using SDKClient.Api.Request.DropDownList;
 
 namespace ProductManagementApi.Controllers.Role
 {
@@ -57,6 +59,28 @@ namespace ProductManagementApi.Controllers.Role
         public RolePutResponse PutRole(RolePutRequest request)
         {
             return UpdateRoleBll.Instance.UpdateRole(request);
+        }
+
+        /// <summary>
+        /// 反填
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public RoleByIdResponse GetRoleById(RoleByIdRequest request)
+        {
+            return UpdateRoleBll.Instance.GetRoleById(request);
+        }
+
+        /// <summary>
+        /// 获取权限名称
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public DorpDownPrivilegeResponse GePrivilege(DorpDownPrivilegeRequest request)
+        {
+            return PostRoleBll.Instance.GetPrivilege(request);
         }
 
     }

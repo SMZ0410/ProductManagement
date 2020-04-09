@@ -3,37 +3,61 @@
     ViewBag.Title = "AddRole";
 }
 
+<div class="col-lg-12">
+    <div class="card" style="width:1200px ;margin-left:0px;margin-top:16px">
 
-    <table class="table">
-        <tr>
-            <td>角色名称</td>
-            <td><input type="text" name="RoleName" id="RoleName" /></td>
-        </tr>
-        <tr>
-            <td>角色描述</td>
-            <td><input type="text" name="RoleDescribe" id="RoleDescribe" /></td>
-        </tr>
-        <tr>
-            <td>权限名称</td>
-            <td><input type="text" name="privilegeName" id="privilegeName" /></td>
-        </tr>
-        <tr>
-            <td>权限描述</td>
-            <td><input type="text" name="privilegeDescribe" id="privilegeDescribe" /></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="button" value="确定" onclick="roleadd()" />
-                <input type="button" value="取消" onclick="location.href='/Role/GetRoleInfos'" />
-            </td>
-        </tr>
-    </table>
+        <div class="card-header d-flex align-items-center">
+            <h3 class="h3">添加角色</h3>
+        </div>
+
+        <div class="card-body" style="margin-left:10%">
+
+            <div class="form-group">
+                <label class="form-control-label">角色名称</label>
+                <div style="width:600px">
+                    <input id="RoleName" name="RoleName" type="text" placeholder="角色名称_RoleName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">角色描述</label>
+                <div style="width:600px">
+                    <input id="RoleDescribe" name="RoleDescribe" type="text" placeholder="角色描述_RoleDescribe" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">权限名称</label>
+                <div style="width:600px">
+                    <input id="privilegeName" name="privilegeName" type="text" placeholder="权限名称_PrivilegeName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">权限描述</label>
+                <div style="width:600px">
+                    <input id="privilegeDescribe" type="text" name="privilegeDescribe" placeholder="权限描述_PrivilegeDescribe" class="form-control">
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="form-group" style="float:left;margin-top:30px">
+                <div class="col-sm-4 offset-sm-3">
+                    <button id="roleadd" class="btn btn-primary" onclick="roleadd()">保存_Save</button>
+                </div>
+            </div>
+            <div class="form-group" style="float:left;margin-left:30px;margin-top:30px">
+                <div class="col-sm-4 offset-sm-3">
+                    <a href="/Role/GetRoleInfos" class="btn btn-default">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
     $().ready(function () {
-               //菜单样式
+        //菜单样式
         $("#usersmanage").addClass("active");
     });
     function roleadd() {
@@ -47,11 +71,11 @@
             url: '/Role/PostRole',
             type: 'post',
             dataType: 'json',
-            data: { RoleAll : obj },
+            data: { RoleAll: obj },
             success: function (data) {
                 if (data.Status) {
                     alert(data.Message);
-                    location.href='/Role/GetRoleInfos'
+                    location.href = '/Role/GetRoleInfos'
                 }
                 else {
                     alert(data.Message);
