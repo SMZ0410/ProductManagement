@@ -22,11 +22,12 @@
             <div class="form-group">
                 <label class="form-control-label">应用行业</label>
                 <div style="width:600px">
-                    <select id="selTreade" name="account" class="form-control mb-3">
+                    <select id="selTreade" class="form-control mb-3">
                         <option value="0">---请选择---</option>
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="form-control-label">产品类型</label>
                 <div style="width:600px">
@@ -36,10 +37,11 @@
 
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="form-control-label">归属地</label>
                 <div style="width:600px">
-                    <select id="selAddress" name="account" class="form-control mb-3">
+                    <select id="selAddress" class="form-control mb-3">
                         <option value="0">---请选择---</option>
                     </select>
                 </div>
@@ -47,7 +49,7 @@
             <div class="form-group">
                 <label class="form-control-label">产品阶段</label>
                 <div style="width:600px">
-                    <select id="selStages" name="account" class="form-control mb-3">
+                    <select id="selStages" class="form-control mb-3">
                         <option value="0">---请选择---</option>
                     </select>
                 </div>
@@ -61,7 +63,7 @@
             <div class="form-group">
                 <label class="form-control-label">产品经理</label>
                 <div style="width:600px">
-                    <select id="selManager" name="account" class="form-control mb-3">
+                    <select id="selManager" class="form-control mb-3">
                         <option value="0">---请选择---</option>
                     </select>
                 </div>
@@ -82,7 +84,6 @@
         </div>
     </div>
 </div>
-
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <script>
@@ -107,93 +108,147 @@
             $("#useradd").remove();
         }
 
-        //获取应用行业
+        //获取下拉单选框等
+        //1.应用行业  
         $.ajax({
             url: "/Product/GetTreade",
             type: "POST",
             dataType: "json",
             success: function (res) {
-                $(res.Trades).each(function () {
-                    var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
-                    $("#selTreade").append(tp);
-                })
-            }
-        })
-        //获取产品阶段
-        $.ajax({
-            url: "/Product/GetStages",
-            type: "POST",
-            dataType: "json",
-            success: function (res) {
-                $(res.Stages).each(function () {
-                    var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
-                    $("#selStages").append(tp);
-                })
-            }
-        })
-        //获取归属地
-        $.ajax({
-            url: "/Product/GetAddress",
-            type: "POST",
-            dataType: "json",
-            success: function (res) {
-                $(res.TrAddress).each(function () {
-                    var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
-                    $("#selAddress").append(tp);
-                })
-            }
-        })
-        //获取产品经理
-        $.ajax({
-            url: "/Product/GetManage",
-            type: "POST",
-            dataType: "json",
-            success: function (res) {
-                $(res.Manages).each(function () {
-                    var tp = "<option value='" + this.UserId + "'>" + this.UName + "</option>"
-                    $("#selManager").append(tp);
-                })
-            }
-        })
-        //获取类型信息
-        $.ajax({
-            url: "/Product/GetTypes",
-            type: "POST",
-            dataType: "json",
-            success: function (res) {
-                $(res.Types).each(function () {
-                    var ra = " <input id='radioCustom1' type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
-                    $("#divradio").append(ra);
-                });
-            }
-        });
+                if (res.Status) {
+                    $(res.Trades).each(function () {
+                        var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
+                        $("#selTreade").append(tp);
+                    });
+
+                    //2.获取产品阶段
+                    $.ajax({
+                        url: "/Product/GetStages",
+                        type: "POST",
+                        dataType: "json",
+                        success: function (res) {
+                            if (res.Status) {
+                                $(res.Stages).each(function () {
+                                    var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
+                                    $("#selStages").append(tp);
+                                });
+
+                                //3.获取归属地
+                                $.ajax({
+                                    url: "/Product/GetAddress",
+                                    type: "POST",
+                                    dataType: "json",
+                                    success: function (res) {
+                                        if (res.Status) {
+                                            $(res.TrAddress).each(function () {
+                                                var tp = "<option value='" + this.AddressId + "'>" + this.AddressName + "</option>"
+                                                $("#selAddress").append(tp);
+                                            });
+
+                                            //4.获取产品经理
+                                            $.ajax({
+                                                url: "/Product/GetManage",
+                                                type: "POST",
+                                                dataType: "json",
+                                                success: function (res) {
+                                                    if (res.Status) {
+                                                        $(res.Manages).each(function () {
+                                                            var tp = "<option value='" + this.UserId + "'>" + this.UName + "</option>"
+                                                            $("#selManager").append(tp);
+                                                        });
+
+                                                        //5.获取类型信息
+                                                        $.ajax({
+                                                            url: "/Product/GetTypes",
+                                                            type: "POST",
+                                                            dataType: "json",
+                                                            success: function (res) {
+                                                                if (res.Status) {
+                                                                    $(res.Types).each(function () {
+                                                                        var ra = " <input   type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
+                                                                        $("#divradio").append(ra);
+                                                                    });
+
+                                                                    //
+                                                                    //6.获取信息
+                                                                    var pid = $("#val").val();
+                                                                    $.ajax({
+                                                                        url: "/Product/EditProduct",
+                                                                        type: "POST",
+                                                                        dataType: "json",
+                                                                        data: {
+                                                                            PId: pid
+                                                                        },
+                                                                        success: function (res) {
+                                                                            if (res.Status) {
+
+                                                                                $("#txtProductName").val(res.ProductInfo.ProductName);
+                                                                                $("#selTreade").val(res.ProductInfo.TradeId);
+
+                                                                                $("[name='ProductType']").each(function () {
+                                                                                    if (this.value == res.ProductInfo.TypeId) {
+                                                                                        this.checked = true;
+                                                                                    }
+                                                                                });
+
+                                                                                var aid = res.ProductInfo.AddressId;
+                                                                                $("#selAddress").val(aid);
+
+                                                                                var sid = res.ProductInfo.StageId;
+                                                                                $("#selStages").val(sid);
+
+                                                                                $("#txtProductDetail").val(res.ProductInfo.ProductDetail);
+
+                                                                                var uid = res.ProductInfo.UserId;
+                                                                                $("#selManager").val(uid);
 
 
-        //获取信息
-        var pid = $("#val").val();
-        $.ajax({
-            url: "/Product/EditProduct",
-            type: "POST",
-            dataType: "json",
-            data: {
-                PId: pid
-            },
-            success: function (res) {
-                $("#txtProductName").val(res.ProductInfo.ProductName),
-                    $("#selManager").val(res.ProductInfo.UserId),
-                    $("#txtProductDetail").val(res.ProductInfo.ProductDetail),
-                    $("#selTreade").val(res.ProductInfo.TradeId), 
-                    $("input[name='ProductType']").each(function () {
-                        if (this.value == res.ProductInfo.TypeId) {
-                            alert(this.value)
-                            this.checked = true;
+                                                                            }
+                                                                            else {
+                                                                                alert(res.Message);
+                                                                            }
+
+                                                                        }
+                                                                    })
+                                                                    //end
+                                                                }
+                                                                else {
+                                                                    alert(res.Message);
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                    else {
+                                                        alert(res.Message)
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            alert(res.Message)
+                                        }
+                                    }
+                                });
+                            }
+
                         }
-                    })
-                $("#selAddress").val(res.ProductInfo.AddressId),
-                    $("#selStages").val(res.ProductInfo.StageId)
+                    });
+                }
+                else {
+                    alert(res.Message)
+                }
             }
         })
+
+
+
+
+
+
+
     })
+
+
 
     //修改产品功能
     function ProductUpdate() {
