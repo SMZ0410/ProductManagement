@@ -10,7 +10,7 @@ namespace ProductManagementUI.Controllers
     //七组无敌！！！！
     public class HomeController : Controller
     {
-        public ActionResult Index(string userName="",string roleName="",int userId=0)
+        public ActionResult Index(string userName="",string roleName="",int userId=0,string privilegeName="")
         {
             if (!string.IsNullOrEmpty(userName))
             {
@@ -23,6 +23,10 @@ namespace ProductManagementUI.Controllers
             if (userId>0)
             {
                 Session["UserId"] = userId;
+            }
+            if (!string.IsNullOrEmpty(privilegeName))
+            {
+                Session["privilegeName"] = privilegeName;
             }
 
             return View();

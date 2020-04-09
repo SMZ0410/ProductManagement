@@ -24,8 +24,7 @@
             <div class="form-group">
                 <label class="form-control-label">权限名称</label>
                 <div style="width:600px">
-                    <select id="selPrivilege" name="account" class="form-control mb-3">
-                    </select>
+                    <input id="privilegeName" name="privilegeName" type="text" placeholder="权限名称_PrivilegeName" class="form-control">
                 </div>
             </div>
 
@@ -50,20 +49,27 @@
 <script>
 
     $().ready(function () {
+        $("#usersmanage").addClass("active");
+        $("#exampledropdownDropdown").addClass("list-unstyled collapse show");
 
-        //获取权限名称
-        $.ajax({
-            url: "/Role/GePrivilege", 
-            type: "POST",
-            dataType: "json",
-            success: function (res) {
-                $(res.Privileges).each(function () {
-                    var tp = "<option value='" + this.PrivilegeId + "'>" + this.PrivilegeName + "</option>"
-                    $("#selPrivilege").append(tp);
-                })
-            }
-        })
+        //权限相关
+        if ($("#privilege").val() == "普通用户") {
+            $("#productadd").remove();
+            $("#addrole").remove();
+            $("#useradd").remove();
+        }
 
+        if ($("#privilege").val() == "用户相关") {
+            $("#productadd").remove();
+        }
+
+        if ($("#privilege").val() == "产品相关") {
+            $("#addrole").remove();
+            $("#useradd").remove();
+        }
+
+
+        //加载数据
         var roleId = $("#val").val();
         $.ajax({
             url: '/Role/ByIdRole',
@@ -73,12 +79,10 @@
                 RoleId: roleId
             },
             success: function (res) {
-                    $("#RoleName").val(res.RoleAll.RoleName), 
-                    $("#selPrivilege").val(res.RoleAll.PrivilegeId)
+                $("#RoleName").val(res.RoleAll.RoleName),
+                    $("#privilegeName").val(res.RoleAll.privilegeName)
             }
         })
-
-
     })
 
     function roleadd() {
@@ -87,13 +91,13 @@
 
         var obj = {
             RoleId: roleId,
+            PrivilegeId: roleId,
             RoleName: $("#RoleName").val(),
-            PrivilegeId: $("#selPrivilege").val(),
-            UpdatorId: $("#userid").val()
+            privilegeName: $("#privilegeName").val()
         };
         $.ajax({
             url: '/Role/PutRole',
-            type: 'POST',
+            type: 'post',
             dataType: 'json',
             data: {
                 RoleAll: obj

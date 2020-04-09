@@ -69,9 +69,11 @@ namespace DAL.User
         {
             using (IDbConnection conn = new SqlConnection(connStr))
             {
-                string sql = @"SELECT u.UserId, u.UserName,r.RoleName FROM dbo.UserInfo u
+                string sql = @"SELECT u.UserId, u.UserName,r.RoleName,p.privilegeName FROM dbo.UserInfo u
                                         JOIN dbo.UserRoleMapInfo m ON u. UserId = m.UserId
                                         JOIN dbo.RoleInfo r ON m.RoleId = r.RoleId
+                                        JOIN dbo.RolePrivilegeMapInfo m2 ON m2.RoleId=r.RoleId
+                                        JOIN dbo.PrivilegeInfo p ON p.PrivilegeId=m2.PrivilegeId
                                         WHERE UserName = @username  AND UserPassword = @userpassword";
 
                 //获取用户信息并返回 
@@ -161,13 +163,13 @@ namespace DAL.User
         /// 检查新密码是否和旧密码一致
         /// </summary>
         /// <returns></returns>
-        public int CheckPassword(string userName,string newPassword)
+        public int CheckPassword(string userName, string newPassword)
         {
             int res = 0;
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username  AND UserPassword = @newpassword";
-                res = conn.QueryFirstOrDefault<int>(sql,new { username=userName, newpassword=newPassword });
+                res = conn.QueryFirstOrDefault<int>(sql, new { username = userName, newpassword = newPassword });
             }
             return res;
         }
@@ -250,7 +252,7 @@ namespace DAL.User
                                         @userName , 
                                          @email , @updatorId , 
                                         @role,   @addressId  ";
-                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName,  salt = info.Salt, email = info.Email, updatorId = info.UpdatorId, role = info.RoleId, addressId = info.AddressId });
+                var res = conn.Execute(sql, new { userId = info.UserId, userName = info.UserName, salt = info.Salt, email = info.Email, updatorId = info.UpdatorId, role = info.RoleId, addressId = info.AddressId });
                 return res;
             }
         }

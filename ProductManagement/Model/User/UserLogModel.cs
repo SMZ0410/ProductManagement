@@ -27,5 +27,9 @@ namespace Model.User
         /// 角色名称
         /// </summary>
         public string RoleName { get; set; }
+        /// <summary>
+        /// 权限
+        /// </summary>
+        public string privilegeName { get; set; }
     }
 }

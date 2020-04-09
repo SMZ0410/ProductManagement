@@ -83,6 +83,7 @@
                         <p style="margin-left:50px"> @Session["RoleName"]</p>
                         <input type="hidden" value="@Session["UserId"]" id="userid" />
                         <input type="hidden" value="@Session["UserName"]" id="uname" />
+                        <input type="hidden" value="@Session["privilegeName"]" id="privilege" />
                     </div>
 
                 </div>
@@ -93,16 +94,16 @@
                         <li id="productlist"><a href="/Product/ProductInfoPage"> <i class="icon-list"></i>产品列表_Product</a></li>
                         <li id="productadd"><a href="/Product/ProductAddPage"> <i class="icon-form"></i>添加产品_AddPro</a></li>
                         <li id="usersmanage">
-                            <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse" class="collapsed">
+                            <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse" class="collapsed" id="cols">
                             <i class="icon-user"></i> 用户管理_Users </a>
                             <ul id="exampledropdownDropdown" class="list-unstyled collapse">
-                                <li><a href="/Role/GetRoleInfos">角色管理</a></li>
-                                <li><a href="/Role/AddRole">添加角色</a></li>
-                                <li id="usershow"><a href="/User/UserShow">用户管理</a></li>
-                                <li><a href="/User/UserAdd">添加用户</a></li>
+                                <li id="rolepage"><a href="/Role/GetRoleInfos">角色列表</a></li>
+                                <li id="addrole"><a href="/Role/AddRole">添加角色</a></li>
+                                <li id="usershow"><a href="/User/UserShow">用户列表</a></li>
+                                <li id="useradd"><a href="/User/UserAdd">添加用户</a></li>
                             </ul>
                         </li>
-                        <li><a href="#"> <i class="icon-website"></i>权限管理_Privilege</a></li>
+                     
                         <li id="updpwd"><a href="/User/UpdateUserPasswordPage"> <i class="icon-interface-windows"></i>修改密码_UpdPwd</a></li>
 
                     </ul>
