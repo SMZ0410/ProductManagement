@@ -123,5 +123,13 @@ namespace ProductManagementUI.Controllers
             return Json(ProductBll.Instance.UpdateProducts(request));
         }
 
+        /// <summary>
+        /// 获取类型信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetTypes(DropDownTypeRequest request)
+        {
+            return Json(ProductBll.Instance.GetTypes(request));
+        }
     }
 }

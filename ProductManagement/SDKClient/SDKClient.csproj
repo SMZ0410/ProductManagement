@@ -45,6 +45,7 @@
     <Compile Include="Api\Request\DropDownList\DorpDownPrivilegeRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownAddressRequest.cs" />
     <Compile Include="Api\Request\DropDownList\DropDownManageRequest.cs" />
+    <Compile Include="Api\Request\DropDownList\DropDownTypeRequest.cs" />
     <Compile Include="Api\Request\Product\ProductEditRequest.cs" />
     <Compile Include="Api\Request\Role\RoleByIdRequest.cs" />
     <Compile Include="Api\Request\Role\RolePostRequest.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Api\Response\DropDownList\DropDownManageReponse.cs" />
     <Compile Include="Api\Response\DropDownList\DropDownStageReponse.cs" />
     <Compile Include="Api\Response\DropDownList\DropDownTreadeResponse.cs" />
+    <Compile Include="Api\Response\DropDownList\DropDownTypeResponse.cs" />
     <Compile Include="Api\Response\Product\ProductAddResponse.cs" />
     <Compile Include="Api\Response\Product\ProductDeleteResponse.cs" />
     <Compile Include="Api\Response\Product\ProductEditResponse.cs" />

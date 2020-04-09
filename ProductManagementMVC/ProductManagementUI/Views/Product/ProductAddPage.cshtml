@@ -137,6 +137,16 @@
                 })
             }
         })
+
+        //获取类型信息
+        $.ajax({
+            url: "/Product/GetTypes",
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                
+            }
+        })
     })
 
     //添加的点击事件

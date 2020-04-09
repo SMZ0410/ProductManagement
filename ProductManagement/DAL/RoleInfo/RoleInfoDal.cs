@@ -29,7 +29,7 @@ namespace DAL.RoleInfo
                                         FROM dbo.RoleInfo r 
                                         JOIN dbo.RolePrivilegeMapInfo m ON r.RoleId=m.RoleId
                                         JOIN dbo.PrivilegeInfo p ON p.PrivilegeId=m.PrivilegeId
-                                        INNER JOIN 
+                                        LEFT JOIN 
                                         (SELECT  r.RoleId,COUNT(1) AS UserNum FROM dbo.RoleInfo r 
                                         JOIN dbo.UserRoleMapInfo m ON m.RoleId=r.RoleId
                                         JOIN dbo.UserInfo u ON m.UserId =u.UserId 
