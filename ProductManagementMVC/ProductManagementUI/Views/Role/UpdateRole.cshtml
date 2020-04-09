@@ -24,7 +24,8 @@
             <div class="form-group">
                 <label class="form-control-label">权限名称</label>
                 <div style="width:600px">
-                    <input id="privilegeName" name="privilegeName" type="text" placeholder="权限名称_PrivilegeName" class="form-control">
+                    <select id="selPrivilege" name="account" class="form-control mb-3">
+                    </select>
                 </div>
             </div>
 
@@ -70,6 +71,20 @@
 
 
         //加载数据
+
+        //获取权限名称
+        $.ajax({
+            url: "/Role/GePrivilege", 
+            type: "POST",
+            dataType: "json",
+            success: function (res) {
+                $(res.Privileges).each(function () {
+                    var tp = "<option value='" + this.PrivilegeId + "'>" + this.PrivilegeName + "</option>"
+                    $("#selPrivilege").append(tp);
+                })
+            }
+        })
+
         var roleId = $("#val").val();
         $.ajax({
             url: '/Role/ByIdRole',
@@ -79,10 +94,12 @@
                 RoleId: roleId
             },
             success: function (res) {
-                $("#RoleName").val(res.RoleAll.RoleName),
-                    $("#privilegeName").val(res.RoleAll.privilegeName)
+                    $("#RoleName").val(res.RoleAll.RoleName), 
+                    $("#selPrivilege").val(res.RoleAll.PrivilegeId)
             }
         })
+
+
     })
 
     function roleadd() {
@@ -91,13 +108,13 @@
 
         var obj = {
             RoleId: roleId,
-            PrivilegeId: roleId,
             RoleName: $("#RoleName").val(),
-            privilegeName: $("#privilegeName").val()
+            PrivilegeId: $("#selPrivilege").val(),
+            UpdatorId: $("#userid").val()
         };
         $.ajax({
             url: '/Role/PutRole',
-            type: 'post',
+            type: 'POST',
             dataType: 'json',
             data: {
                 RoleAll: obj
