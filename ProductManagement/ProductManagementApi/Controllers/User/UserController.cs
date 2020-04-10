@@ -17,7 +17,7 @@ namespace ProductManagementApi.Controllers.User
     /// <summary>
     /// 用户Api控制器
     /// </summary> 
-    //[ApiAuthorize] 
+    [ApiAuthorize] 
     public class UserController : ApiController
     {
 
