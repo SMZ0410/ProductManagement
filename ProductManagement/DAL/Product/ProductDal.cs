@@ -26,7 +26,8 @@ namespace DAL.Product
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT * FROM v_Product  where  Status=1";
+                string sql = @"SELECT * FROM v_Product WHERE Status=1 ";
+
 
                 if (query.TradeId > 0)
                 {
@@ -48,7 +49,6 @@ namespace DAL.Product
                 {
                     sql += " AND ProductName LIKE @productName ";
                 }
-
 
                 list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, userId = query.UserId, productName = "%" + query.ProductName + "%" }).ToList();
 
