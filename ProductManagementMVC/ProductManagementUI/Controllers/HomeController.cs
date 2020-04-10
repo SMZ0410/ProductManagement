@@ -46,9 +46,23 @@ namespace ProductManagementUI.Controllers
             return View();
         }
 
-        public ActionResult Error()
+        /// <summary>
+        /// 404 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult NotFoundPage()
         {
             return View();
         }
+
+        /// <summary>
+        /// 500
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ErrorPage()
+        {
+            return View();
+        }
+
     }
 }
