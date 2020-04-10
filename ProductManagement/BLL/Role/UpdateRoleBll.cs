@@ -28,7 +28,7 @@ namespace BLL.Role
                 response.Message = "出错了";
             }
             else
-            { 
+            {
                 response.Message = "恭喜成功";
             }
             return response;
