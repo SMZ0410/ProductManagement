@@ -22,14 +22,15 @@ namespace BLL.Role
 
             var res = UpdateRoleDal.Instance.DeleteRole(request.RoleAll);
 
-            if (res <= 0)
+            if (res > 0)
             {
-                response.Status = false;
-                response.Message = "出错了";
+                response.Message = "删除成功";
             }
             else
             {
-                response.Message = "恭喜成功";
+
+                response.Status = false;
+                response.Message = "删除失败，请检查网络";
             }
             return response;
         }
