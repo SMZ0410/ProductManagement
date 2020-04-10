@@ -26,35 +26,31 @@ namespace DAL.Product
             {
                 List<ProductInfo> list = new List<ProductInfo>();
 
-                string sql = @"SELECT * FROM v_Product ";
+                string sql = @"SELECT * FROM v_Product  where  Status=1";
 
-                if (query.TradeId > 0 || query.StageId > 0 || query.AddressId > 0 || query.UserId > 0 || !string.IsNullOrEmpty(query.ProductName))
+                if (query.TradeId > 0)
                 {
-                    sql += " WHERE 1=1 ";
-
-                    if (query.TradeId > 0)
-                    {
-                        sql += " AND TradeId = @tradeId ";
-                    }
-                    if (query.StageId > 0)
-                    {
-                        sql += " AND StageId = @stageId ";
-                    }
-                    if (query.AddressId > 0)
-                    {
-                        sql += " AND AddressId = @addressId ";
-                    }
-                    if (query.UserId > 0)
-                    {
-                        sql += " AND UserId = @userId ";
-                    }
-                    if (!string.IsNullOrEmpty(query.ProductName))
-                    {
-                        sql += " AND ProductName LIKE @productName ";
-                    }
+                    sql += " AND TradeId = @tradeId ";
+                }
+                if (query.StageId > 0)
+                {
+                    sql += " AND StageId = @stageId ";
+                }
+                if (query.AddressId > 0)
+                {
+                    sql += " AND AddressId = @addressId ";
+                }
+                if (query.UserId > 0)
+                {
+                    sql += " AND UserId = @userId ";
+                }
+                if (!string.IsNullOrEmpty(query.ProductName))
+                {
+                    sql += " AND ProductName LIKE @productName ";
                 }
 
-                 list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, userId = query.UserId, productName = "%" + query.ProductName + "%" }).ToList();
+
+                list = conn.Query<ProductInfo>(sql, new { tradeId = query.TradeId, stageId = query.StageId, addressId = query.AddressId, userId = query.UserId, productName = "%" + query.ProductName + "%" }).ToList();
 
                 return list;
             }
@@ -206,7 +202,7 @@ namespace DAL.Product
 	                                                    @stageId,
 	                                                    @updatorId ";
 
-                var res = conn.Execute(sql,new { productId = Upd.ProductId, productName = Upd.ProductName, userId =Upd.UserId, productDetail =Upd.ProductDetail, tradeId =Upd.TradeId, typeId =Upd.TypeId, addressId =Upd.AddressId, stageId =Upd.StageId, updatorId=Upd.UpdatorId });
+                var res = conn.Execute(sql, new { productId = Upd.ProductId, productName = Upd.ProductName, userId = Upd.UserId, productDetail = Upd.ProductDetail, tradeId = Upd.TradeId, typeId = Upd.TypeId, addressId = Upd.AddressId, stageId = Upd.StageId, updatorId = Upd.UpdatorId });
                 return res;
             }
         }
@@ -228,5 +224,5 @@ namespace DAL.Product
                 return list;
             }
         }
-    }  
+    }
 }
