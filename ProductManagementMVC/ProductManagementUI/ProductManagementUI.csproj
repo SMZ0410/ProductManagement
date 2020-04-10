@@ -170,6 +170,7 @@
     <Content Include="ReferencesFile\Template\Icon\error.png" />
     <Content Include="ReferencesFile\Template\Icon\index.png" />
     <Content Include="ReferencesFile\Template\Icon\login.png" />
+    <Content Include="ReferencesFile\Template\Icon\No.png" />
     <Content Include="ReferencesFile\Template\Icon\ResetPassword.png" />
     <Content Include="ReferencesFile\Template\Icon\China.jpg" />
     <Content Include="ReferencesFile\Template\img\avatar-0.jpg" />
@@ -633,7 +634,7 @@
     <Content Include="Views\User\ForgotPasswordPage.cshtml" />
     <Content Include="Views\User\ResetUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductAddPage.cshtml" />
-    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\NotFoundPage.cshtml" />
     <Content Include="Views\User\UserAdd.cshtml" />
     <Content Include="Views\User\UpdateUserPasswordPage.cshtml" />
     <Content Include="Views\Product\ProductUpdatePage.cshtml" />
@@ -641,6 +642,7 @@
     <Content Include="Views\Role\AddRole.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Role\UpdateRole.cshtml" />
+    <Content Include="Views\Home\ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
