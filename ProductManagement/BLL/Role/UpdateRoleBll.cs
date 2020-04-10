@@ -20,17 +20,17 @@ namespace BLL.Role
         {
             RoleUpdateResponse response = new RoleUpdateResponse();
 
-            var str = UpdateRoleDal.Instance.DeleteRole(request.RoleAll);
+            var res = UpdateRoleDal.Instance.DeleteRole(request.RoleAll);
 
-            if (str <= 0)
+            if (res > 0)
             {
-                response.Status = false;
-                response.Message = "出错了";
+                response.Message = "删除成功";
             }
             else
             {
-                response.postRoles = str;
-                response.Message = "恭喜成功";
+
+                response.Status = false;
+                response.Message = "删除失败，请检查网络";
             }
             return response;
         }
