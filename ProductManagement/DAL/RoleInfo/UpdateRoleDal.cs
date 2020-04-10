@@ -27,7 +27,7 @@ namespace DAL.RoleInfo
             {
                 string sql = @"UPDATE dbo.RoleInfo SET UpdateTime = GETDATE(),UpdatorId = @updatorid,Status = 0 WHERE RoleId = @roleid";
 
-                result = coon.Query<PostRoleModel>(sql, new { updatorid = post.UpdatorId, roleid = post.RoleId }).Count();
+                result = coon.Execute(sql, new { updatorid = post.UpdatorId, roleid = post.RoleId });
 
                 return result;
             }
@@ -47,7 +47,7 @@ namespace DAL.RoleInfo
                                                     @privilegeId,
                                                     @updatorId ";
 
-                result = coon.Query<PostRoleModel>(sql, new { roleId = post.RoleId, roleName = post.RoleName, privilegeId = post.PrivilegeId, updatorId=post.UpdatorId }).Count();
+                result = coon.Query<PostRoleModel>(sql, new { roleId = post.RoleId, roleName = post.RoleName, privilegeId = post.PrivilegeId, updatorId = post.UpdatorId }).Count();
 
                 return result;
             }
