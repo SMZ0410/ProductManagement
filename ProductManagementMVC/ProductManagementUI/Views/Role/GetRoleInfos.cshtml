@@ -62,7 +62,7 @@
         if ($("#privilege").val() == "产品相关") {
             $("#addrole").remove();
             $("#useradd").remove();
-               $("#optd").remove();
+            $("#optd").remove();
         }
 
         //加载数据
@@ -85,53 +85,57 @@
                 $(data.RoleInfo).each(function () {
 
                     var td = "";
-                    if ($("#privilege").val() != "普通用户" &&$("#privilege").val() != "产品相关") {
-                    var td = "<td id='optd'><a href='/Role/UpdateRole?RoleId=" + this.RoleId + "'>编辑&nbsp;&nbsp;  </a><a style='color:brown'  onclick='Del(" + this.RoleId + ")'> &nbsp;&nbsp;删除</a></td>";
-                }
+                    if ($("#privilege").val() != "普通用户" && $("#privilege").val() != "产品相关") {
+                        var td = "<td id='optd'><a href='/Role/UpdateRole?RoleId=" + this.RoleId + "'>编辑&nbsp;&nbsp;  </a><a style='color:brown'  onclick='Del(" + this.RoleId + ")'> &nbsp;&nbsp;删除</a></td>";
+                    }
 
-                var st = "<tr>"
-                    + "<td>" + i + "</td>"
-                    + "<td>" + this.RoleName + "</td>"
-                    + "<td>" + this.privilegeName + "</td>"
-                    + "<td>" + this.UserNum + "</td>"
-                    + td
-                    + "</tr>";
-                tr += st;
-                i++;
-            });
-        $("#tb").html(tr);
+                    var st = "<tr>"
+                        + "<td>" + i + "</td>"
+                        + "<td>" + this.RoleName + "</td>"
+                        + "<td>" + this.privilegeName + "</td>"
+                        + "<td>" + this.UserNum + "</td>"
+                        + td
+                        + "</tr>";
+                    tr += st;
+                    i++;
+                });
+                $("#tb").html(tr);
+            }
+        });
     }
-});
-}
-$("#BtnQuery").click(function () {
-    var rolename = $("#RoleName").val();
-    RoleQuery(rolename);
-});
+    $("#BtnQuery").click(function () {
+        var rolename = $("#RoleName").val();
+        RoleQuery(rolename);
+    });
 
 
 
-function Del(RoleId) {
-    var obj = {
-        RoleAll: {
-            RoleId: RoleId
+    function Del(RoleId) {
+        var obj = {
+            RoleAll: {
+                RoleId: RoleId
+            }
+        }
+        if (confirm("确定删除吗·qin~~")) {
+            $.ajax({
+                url: '/Role/DeleteRole',
+                type: 'post',
+                dataType: 'json',
+                data: obj,
+                success: function (res) {
+                    if (res.Status) {
+                        alert(res.Message);
+                        RoleQuery("");
+                    }
+                    else {
+                        alert(res.Message);
+                    }
+                }
+            })
         }
     }
-    if (confirm("确定删除吗·qin~~")) {
-        $.ajax({
-            url: '/Role/DeleteRole',
-            type: 'post',
-            dataType: 'json',
-            data: obj,
-            success: function (res) {
-                if (res > 0) {
-                    alert('删除成功');
-                }
-            }
-        })
-    }
-}
 
-function UserRole() {
-    location.href = "/Role/AddRole";
-}
+    function UserRole() {
+        location.href = "/Role/AddRole";
+    }
 </script>
