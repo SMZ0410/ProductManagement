@@ -119,8 +119,7 @@
                     $(res.Trades).each(function () {
                         var tp = "<option value='" + this.TradeId + "'>" + this.TradeName + "</option>"
                         $("#selTreade").append(tp);
-                    });
-
+                    }); 
                     //2.获取产品阶段
                     $.ajax({
                         url: "/Product/GetStages",
@@ -131,9 +130,7 @@
                                 $(res.Stages).each(function () {
                                     var tp = "<option value='" + this.StageId + "'>" + this.StageName + "</option>"
                                     $("#selStages").append(tp);
-                                });
-
-
+                                }); 
                                 //3.获取归属地
                                 $.ajax({
                                     url: "/Product/GetAddress",
@@ -167,7 +164,7 @@
                                                                         var ra = " <input id='radioCustom1' type='radio' value='" + this.TypeId + "' name='ProductType' class='radio-template'><label for='radioCustom1'>" + this.TypeName + "&nbsp;&nbsp;&nbsp;</label>";
                                                                         $("#divradio").append(ra);
                                                                     });
-                                                                    //获取信息
+                                                                    //6。获取信息
                                                                     var pid = $("#val").val();
                                                                     $.ajax({
                                                                         url: "/Product/EditProduct",
@@ -183,8 +180,7 @@
                                                                                 $("#txtProductDetail").val(res.ProductInfo.ProductDetail);
                                                                                 $("#selTreade").val(res.ProductInfo.TradeId);
                                                                                 $("input[name='ProductType']").each(function () {
-                                                                                    if (this.value == res.ProductInfo.TypeId) {
-                                                                                        alert(this.value)
+                                                                                    if (this.value == res.ProductInfo.TypeId) { 
                                                                                         this.checked = true;
                                                                                     }
                                                                                 });
