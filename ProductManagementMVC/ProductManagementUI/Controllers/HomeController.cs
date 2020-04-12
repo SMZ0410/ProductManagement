@@ -12,10 +12,11 @@ namespace ProductManagementUI.Controllers
     {
         public ActionResult Index(string userName="",string roleName="",int userId=0,string privilegeName="")
         {
+           
             if (!string.IsNullOrEmpty(userName))
             {
                 Session["UserName"] = userName;
-            }
+            } 
             if (!string.IsNullOrEmpty(roleName))
             {
                 Session["RoleName"] = roleName;

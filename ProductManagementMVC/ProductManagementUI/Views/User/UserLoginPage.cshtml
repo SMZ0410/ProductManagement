@@ -26,13 +26,13 @@
     <!-- Custom stylesheet - for your changes-->
     <link href="~/ReferencesFile/Template/css/custom.css" rel="stylesheet" />
     <!-- Favicon-->
-    <link rel="shortcut icon" href="~/ReferencesFile/Template/Icon/login.png"> 
+    <link rel="shortcut icon" href="~/ReferencesFile/Template/Icon/login.png">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
-<body> 
+<body>
 
     <div class="page login-page">
         <div class="container d-flex align-items-center">
@@ -57,16 +57,16 @@
                                     <br />
                                     <br />
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="loginUsername" required data-msg="请输入用户名" class="input-material">
+                                        <input id="login-username" type="text" name="loginUsername" value="@ViewBag.UserName" required data-msg="请输入用户名" class="input-material">
                                         <label for="login-username" class="label-material">用户名_UserName</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="login-password" type="password" name="loginPassword" required data-msg="请输入用户的密码" class="input-material">
+                                        <input id="login-password" type="password" name="loginPassword" value="@ViewBag.UserPassword" required data-msg="请输入用户的密码" class="input-material">
                                         <label for="login-password" class="label-material">密码_Password</label>
                                     </div><a id="login" style="color:white" class="btn btn-primary">登录_Login</a>
                                     <div class="form-group terms-conditions">
-                                        <input id="register-agree" name="registerAgree" type="checkbox" required value="1" data-msg="Your agreement is required" class="checkbox-template">
-                                        <label for="register-agree">记住密码_RememberPassword</label>
+                                        <input id="rememberpassword" type="checkbox" checked="checked" class="checkbox-template">
+                                        <label for="rememberpassword">记住密码_RememberPassword</label>
                                     </div>
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                 </form> <a href="/User/ForgotPasswordPage" class="forgot-pass">忘记密码...?_ForgotPassword</a><br>
@@ -93,16 +93,23 @@
 
 
 <script>
+
+    $().ready(function () {
+        if ($("#login-password").val() == "") {
+            $("#rememberpassword").prop("checked", "");
+        }
+    });
+
     //登录点击事件
     $("#login").click(function () {
-
         //登录对象
         var obj = {
             User:
             {
                 UserName: $("#login-username").val(),
                 UserPassword: $("#login-password").val()
-            }
+            },
+            ck: $("#rememberpassword").prop("checked")
         };
 
         $.ajax({
@@ -111,9 +118,15 @@
             data: obj,
             dataType: "json",
             success: function (res) {
-                if (res.Status) { 
-                     //成功之后跳转页面并附带参数
-                    location.href = "/Home/Index?userName=" + res.User.UserName + "&roleName=" + res.User.RoleName + "&userId=" + res.User.UserId+"&privilegeName="+res.User.privilegeName;
+                if (res.Status) {
+                    //将用户名密码保存到cookie
+                    $.ajax({
+                        url: "/User/RememberPassword",
+                        type: "POST",
+                        data: obj
+                    });
+                    //成功之后跳转页面并附带参数
+                    location.href = "/Home/Index?userName=" + res.User.UserName + "&roleName=" + res.User.RoleName + "&userId=" + res.User.UserId + "&privilegeName=" + res.User.privilegeName;
                 }
                 else {
                     alert(res.Message);

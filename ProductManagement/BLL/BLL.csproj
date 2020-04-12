@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SDKClient">
-      <HintPath>..\..\Lib\SDKClient.dll</HintPath>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,6 +64,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{55d55bd8-a0ec-4444-b840-edc0119ddc69}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SDKClient\SDKClient.csproj">
+      <Project>{5ba7d0fa-2a05-45b3-a776-b3377aa6a9ea}</Project>
+      <Name>SDKClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

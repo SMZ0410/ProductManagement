@@ -83,6 +83,19 @@ namespace DAL.User
         }
 
         /// <summary>
+        /// 修改用户最后登录时间
+        /// </summary>
+        public int SetUserLastLoginTime(string userName)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE dbo.UserInfo SET LastLoginTime=GETDATE() WHERE UserName=@username";
+
+                return conn.Execute(sql, new { username = userName });
+            }
+        }
+
+        /// <summary>
         /// 获得地址的下拉值
         /// </summary>
         /// <returns></returns>

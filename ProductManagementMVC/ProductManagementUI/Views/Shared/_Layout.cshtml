@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+
+
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -53,10 +56,6 @@
                         </div>
                         <!-- Navbar Menu -->
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                            <!-- Search-->
-                            <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
-
-
                             <!-- Languages dropdown    -->
                             <li class="nav-item dropdown">
                                 <a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src=" ~/ReferencesFile/Template/Icon/China.jpg" alt="English"><span class="d-none d-sm-inline-block">China</span></a>
@@ -64,9 +63,8 @@
                                     <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="~/ReferencesFile/Template/Icon/China.jpg" alt="China" class="mr-2">China</a></li>
                                 </ul>
                             </li>
-
                             <!-- Logout    -->
-                            <li class="nav-item"><a href="/User/UserLoginPage" class="nav-link logout"> <span class="d-none d-sm-inline">注销_LogOut</span><i class="fa fa-sign-out"></i></a></li>
+                            <li class="nav-item"><a href="javascript:void(0)" id="logout" class="nav-link logout"> <span class="d-none d-sm-inline">注销_LogOut</span><i class="fa fa-sign-out"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -81,6 +79,14 @@
                     <div class="title">
                         <h1 style="margin-left:30px" class="h4">登录人：@Session["UserName"]</h1>
                         <p style="margin-left:50px"> @Session["RoleName"]</p>
+
+                        @*登录验证*@
+                        @if (Session["UserName"] == null||string.IsNullOrEmpty(Session["UserName"].ToString()))
+                        {
+                            Response.Write("<script>alert('请先登录'); location.href = '/User/UserLoginPage';</script>");
+                        }
+
+                        <!--hidden value-->
                         <input type="hidden" value="@Session["UserId"]" id="userid" />
                         <input type="hidden" value="@Session["UserName"]" id="uname" />
                         <input type="hidden" value="@Session["privilegeName"]" id="privilege" />
@@ -95,7 +101,8 @@
                         <li id="productadd"><a href="/Product/ProductAddPage"> <i class="icon-form"></i>添加产品_AddPro</a></li>
                         <li id="usersmanage">
                             <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse" class="collapsed" id="cols">
-                            <i class="icon-user"></i> 用户管理_Users </a>
+                                <i class="icon-user"></i> 用户管理_Users
+                            </a>
                             <ul id="exampledropdownDropdown" class="list-unstyled collapse">
                                 <li id="rolepage"><a href="/Role/GetRoleInfos">角色列表</a></li>
                                 <li id="addrole"><a href="/Role/AddRole">添加角色</a></li>
@@ -103,7 +110,7 @@
                                 <li id="useradd"><a href="/User/UserAdd">添加用户</a></li>
                             </ul>
                         </li>
-                     
+
                         <li id="updpwd"><a href="/User/UpdateUserPasswordPage"> <i class="icon-interface-windows"></i>修改密码_UpdPwd</a></li>
 
                     </ul>
@@ -146,7 +153,18 @@
 </body>
 </html>
  
-<script>
+<script> 
+
+      $(function () {
+        window.history.forward(1);
+    });
+
+    //注销
+    $("#logout").click(function () {
+        location.href = '/User/Logout';
+    });
+
+    //菜单样式
     var li = document.querySelectorAll('.por li');
     for (var i = 0; i < li.length; i++)
         li[i].onclick = function () {

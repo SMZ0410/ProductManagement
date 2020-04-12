@@ -17,6 +17,7 @@ namespace SDKClient.Api.Request.User
         /// </summary>
         public UserLogModel User { get; set; }
 
+
         /// <summary>
         /// 重写基类路劲
         /// </summary>

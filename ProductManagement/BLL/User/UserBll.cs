@@ -72,7 +72,7 @@ namespace BLL.User
             string password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
 
             //给request参数重新赋值加密后的密码
-            request.User.UserPassword = password; 
+            request.User.UserPassword = password;
 
             //调用dal层方法 拿到返回id
             var user = UserDal.Instance.UserLogin(request.User);
@@ -80,13 +80,18 @@ namespace BLL.User
             //如果id>0登陆成功
             if (user != null)
             {
-                response.Message = "登陆成功！";
-                response.User = user;
-            }
-            else
-            {
-                response.Status = false;
-                response.Message = "登录失败，密码错误";
+                //修改用户最后登录时间
+                int res = UserDal.Instance.SetUserLastLoginTime(user.UserName);
+                if (res > 0)
+                {
+                    response.Message = "登陆成功！";
+                    response.User = user;
+                }
+                else
+                {
+                    response.Status = false;
+                    response.Message = "登录失败，密码错误";
+                } 
             }
             //返回
             return response;
@@ -161,14 +166,14 @@ namespace BLL.User
             var encryptionPassword = MD5Encrypt.MD5Encrypt32(request.NewPassword + salt);
 
             //判断新密码是否和旧密码一致
-            var uid = UserDal.Instance.CheckPassword(decryptusername,encryptionPassword);
-            if (uid>0)
+            var uid = UserDal.Instance.CheckPassword(decryptusername, encryptionPassword);
+            if (uid > 0)
             {
                 response.Status = false;
                 response.Message = "不能使用最近使用过的密码，请重新输入";
                 return response;
             }
-        
+
 
             //调用dal层重置密码方法
             int res = UserDal.Instance.ResetUserPasswod(decryptusername, encryptionPassword);
@@ -308,7 +313,7 @@ namespace BLL.User
         public UserDeleteResponse UserDelete(UserDeleteRequest request)
         {
             UserDeleteResponse response = new UserDeleteResponse();
-            
+
             var res = UserDal.Instance.UserDelete(request.ID);
             if (res <= 0)
             {
@@ -331,7 +336,7 @@ namespace BLL.User
         public UserUpdPwdResponse UpdateUserPassword(UserUpdPwdRequest request)
         {
             UserUpdPwdResponse response = new UserUpdPwdResponse();
-            if (request.User.UserId<=0)
+            if (request.User.UserId <= 0)
             {
                 response.Status = false;
                 response.Message = "网络错误，请重新登录 userid<=0";
@@ -348,11 +353,11 @@ namespace BLL.User
             var salt = UserDal.Instance.GetSaltByUserName(request.User.UName);
 
             //加密用户密码
-            var password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword+salt);
+            var password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
 
             //判断新密码是否和旧密码一致
             var uid = UserDal.Instance.CheckPassword(request.User.UName, password);
-            if (uid >0)
+            if (uid > 0)
             {
                 response.Status = false;
                 response.Message = "不能使用最近使用过的密码，请重新输入";
@@ -364,9 +369,9 @@ namespace BLL.User
 
             //调用dal层方法ResetUserPasswod
             int res = UserDal.Instance.UpdateUserPassword(request.User);
-            if (res>0)
-            { 
-                response.Message = "修改成功，请重新登录"; 
+            if (res > 0)
+            {
+                response.Message = "修改成功，请重新登录";
             }
             else
             {

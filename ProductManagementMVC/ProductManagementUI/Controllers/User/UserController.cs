@@ -25,7 +25,21 @@ namespace ProductManagementUI.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult UserLoginPage()
-        {
+        { 
+            //获取cookie中的数据
+            HttpCookie hc = Request.Cookies.Get("Example");
+
+            //判断cookie是否空值
+            if (hc != null)
+            {
+                //把保存的用户名和密码赋值给对应的文本框
+                //用户名
+                var name = hc.Values["UserName"].ToString();
+                ViewBag.UserName = name;
+                //密码
+                var pwd = hc.Values["UserPassword"].ToString();
+                ViewBag.UserPassword = pwd;
+            }
             return View();
         }
 
@@ -35,6 +49,38 @@ namespace ProductManagementUI.Controllers
         public JsonResult UserLogin(UserLoginRequest request)
         {
             return Json(UserBll.Instance.UserLogin(request), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 记住密码
+        /// </summary>
+        public void RememberPassword(UserLogin user, bool ck)
+        {
+            if (ck)
+            {
+                HttpCookie hc = new HttpCookie("Example");
+
+                //在cookie对象中保存用户名和密码
+                hc["UserName"] = user.UserName;
+                hc["UserPassword"] = user.UserPassword;
+                //设置过期时间
+                hc.Expires = DateTime.Now.AddDays(7);
+                //保存到客户端
+                Response.Cookies.Add(hc);
+            }
+            else
+            {
+                HttpCookie hc = new HttpCookie("Example");
+                //判断hc是否空值
+                if (hc != null)
+                {
+                    //设置过期时间
+                    hc.Expires = DateTime.Now.AddDays(-1);
+                    //保存到客户端
+                    Response.Cookies.Add(hc);
+                }
+
+            }
         }
 
         /// <summary>
@@ -185,6 +231,15 @@ namespace ProductManagementUI.Controllers
         public ActionResult UpdateUserPassword(UserUpdPwdRequest request)
         {
             return Json(UserBll.Instance.UpdateUserPassword(request));
+        }
+
+        /// <summary>
+        /// 注销登录
+        /// </summary>
+        public void Logout()
+        {
+            Session.Clear();
+            Response.Write("<script>location.href = '/User/UserLoginPage';</script>");
         }
     }
 }
