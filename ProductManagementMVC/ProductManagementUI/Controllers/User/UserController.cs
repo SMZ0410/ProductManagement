@@ -34,8 +34,8 @@ namespace ProductManagementUI.Controllers
             {
                 //把保存的用户名和密码赋值给对应的文本框
                 //用户名
-                var name =
-                ViewBag.UserName = HttpUtility.UrlDecode(hc.Values["UserName"].ToString());
+                var name = HttpUtility.UrlDecode(hc.Values["UserName"].ToString());
+                ViewBag.UserName = name;
                 //密码
                 var pwd = hc.Values["UserPassword"].ToString();
                 ViewBag.UserPassword = pwd;
