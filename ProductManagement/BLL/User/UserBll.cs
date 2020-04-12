@@ -65,6 +65,8 @@ namespace BLL.User
                 return response;
             }
 
+         
+
             //根据用户名获取用户的盐
             string salt = UserDal.Instance.GetSaltByUserName(request.User.UserName);
 
@@ -226,18 +228,26 @@ namespace BLL.User
                 response.Message = "请选择地址";
                 return response;
             }
-            //if (request.Users.RoleId <= 0)
-            //{
-            //    response.Status = false;
-            //    response.Message = "请选择角色";
-            //    return response;
-            //}
-            //if (request.User.CreatorId <= 0)
-            //{
-            //    response.Status = false;
-            //    response.Message = "系统繁忙，creatorid<=0";
-            //    return response;
-            //}
+            if (request.User.RoleId <= 0)
+            {
+                response.Status = false;
+                response.Message = "请选择角色";
+                return response;
+            }
+            if (request.User.CreatorId <= 0)
+            {
+                response.Status = false;
+                response.Message = "系统繁忙，creatorid<=0";
+                return response;
+            }
+            //判断用户名是否已被注册
+            int uid = UserDal.Instance.UserNameExist(request.User.UserName);
+            if (uid > 0)
+            {
+                response.Status = false;
+                response.Message = "用户名已存在";
+                return response;
+            }
 
             //开始获取盐
             var salt = Generate.GenerateSalt();

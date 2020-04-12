@@ -121,8 +121,7 @@ namespace DAL.User
             using (IDbConnection conn = new SqlConnection(connStr))
             {
                 List<RoleInfos> list = new List<RoleInfos>();
-                var sql = $"SELECT * FROM dbo.RoleInfo";
-                //DISTINCT RoleName
+                var sql = $"SELECT * FROM dbo.RoleInfo WHERE Status=1";
                 list = conn.Query<RoleInfos>(sql).ToList();
                 return list;
             }
@@ -157,6 +156,20 @@ namespace DAL.User
                 return iu;
             }
 
+        }
+
+        /// <summary>
+        /// 查询用户名称是否存在
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public int UserNameExist(string userName)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "SELECT UserId FROM dbo.UserInfo WHERE UserName=@username";
+                return conn.QueryFirstOrDefault<int>(sql,new { username=userName});
+            }
         }
 
         /// <summary>
@@ -233,7 +246,7 @@ namespace DAL.User
 
         }
         /// <summary>
-        /// 获取用户胡的单条信息
+        /// 获取用户的单条信息
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
