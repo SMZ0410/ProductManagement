@@ -34,8 +34,8 @@ namespace ProductManagementUI.Controllers
             {
                 //把保存的用户名和密码赋值给对应的文本框
                 //用户名
-                var name = hc.Values["UserName"].ToString();
-                ViewBag.UserName = name;
+                var name =
+                ViewBag.UserName = HttpUtility.UrlDecode(hc.Values["UserName"].ToString());
                 //密码
                 var pwd = hc.Values["UserPassword"].ToString();
                 ViewBag.UserPassword = pwd;
@@ -59,9 +59,8 @@ namespace ProductManagementUI.Controllers
             if (ck)
             {
                 HttpCookie hc = new HttpCookie("Example");
-
                 //在cookie对象中保存用户名和密码
-                hc["UserName"] = user.UserName;
+                hc["UserName"] = HttpUtility.UrlEncode(user.UserName);
                 hc["UserPassword"] = user.UserPassword;
                 //设置过期时间
                 hc.Expires = DateTime.Now.AddDays(7);
