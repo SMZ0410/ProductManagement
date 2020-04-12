@@ -68,7 +68,7 @@ namespace BLL.User
             //根据用户名获取用户的盐
             string salt = UserDal.Instance.GetSaltByUserName(request.User.UserName);
 
-            //将密码和盐拼接进项MD5加密
+            //将密码和盐拼接进项MD5加密 
             string password = MD5Encrypt.MD5Encrypt32(request.User.UserPassword + salt);
 
             //给request参数重新赋值加密后的密码
