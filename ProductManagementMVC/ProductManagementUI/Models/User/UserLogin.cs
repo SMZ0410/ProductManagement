@@ -18,5 +18,7 @@ namespace ProductManagementUI.Models.User
         /// 用户密码
         /// </summary>
         public string UserPassword { get; set; }
+
+        public bool Ck { get; set; }
     }
 }

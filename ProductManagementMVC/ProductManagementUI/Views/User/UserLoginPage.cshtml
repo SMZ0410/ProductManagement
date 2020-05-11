@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>用户登录</title>
     <meta name="description" content="">
@@ -33,8 +33,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
-
-    <div class="page login-page">
+    <input hidden id="un" value="@ViewBag.UserName" />
+    <input hidden id="up" value="@ViewBag.UserPassword" />
+    <div class="page login-page" id="divVue">
         <div class="container d-flex align-items-center">
             <div class="form-holder has-shadow">
                 <div class="row">
@@ -57,15 +58,15 @@
                                     <br />
                                     <br />
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="loginUsername" value="@ViewBag.UserName" required data-msg="请输入用户名" class="input-material">
+                                        <input id="login-username" df v-model="info.User.UserName" type="text" name="loginUsername" required data-msg="请输入用户名" class="input-material">
                                         <label for="login-username" class="label-material">用户名_UserName</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="login-password" type="password" name="loginPassword" value="@ViewBag.UserPassword" required data-msg="请输入用户的密码" class="input-material">
+                                        <input id="login-password"   v-model="info.User.UserPassword" type="password" name="loginPassword" required data-msg="请输入用户的密码" class="input-material">
                                         <label for="login-password" class="label-material">密码_Password</label>
-                                    </div><a id="login" style="color:white" class="btn btn-primary">登录_Login</a>
+                                    </div><a id="login" v-on:click="Login" style="color:white" class="btn btn-primary">登录_Login</a>
                                     <div class="form-group terms-conditions">
-                                        <input id="rememberpassword" type="checkbox" checked="checked" class="checkbox-template">
+                                        <input id="rememberpassword" v-model="info.User.Ck" type="checkbox" checked="checked" class="checkbox-template">
                                         <label for="rememberpassword">记住密码_RememberPassword</label>
                                     </div>
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
@@ -91,47 +92,104 @@
 </body>
 </html>
 
-
+<script src="~/Scripts/VUE/vue.min.js"></script>
+<script src="~/Scripts/VUE/axios.min.js"></script>
 <script>
+  
+    new Vue({
+        el: "#divVue",
+        data() {
+            return {
+                info: {
+                    User:
+                    {
+                        UserName:"",
+                        UserPassword: "",
+                        Ck: false
+                    }
+                }
+            }
+        },
+        mounted() {
+            $("#login-username").val($("#un").val());
+            $("#login-password").val($("#up").val());
+            this.info.User.UserName = $("#login-username").val();
+            this.info.User.UserPassword = $("#login-password").val();
 
-    $().ready(function () {
-        if ($("#login-password").val() == "") {
-            $("#rememberpassword").prop("checked", "");
+            if ($("#login-password").val() == "") {
+                $("#rememberpassword").prop("checked", "");
+            }
+            else {
+                $("#rememberpassword").prop("checked", "true");
+            }
+        },
+        methods: {
+            Login: function () {
+                var user = {
+                    User:
+                    {
+                        UserName: this.info.User.UserName,
+                        UserPassword: this.info.User.UserPassword,
+                        Ck: this.info.User.Ck
+                    }
+                };
+
+                axios
+                    .post("/User/UserLogin", user)
+                    .then(function (res) {
+                        if (res.data.Status) {
+                            axios
+                                .post("/User/RememberPassword", user)
+                            location.href = "/Home/Index?userName=" + res.data.User.UserName + "&roleName=" + res.data.User.RoleName + "&userId=" + res.data.User.UserId + "&privilegeName=" + res.data.User.privilegeName;
+
+                        }
+                        else {
+                            window.alert(res.data.Message);
+                        }
+                    });
+            }
         }
     });
 
-    //登录点击事件
-    $("#login").click(function () {
-        //登录对象
-        var obj = {
-            User:
-            {
-                UserName: $("#login-username").val(),
-                UserPassword: $("#login-password").val()
-            },
-            ck: $("#rememberpassword").prop("checked")
-        };
 
-        $.ajax({
-            url: "/User/UserLogin",
-            type: "POST",
-            data: obj,
-            dataType: "json",
-            success: function (res) {
-                if (res.Status) {
-                    //将用户名密码保存到cookie
-                    $.ajax({
-                        url: "/User/RememberPassword",
-                        type: "POST",
-                        data: obj
-                    });
-                    //成功之后跳转页面并附带参数
-                    location.href = "/Home/Index?userName=" + res.User.UserName + "&roleName=" + res.User.RoleName + "&userId=" + res.User.UserId + "&privilegeName=" + res.User.privilegeName;
-                }
-                else {
-                    alert(res.Message);
-                }
-            }
-        });
-    })
+
+    //$().ready(function () {
+
+
+    //});
+
+    ////登录点击事件
+    //$("#login").click(function () {
+    //    //登录对象
+    //    var obj = {
+    //        User:
+    //        {
+    //            UserName: $("#login-username").val(),
+    //            UserPassword: $("#login-password").val()
+    //        },
+    //        ck: $("#rememberpassword").prop("checked")
+    //    };
+
+    //    $.ajax({
+    //        url: "/User/UserLogin",
+    //        type: "POST",
+    //        data: obj,
+    //        dataType: "json",
+    //        success: function (res) {
+    //            if (res.Status) {
+    //                //将用户名密码保存到cookie
+    //                $.ajax({
+    //                    url: "/User/RememberPassword",
+    //                    type: "POST",
+    //                    data: obj
+    //                });
+    //                //成功之后跳转页面并附带参数
+    //                location.href = "/Home/Index?userName=" + res.User.UserName + "&roleName=" + res.User.RoleName + "&userId=" + res.User.UserId + "&privilegeName=" + res.User.privilegeName;
+    //            }
+    //            else {
+    //                alert(res.Message);
+    //            }
+    //        }
+    //    });
+    //})
 </script>

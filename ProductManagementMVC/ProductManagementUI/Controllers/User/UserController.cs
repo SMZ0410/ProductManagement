@@ -54,9 +54,9 @@ namespace ProductManagementUI.Controllers
         /// <summary>
         /// 记住密码
         /// </summary>
-        public void RememberPassword(UserLogin user, bool ck)
+        public void RememberPassword(UserLogin user)
         {
-            if (ck)
+            if (user.Ck)
             {
                 HttpCookie hc = new HttpCookie("Example");
                 //在cookie对象中保存用户名和密码

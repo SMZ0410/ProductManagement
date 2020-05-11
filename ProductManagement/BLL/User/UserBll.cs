@@ -95,6 +95,11 @@ namespace BLL.User
                     response.Message = "登录失败，密码错误";
                 } 
             }
+            else
+            {
+                response.Status = false;
+                response.Message = "登录失败，密码错误";
+            }
             //返回
             return response;
         }
